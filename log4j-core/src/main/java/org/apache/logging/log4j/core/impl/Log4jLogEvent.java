@@ -294,6 +294,15 @@ public class Log4jLogEvent implements LogEvent {
         }
         return threadName;
     }
+    
+    /**
+     * Returns {@code true} if the thread name attribute of this log event has been initialized, that is, the thread
+     * name of this event may be different from the current thread.
+     * @return {@code true} if the thread name attribute of this log event has been initialized, false otherwise
+     */
+    public boolean hasThreadName() {
+        return threadName != null;
+    }
 
     /**
      * Returns the time in milliseconds from the epoch when the event occurred.
