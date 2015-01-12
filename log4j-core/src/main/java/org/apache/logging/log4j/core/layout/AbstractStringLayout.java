@@ -43,8 +43,8 @@ public abstract class AbstractStringLayout extends AbstractLayout<String> {
         this.charset = charset == null ? Charsets.UTF_8 : charset;
     }
 
-    protected byte[] getBytes(String s) {
-        return s.getBytes(charset);
+    protected byte[] getBytes(final String str) {
+        return Charsets.getBytes(str, charset);
     }
 
     protected Charset getCharset() {
@@ -68,6 +68,7 @@ public abstract class AbstractStringLayout extends AbstractLayout<String> {
      */
     @Override
     public byte[] toByteArray(final LogEvent event) {
-        return toSerializable(event).getBytes(charset);
+        final String str = toSerializable(event);
+        return getBytes(str);
     }
 }
