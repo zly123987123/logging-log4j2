@@ -18,8 +18,10 @@
 package org.apache.logging.log4j.core.pattern;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 
 import org.apache.logging.log4j.core.util.Assert;
+import org.apache.logging.log4j.core.util.Charsets;
 
 /**
  * Buffer implementation that tracks data as bytes.
@@ -27,13 +29,44 @@ import org.apache.logging.log4j.core.util.Assert;
 public class BinaryBuffer implements Buffer {
 
     private ByteBuffer buffer;
+    private final Charset charset;
 
-    public BinaryBuffer() {
-        this(ByteBuffer.allocateDirect(512 * 1024)); // FIXME
+    /**
+     * Constructs a {@code BinaryBuffer} with a 512 KB initial capacity.
+     * 
+     * @param charset the {@code Charset} to use to convert text to bytes
+     */
+    public BinaryBuffer(final Charset charset) {
+        this(charset, ByteBuffer.allocate(512 * 1024));
     }
 
-    public BinaryBuffer(ByteBuffer buffer) {
+    /**
+     * Constructs a {@code BinaryBuffer} wrapping the specified {@code ByteBuffer}.
+     * 
+     * @param charset the {@code Charset} to use to convert text to bytes
+     * @param buffer the internal buffer to use
+     */
+    public BinaryBuffer(final Charset charset, final ByteBuffer buffer) {
+        this.charset = Assert.requireNonNull(charset, "charset");
         this.buffer = Assert.requireNonNull(buffer, "buffer");
+    }
+
+    /**
+     * Returns the {@code Charset} used to convert text to bytes.
+     * 
+     * @return the {@code Charset} this buffer was constructed with.
+     */
+    public Charset getCharset() {
+        return charset;
+    }
+
+    private void ensureCapacity(final int additional) {
+        if (buffer.remaining() < additional) {
+            final ByteBuffer extended = ByteBuffer.allocate(buffer.capacity() * 2);
+            buffer.rewind();
+            extended.put(buffer);
+            buffer = extended;
+        }
     }
 
     @Override
@@ -43,7 +76,22 @@ public class BinaryBuffer implements Buffer {
 
     @Override
     public BinaryBuffer append(String text) {
-        buffer.put(text.getBytes());
+        return append(Charsets.getBytes(text, charset));
+    }
+
+    @Override
+    public BinaryBuffer append(final long value, final FormattingInfo formattingInfo) {
+        final int position = buffer.position();
+        append(value);
+        formattingInfo.format(position, buffer);
+        return this;
+    }
+
+    @Override
+    public BinaryBuffer append(final String unformatted, final FormattingInfo formattingInfo) {
+        final int position = buffer.position();
+        append(unformatted);
+        formattingInfo.format(position, buffer);
         return this;
     }
 
@@ -52,8 +100,15 @@ public class BinaryBuffer implements Buffer {
         if (ch > 126) { // not in ISO-8859-1
             append(new String(new char[] { ch }));
         } else {
-            buffer.put((byte) ch);
+            append((byte) ch);
         }
+        return this;
+    }
+
+    @Override
+    public BinaryBuffer append(byte b) {
+        ensureCapacity(1);
+        buffer.put(b);
         return this;
     }
 
@@ -65,9 +120,7 @@ public class BinaryBuffer implements Buffer {
         }
         int appendedLength = (i < 0) ? stringSizeOfInt(-i) + 1 : stringSizeOfInt(i);
         int spaceNeeded = buffer.position() + appendedLength;
-        if (spaceNeeded > buffer.capacity()) { // TODO use buffer.remaining()
-            // expandCapacity(spaceNeeded); // FIXME make expandable
-        }
+        ensureCapacity(appendedLength);
         getChars(i, spaceNeeded, buffer);
         buffer.position(spaceNeeded);
         return this;
@@ -81,7 +134,7 @@ public class BinaryBuffer implements Buffer {
         }
         int appendedLength = (l < 0) ? stringSize(-l) + 1 : stringSize(l);
         int spaceNeeded = buffer.position() + appendedLength;
-        // ensureCapacityInternal(spaceNeeded); // FIXME
+        ensureCapacity(appendedLength);
         getChars(l, spaceNeeded, buffer);
         buffer.position(spaceNeeded);
         return this;
@@ -229,6 +282,7 @@ public class BinaryBuffer implements Buffer {
      */
     @Override
     public BinaryBuffer append(byte[] data) {
+        ensureCapacity(data.length);
         buffer.put(data);
         return this;
     }
@@ -261,6 +315,49 @@ public class BinaryBuffer implements Buffer {
     @Override
     public boolean hasTrailingWhitespace() {
         final int len = buffer.position();
-        return len > 0 && !Character.isWhitespace((char) buffer.get(len - 1));
+        return len == 0 || Character.isWhitespace((char) buffer.get(len - 1));
+    }
+
+    /**
+     * Returns a copy of the data in the buffer.
+     * 
+     * @return a copy of the data in the buffer.
+     */
+    public byte[] toByteArray() {
+        final byte[] result = new byte[length()];
+        buffer.rewind();
+        buffer.get(result);
+        return result;
+    }
+
+    /**
+     * Writes the content of this buffer into the specified destination.
+     * 
+     * @param destination the destination buffer to write into
+     */
+    public void writeInto(final ByteBuffer destination) {
+        buffer.flip(); // sets buffer limit to its current position
+        destination.put(buffer); // copy up to limit
+
+        // now revert buffer state so it can be appended to again
+        buffer.limit(buffer.capacity());
+    }
+
+    /**
+     * Returns the byte at the specified position.
+     * 
+     * @param i the index from which the byte will be read.
+     * @return the byte at the given index
+     */
+    public int byteAt(int i) {
+        return buffer.get(i);
+    }
+
+    /**
+     * Returns the contents of this {@code Buffer} as a string.
+     */
+    @Override
+    public String toString() {
+        return new String(toByteArray(), getCharset());
     }
 }
