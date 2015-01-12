@@ -38,13 +38,13 @@ public class RegexReplacementConverterTest {
         ThreadContext.put("MyKey", "Apache");
         final LogEvent event = new Log4jLogEvent(RegexReplacementConverterTest.class.getName(), null, null,
             Level.DEBUG, new SimpleMessage("This is a test"), null);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         final LoggerContext ctx = (LoggerContext) LogManager.getContext();
         final String[] options = new String[] {
             "%logger %msg%n", "\\.", "/"
         };
         final RegexReplacementConverter converter = RegexReplacementConverter.newInstance(ctx.getConfiguration(),
-            options);
+            options, FormattingInfo.getDefault());
         converter.format(event, sb);
         assertEquals("org/apache/logging/log4j/core/pattern/RegexReplacementConverterTest This is a test" +
             Constants.LINE_SEPARATOR, sb.toString());

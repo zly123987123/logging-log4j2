@@ -16,6 +16,7 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.logging.log4j.core.LogEvent;
@@ -37,8 +38,8 @@ public final class EncodingPatternConverter extends LogEventPatternConverter {
      *
      * @param formatters The PatternFormatters to generate the text to manipulate.
      */
-    private EncodingPatternConverter(final List<PatternFormatter> formatters) {
-        super("encode", "encode");
+    private EncodingPatternConverter(final List<PatternFormatter> formatters, final FormattingInfo formattingInfo) {
+        super("encode", "encode", formattingInfo);
         this.formatters = formatters;
     }
 
@@ -49,7 +50,7 @@ public final class EncodingPatternConverter extends LogEventPatternConverter {
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static EncodingPatternConverter newInstance(final Configuration config, final String[] options) {
+    public static EncodingPatternConverter newInstance(final Configuration config, final String[] options, final FormattingInfo formattingInfo) {
         if (options.length != 1) {
             LOGGER.error("Incorrect number of options on escape. Expected 1, received " + options.length);
             return null;
@@ -60,49 +61,73 @@ public final class EncodingPatternConverter extends LogEventPatternConverter {
         }
         final PatternParser parser = PatternLayout.createPatternParser(config);
         final List<PatternFormatter> formatters = parser.parse(options[0]);
-        return new EncodingPatternConverter(formatters);
+        return new EncodingPatternConverter(formatters, formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        final StringBuilder buf = new StringBuilder();
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        replaceAndAppend(event, toAppendTo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        replaceAndAppend(event, toAppendTo);
+    }
+
+    private void replaceAndAppend(final LogEvent event, final Buffer toAppendTo) {
+        final TextBuffer buf = new TextBuffer();
         for (final PatternFormatter formatter : formatters) {
             formatter.format(event, buf);
         }
         for (int i = 0; i < buf.length(); i++) {
             final char c = buf.charAt(i);
-            switch (c) {
-                case '\r':
-                    toAppendTo.append("\\r");
-                    break;
-                case '\n':
-                    toAppendTo.append("\\n");
-                    break;
-                case '&':
-                    toAppendTo.append("&amp;");
-                    break;
-                case '<':
-                    toAppendTo.append("&lt;");
-                    break;
-                case '>':
-                    toAppendTo.append("&gt;");
-                    break;
-                case '"':
-                    toAppendTo.append("&quot;");
-                    break;
-                case '\'':
-                    toAppendTo.append("&apos;");
-                    break;
-                case '/':
-                    toAppendTo.append("&#x2F;");
-                    break;
-                default:
-                    toAppendTo.append(c);
-                    break;
-            }
+            replace(c, toAppendTo);
+        }
+    }
+
+    private void replace(final char c, final Buffer toAppendTo) {
+        switch (c) {
+            case '\r':
+                toAppendTo.append("\\r");
+                break;
+            case '\n':
+                toAppendTo.append("\\n");
+                break;
+            case '&':
+                toAppendTo.append("&amp;");
+                break;
+            case '<':
+                toAppendTo.append("&lt;");
+                break;
+            case '>':
+                toAppendTo.append("&gt;");
+                break;
+            case '"':
+                toAppendTo.append("&quot;");
+                break;
+            case '\'':
+                toAppendTo.append("&apos;");
+                break;
+            case '/':
+                toAppendTo.append("&#x2F;");
+                break;
+            default:
+                toAppendTo.append(c);
+                break;
+        }
+    }
+    
+    @Override
+    public void setCharset(final Charset charset) {
+        super.setCharset(charset);
+        for (PatternFormatter paf : formatters) {
+            paf.getConverter().setCharset(charset);
         }
     }
 }

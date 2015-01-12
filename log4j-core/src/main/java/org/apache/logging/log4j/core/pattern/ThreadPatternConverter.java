@@ -16,8 +16,11 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
+import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 
 /**
  * Formats the event thread name.
@@ -25,17 +28,12 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Plugin(name = "ThreadPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "t", "thread" })
 public final class ThreadPatternConverter extends LogEventPatternConverter {
-    /**
-     * Singleton.
-     */
-    private static final ThreadPatternConverter INSTANCE =
-        new ThreadPatternConverter();
 
     /**
      * Private constructor.
      */
-    private ThreadPatternConverter() {
-        super("Thread", "thread");
+    private ThreadPatternConverter(final FormattingInfo formattingInfo) {
+        super("Thread", "thread", formattingInfo);
     }
 
     /**
@@ -44,16 +42,36 @@ public final class ThreadPatternConverter extends LogEventPatternConverter {
      * @param options options, currently ignored, may be null.
      * @return instance of ThreadPatternConverter.
      */
-    public static ThreadPatternConverter newInstance(
-        final String[] options) {
-        return INSTANCE;
+    public static ThreadPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new ThreadPatternConverter(formattingInfo);
+    }
+    
+    @Override
+    protected String convert(final Object thread) {
+        if (thread instanceof Thread) {
+            return ((Thread) thread).getName();
+        }
+        return thread.toString();
+    }
+    
+    private Object extractThreadOrThreadName(final LogEvent event) {
+        final boolean useEvent = event instanceof Log4jLogEvent && ((Log4jLogEvent) event).hasThreadName();
+        return useEvent ? event.getThreadName() : Thread.currentThread();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        toAppendTo.append(event.getThreadName());
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        toAppendTo.append(getCachedFormattedString(extractThreadOrThreadName(event)));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        toAppendTo.append(getCachedFormattedBytes(extractThreadOrThreadName(event), charset));
     }
 }

@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.util.Constants;
@@ -28,39 +30,45 @@ import org.apache.logging.log4j.core.util.Constants;
 public final class LineSeparatorPatternConverter extends LogEventPatternConverter {
 
     /**
-     * Singleton.
-     */
-    private static final LineSeparatorPatternConverter INSTANCE = new LineSeparatorPatternConverter();
-
-    /**
      * Line separator.
      */
     private final String lineSep;
+    private final byte[] lineSepBytes;
 
     /**
      * Private constructor.
      */
-    private LineSeparatorPatternConverter() {
-        super("Line Sep", "lineSep");
+    private LineSeparatorPatternConverter(final FormattingInfo formattingInfo) {
+        super("Line Sep", "lineSep", formattingInfo);
         lineSep = Constants.LINE_SEPARATOR;
+        lineSepBytes = lineSep.getBytes(); // Charset does not matter for this particular string
     }
 
     /**
      * Obtains an instance of pattern converter.
      *
-     * @param options
-     *        options, may be null.
+     * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static LineSeparatorPatternConverter newInstance(final String[] options) {
-        return INSTANCE;
+    public static LineSeparatorPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new LineSeparatorPatternConverter(formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        // note: this converter ignores FormattingInfo on purpose
         toAppendTo.append(lineSep);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        // note: this converter ignores FormattingInfo on purpose
+        toAppendTo.append(lineSepBytes);
     }
 }

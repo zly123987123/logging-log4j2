@@ -18,6 +18,7 @@ package org.apache.logging.log4j.core.pattern;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.LogEvent;
@@ -35,34 +36,47 @@ public class ExtendedThrowablePatternConverterTest {
 
     @Test
     public void testFull() {
-        final ExtendedThrowablePatternConverter converter = ExtendedThrowablePatternConverter.newInstance(null);
+        final ExtendedThrowablePatternConverter converter = ExtendedThrowablePatternConverter.newInstance(null,
+                FormattingInfo.getDefault());
         final Throwable cause = new NullPointerException("null pointer");
         final Throwable parent = new IllegalArgumentException("IllegalArgument", cause);
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
-            new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
-        converter.format(event, sb);
+                new SimpleMessage("test exception"), parent);
         final StringWriter sw = new StringWriter();
         final PrintWriter pw = new PrintWriter(sw);
         parent.printStackTrace(pw);
+        final String expected = sw.toString().replaceAll("\r", Strings.EMPTY);
+
+        final TextBuffer sb = new TextBuffer();
+        converter.format(event, sb);
         String result = sb.toString();
         result = result.replaceAll(" ~?\\[.*\\]", Strings.EMPTY);
-        final String expected = sw.toString().replaceAll("\r", Strings.EMPTY);
+        assertEquals(expected, result);
+        
+        final BinaryBuffer bin = new BinaryBuffer(Charset.defaultCharset());
+        converter.format(event, bin);
+        result = bin.toString();
+        result = result.replaceAll(" ~?\\[.*\\]", Strings.EMPTY);
         assertEquals(expected, result);
     }
 
     @Test
     public void testFiltering() {
         final String packages = "filters(org.junit, org.apache.maven, sun.reflect, java.lang.reflect)";
-        final String[] options = {packages};
-        final ExtendedThrowablePatternConverter converter = ExtendedThrowablePatternConverter.newInstance(options);
+        final String[] options = { packages };
+        final ExtendedThrowablePatternConverter converter = ExtendedThrowablePatternConverter.newInstance(options,
+                FormattingInfo.getDefault());
         final Throwable cause = new NullPointerException("null pointer");
         final Throwable parent = new IllegalArgumentException("IllegalArgument", cause);
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
-            new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+                new SimpleMessage("test exception"), parent);
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         assertTrue("No suppressed lines", result.contains(" suppressed "));
+        
+        final BinaryBuffer bin = new BinaryBuffer(Charset.defaultCharset());
+        converter.format(event, bin);
+        assertTrue("No suppressed lines", bin.toString().contains(" suppressed "));
     }
 }

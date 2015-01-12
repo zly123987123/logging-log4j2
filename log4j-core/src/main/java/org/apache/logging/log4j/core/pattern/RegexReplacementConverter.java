@@ -16,6 +16,7 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -39,13 +40,14 @@ public final class RegexReplacementConverter extends LogEventPatternConverter {
 
     /**
      * Construct the converter.
+     * 
      * @param formatters The PatternFormatters to generate the text to manipulate.
      * @param pattern The regular expression Pattern.
      * @param substitution The substitution string.
      */
-    private RegexReplacementConverter(final List<PatternFormatter> formatters,
-                                      final Pattern pattern, final String substitution) {
-        super("replace", "replace");
+    private RegexReplacementConverter(final List<PatternFormatter> formatters, final Pattern pattern,
+            final String substitution, final FormattingInfo formattingInfo) {
+        super("replace", "replace", formattingInfo);
         this.pattern = pattern;
         this.substitution = substitution;
         this.formatters = formatters;
@@ -55,11 +57,12 @@ public final class RegexReplacementConverter extends LogEventPatternConverter {
      * Gets an instance of the class.
      *
      * @param config The current Configuration.
-     * @param options pattern options, may be null.  If first element is "short",
-     *                only the first line of the throwable will be formatted.
+     * @param options pattern options, may be null. If first element is "short", only the first line of the throwable
+     *            will be formatted.
      * @return instance of class.
      */
-    public static RegexReplacementConverter newInstance(final Configuration config, final String[] options) {
+    public static RegexReplacementConverter newInstance(final Configuration config, final String[] options,
+            final FormattingInfo formattingInfo) {
         if (options.length != 3) {
             LOGGER.error("Incorrect number of options on replace. Expected 3 received " + options.length);
             return null;
@@ -79,19 +82,38 @@ public final class RegexReplacementConverter extends LogEventPatternConverter {
         final Pattern p = Pattern.compile(options[1]);
         final PatternParser parser = PatternLayout.createPatternParser(config);
         final List<PatternFormatter> formatters = parser.parse(options[0]);
-        return new RegexReplacementConverter(formatters, p, options[2]);
+        return new RegexReplacementConverter(formatters, p, options[2], formattingInfo);
     }
-
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        final StringBuilder buf = new StringBuilder();
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        format0(event, toAppendTo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        format0(event, toAppendTo);
+    }
+
+    private void format0(final LogEvent event, final Buffer toAppendTo) {
+        final TextBuffer buf = new TextBuffer();
         for (final PatternFormatter formatter : formatters) {
             formatter.format(event, buf);
         }
         toAppendTo.append(pattern.matcher(buf.toString()).replaceAll(substitution));
+    }
+    
+    @Override
+    public void setCharset(final Charset charset) {
+        super.setCharset(charset);
+        for (PatternFormatter paf : formatters) {
+            paf.getConverter().setCharset(charset);
+        }
     }
 }

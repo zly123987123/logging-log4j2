@@ -16,6 +16,7 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
 import java.util.UUID;
 
 import org.apache.logging.log4j.core.LogEvent;
@@ -34,8 +35,8 @@ public final class UuidPatternConverter extends LogEventPatternConverter {
     /**
      * Private constructor.
      */
-    private UuidPatternConverter(final boolean isRandom) {
-        super("u", "uuid");
+    private UuidPatternConverter(final boolean isRandom, final FormattingInfo formattingInfo) {
+        super("u", "uuid", formattingInfo);
         this.isRandom = isRandom;
     }
 
@@ -45,23 +46,34 @@ public final class UuidPatternConverter extends LogEventPatternConverter {
      * @param options options, currently ignored, may be null.
      * @return instance of SequencePatternConverter.
      */
-    public static UuidPatternConverter newInstance(final String[] options) {
+    public static UuidPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
         if (options.length == 0) {
-            return new UuidPatternConverter(false);
+            return new UuidPatternConverter(false, formattingInfo);
         }
 
         if (options.length > 1 || (!options[0].equalsIgnoreCase("RANDOM") && !options[0].equalsIgnoreCase("Time"))) {
             LOGGER.error("UUID Pattern Converter only accepts a single option with the value \"RANDOM\" or \"TIME\"");
         }
-        return new UuidPatternConverter(options[0].equalsIgnoreCase("RANDOM"));
+        return new UuidPatternConverter(options[0].equalsIgnoreCase("RANDOM"), formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        final UUID uuid = isRandom ? UUID.randomUUID() : UuidUtil.getTimeBasedUuid();
-        toAppendTo.append(uuid.toString());
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        toAppendTo.append(getCachedFormattedString(nextUUID()));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        toAppendTo.append(getCachedFormattedBytes(nextUUID(), charset));
+    }
+    
+    private UUID nextUUID() {
+        return isRandom ? UUID.randomUUID() : UuidUtil.getTimeBasedUuid();
     }
 }

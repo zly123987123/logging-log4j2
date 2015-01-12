@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 
@@ -26,17 +28,12 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Plugin(name = "MethodLocationPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "M", "method" })
 public final class MethodLocationPatternConverter extends LogEventPatternConverter {
-    /**
-     * Singleton.
-     */
-    private static final MethodLocationPatternConverter INSTANCE =
-        new MethodLocationPatternConverter();
 
     /**
      * Private constructor.
      */
-    private MethodLocationPatternConverter() {
-        super("Method", "method");
+    private MethodLocationPatternConverter(final FormattingInfo formattingInfo) {
+        super("Method", "method", formattingInfo);
     }
 
     /**
@@ -45,19 +42,29 @@ public final class MethodLocationPatternConverter extends LogEventPatternConvert
      * @param options options, may be null.
      * @return instance of MethodLocationPatternConverter.
      */
-    public static MethodLocationPatternConverter newInstance(final String[] options) {
-        return INSTANCE;
+    public static MethodLocationPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new MethodLocationPatternConverter(formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
         final StackTraceElement element = event.getSource();
-
         if (element != null) {
-            toAppendTo.append(element.getMethodName());
+            toAppendTo.append(getCachedFormattedString(element.getMethodName()));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        final StackTraceElement element = event.getSource();
+        if (element != null) {
+            toAppendTo.append(getCachedFormattedBytes(element.getMethodName(), charset));
         }
     }
 }

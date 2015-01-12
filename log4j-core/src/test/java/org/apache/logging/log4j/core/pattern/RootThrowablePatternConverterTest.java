@@ -31,12 +31,12 @@ public class RootThrowablePatternConverterTest {
 
     @Test
     public void testFull1() {
-        final RootThrowablePatternConverter converter = RootThrowablePatternConverter.newInstance(null);
+        final RootThrowablePatternConverter converter = RootThrowablePatternConverter.newInstance(null, FormattingInfo.getDefault());
         final Throwable cause = new NullPointerException("null pointer");
         final Throwable parent = new IllegalArgumentException("IllegalArgument", cause);
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         // System.out.print(result);
@@ -51,7 +51,7 @@ public class RootThrowablePatternConverterTest {
      */
     @Test
     public void testFull2() {
-        final RootThrowablePatternConverter converter = RootThrowablePatternConverter.newInstance(null);
+        final RootThrowablePatternConverter converter = RootThrowablePatternConverter.newInstance(null, FormattingInfo.getDefault());
         Throwable parent;
         try {
             try {
@@ -64,7 +64,7 @@ public class RootThrowablePatternConverterTest {
         }
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         // System.out.print(result);

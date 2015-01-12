@@ -16,6 +16,7 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.logging.log4j.core.LogEvent;
@@ -34,14 +35,13 @@ public final class StyleConverter extends LogEventPatternConverter implements An
     /**
      * Gets an instance of the class.
      *
-     * @param config
-     *            The current Configuration.
-     * @param options
-     *            pattern options, may be null. If first element is "short", only the first line of the throwable will
-     *            be formatted.
+     * @param config The current Configuration.
+     * @param options pattern options, may be null. If first element is "short", only the first line of the throwable
+     *            will be formatted.
      * @return instance of class.
      */
-    public static StyleConverter newInstance(final Configuration config, final String[] options) {
+    public static StyleConverter newInstance(final Configuration config, final String[] options,
+            final FormattingInfo formattingInfo) {
         if (options.length < 1) {
             LOGGER.error("Incorrect number of options on style. Expected at least 1, received " + options.length);
             return null;
@@ -60,7 +60,7 @@ public final class StyleConverter extends LogEventPatternConverter implements An
         final boolean noConsoleNoAnsi = options.length > 2
                 && (PatternParser.NO_CONSOLE_NO_ANSI + "=true").equals(options[2]);
         final boolean hideAnsi = noConsoleNoAnsi && System.console() == null;
-        return new StyleConverter(formatters, style, hideAnsi);
+        return new StyleConverter(formatters, style, hideAnsi, formattingInfo);
     }
 
     private final List<PatternFormatter> patternFormatters;
@@ -74,15 +74,13 @@ public final class StyleConverter extends LogEventPatternConverter implements An
     /**
      * Constructs the converter.
      *
-     * @param patternFormatters
-     *            The PatternFormatters to generate the text to manipulate.
-     * @param style
-     *            The style that should encapsulate the pattern.
-     * @param noAnsi
-     *            If true, do not output ANSI escape codes.
+     * @param patternFormatters The PatternFormatters to generate the text to manipulate.
+     * @param style The style that should encapsulate the pattern.
+     * @param noAnsi If true, do not output ANSI escape codes.
      */
-    private StyleConverter(final List<PatternFormatter> patternFormatters, final String style, final boolean noAnsi) {
-        super("style", "style");
+    private StyleConverter(final List<PatternFormatter> patternFormatters, final String style, final boolean noAnsi,
+            final FormattingInfo formattingInfo) {
+        super("style", "style", formattingInfo);
         this.patternFormatters = patternFormatters;
         this.style = style;
         this.defaultStyle = AnsiEscape.getDefaultStyle();
@@ -93,18 +91,50 @@ public final class StyleConverter extends LogEventPatternConverter implements An
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        final StringBuilder buf = new StringBuilder();
-        for (final PatternFormatter formatter : patternFormatters) {
-            formatter.format(event, buf);
-        }
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        format0(event, toAppendTo, null);
+    }
 
-        if (buf.length() > 0) {
-            if (noAnsi) {
-                // faster to test and do this than setting style and defaultStyle to empty strings.
-                toAppendTo.append(buf.toString());
-            } else {
-                toAppendTo.append(style).append(buf.toString()).append(defaultStyle);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        format0(event, toAppendTo, charset);
+    }
+
+    private void format0(final LogEvent event, final Buffer toAppendTo, final Charset charset) {
+        formatNested(event, toAppendTo, charset, noAnsi, patternFormatters, style, defaultStyle);
+    }
+
+    public static void formatNested(final LogEvent event, final Buffer toAppendTo, final Charset charset,
+            final boolean noAnsi, final List<PatternFormatter> nested, final String style, final String defaultStyle) {
+        if (noAnsi) {
+            appendNested(nested, event, toAppendTo, charset);
+            return;
+        }
+        final int startLengthForUndo = toAppendTo.length();
+        toAppendTo.append(style);
+        final int beforeAddingNested = toAppendTo.length();
+
+        appendNested(nested, event, toAppendTo, charset);
+
+        if (toAppendTo.length() == beforeAddingNested) {
+            toAppendTo.setLength(startLengthForUndo); // remove style
+        } else {
+            toAppendTo.append(defaultStyle);
+        }
+    }
+
+    private static void appendNested(final List<PatternFormatter> formatters, final LogEvent event,
+            final Buffer toAppendTo, final Charset charset) {
+        if (toAppendTo instanceof TextBuffer) {
+            for (final PatternFormatter formatter : formatters) {
+                formatter.format(event, (TextBuffer) toAppendTo);
+            }
+        } else {
+            for (final PatternFormatter formatter : formatters) {
+                formatter.format(event, (BinaryBuffer) toAppendTo, charset);
             }
         }
     }

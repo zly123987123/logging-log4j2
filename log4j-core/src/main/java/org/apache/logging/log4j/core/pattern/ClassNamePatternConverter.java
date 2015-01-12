@@ -16,9 +16,10 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
-
 
 /**
  * Formats the class name of the site of the logging request.
@@ -27,16 +28,15 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @ConverterKeys({ "C", "class" })
 public final class ClassNamePatternConverter extends NamePatternConverter {
 
-    private static final String NA = "?";
+    private static final char NA = '?';
 
     /**
      * Private constructor.
      *
      * @param options options, may be null.
      */
-    private ClassNamePatternConverter(
-        final String[] options) {
-        super("Class Name", "class name", options);
+    private ClassNamePatternConverter(final String[] options, final FormattingInfo formattingInfo) {
+        super("Class Name", "class name", options, formattingInfo);
     }
 
     /**
@@ -45,23 +45,39 @@ public final class ClassNamePatternConverter extends NamePatternConverter {
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static ClassNamePatternConverter newInstance(final String[] options) {
-        return new ClassNamePatternConverter(options);
+    public static ClassNamePatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new ClassNamePatternConverter(options, formattingInfo);
     }
 
     /**
      * Format a logging event.
      *
-     * @param event      event to format.
-     * @param toAppendTo string buffer to which class name will be appended.
+     * @param event event to format.
+     * @param toAppendTo buffer to which class name will be appended.
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
         final StackTraceElement element = event.getSource();
         if (element == null) {
             toAppendTo.append(NA);
         } else {
             toAppendTo.append(abbreviate(element.getClassName()));
+        }
+    }
+
+    /**
+     * Format a logging event.
+     *
+     * @param event event to format.
+     * @param toAppendTo buffer to which class name will be appended.
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        final StackTraceElement element = event.getSource();
+        if (element == null) {
+            toAppendTo.append((byte) NA);
+        } else {
+            toAppendTo.append(abbreviateToBinary(element.getClassName(), charset));
         }
     }
 }

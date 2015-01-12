@@ -97,7 +97,7 @@ public class PatternParserTest {
         final LogEvent event = new Log4jLogEvent("org.apache.logging.log4j.PatternParserTest", MarkerManager.getMarker("TEST"),
             Logger.class.getName(), Level.INFO, new SimpleMessage("Hello, world"), null,
             mdc, null, "Thread1", elements[0], System.currentTimeMillis());
-        final StringBuilder buf = new StringBuilder();
+        final TextBuffer buf = new TextBuffer();
         for (final PatternFormatter formatter : formatters) {
             formatter.format(event, buf);
         }
@@ -120,7 +120,7 @@ public class PatternParserTest {
         final LogEvent event = new Log4jLogEvent("a.b.c", null,
             Logger.class.getName(), Level.INFO, new SimpleMessage("Hello, world"), null,
             null, null, "Thread1", elements[0], timestamp);
-        final StringBuilder buf = new StringBuilder();
+        final TextBuffer buf = new TextBuffer();
         for (final PatternFormatter formatter : formatters) {
             formatter.format(event, buf);
         }
@@ -149,7 +149,7 @@ public class PatternParserTest {
         final LogEvent event = new Log4jLogEvent("org.apache.logging.log4j.PatternParserTest",
                 MarkerManager.getMarker("TEST"), Logger.class.getName(), level, new SimpleMessage("Hello, world"),
                 null, null, null, "Thread1", /*stackTraceElement[0]*/null, System.currentTimeMillis());
-        final StringBuilder buf = new StringBuilder();
+        final TextBuffer buf = new TextBuffer();
         for (final PatternFormatter formatter : formatters) {
             formatter.format(event, buf);
         }

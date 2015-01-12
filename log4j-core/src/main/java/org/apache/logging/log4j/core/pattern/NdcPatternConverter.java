@@ -16,9 +16,10 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
-
 
 /**
  * Returns the event's NDC in a StringBuilder.
@@ -26,33 +27,37 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Plugin(name = "NdcPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "x", "NDC" })
 public final class NdcPatternConverter extends LogEventPatternConverter {
-  /**
-   *   Singleton.
-   */
-  private static final NdcPatternConverter INSTANCE =
-    new NdcPatternConverter();
 
-  /**
-   * Private constructor.
-   */
-  private NdcPatternConverter() {
-    super("NDC", "ndc");
-  }
+    /**
+     * Private constructor.
+     */
+    private NdcPatternConverter(final FormattingInfo formattingInfo) {
+        super("NDC", "ndc", formattingInfo);
+    }
 
-  /**
-   * Obtains an instance of NdcPatternConverter.
-   * @param options options, may be null.
-   * @return instance of NdcPatternConverter.
-   */
-  public static NdcPatternConverter newInstance(final String[] options) {
-    return INSTANCE;
-  }
+    /**
+     * Obtains an instance of NdcPatternConverter.
+     * 
+     * @param options options, may be null.
+     * @return instance of NdcPatternConverter.
+     */
+    public static NdcPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new NdcPatternConverter(formattingInfo);
+    }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-public void format(final LogEvent event, final StringBuilder toAppendTo) {
-    toAppendTo.append(event.getContextStack());
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        toAppendTo.append(event.getContextStack());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        toAppendTo.append(event.getContextStack());
+    }
 }

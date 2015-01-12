@@ -16,6 +16,7 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,29 +32,37 @@ public class DatePatternConverterTest {
 
     @Test
     public void testNewInstanceAllowsNullParameter() {
-        DatePatternConverter.newInstance(null); // no errors
+        DatePatternConverter.newInstance(null, FormattingInfo.getDefault()); // no errors
     }
 
     @Test
     public void testFormatLogEventStringBuilderDefaultPattern() {
         final LogEvent event = new MyLogEvent();
-        final DatePatternConverter converter = DatePatternConverter.newInstance(null);
-        final StringBuilder sb = new StringBuilder();
+        final DatePatternConverter converter = DatePatternConverter.newInstance(null, FormattingInfo.getDefault());
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
 
         final String expected = "2011-12-30 10:56:35,987";
         assertEquals(expected, sb.toString());
+        
+        final BinaryBuffer bin = new BinaryBuffer(Charset.defaultCharset());
+        converter.format(event, bin, Charset.defaultCharset());
+        assertEquals(expected, bin.toString());
     }
 
     @Test
     public void testFormatLogEventStringBuilderIso8601() {
         final LogEvent event = new MyLogEvent();
-        final DatePatternConverter converter = DatePatternConverter.newInstance(ISO8601_FORMAT);
-        final StringBuilder sb = new StringBuilder();
+        final DatePatternConverter converter = DatePatternConverter.newInstance(ISO8601_FORMAT, FormattingInfo.getDefault());
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
 
         final String expected = "2011-12-30T10:56:35,987";
         assertEquals(expected, sb.toString());
+        
+        final BinaryBuffer bin = new BinaryBuffer(Charset.defaultCharset());
+        converter.format(event, bin, Charset.defaultCharset());
+        assertEquals(expected, bin.toString());
     }
 
     private class MyLogEvent extends AbstractLogEvent {
@@ -70,8 +79,8 @@ public class DatePatternConverterTest {
 
     @Test
     public void testFormatObjectStringBuilderDefaultPattern() {
-        final DatePatternConverter converter = DatePatternConverter.newInstance(null);
-        final StringBuilder sb = new StringBuilder();
+        final DatePatternConverter converter = DatePatternConverter.newInstance(null, FormattingInfo.getDefault());
+        final TextBuffer sb = new TextBuffer();
         converter.format("nondate", sb);
 
         final String expected = ""; // only process dates
@@ -80,8 +89,8 @@ public class DatePatternConverterTest {
 
     @Test
     public void testFormatDateStringBuilderDefaultPattern() {
-        final DatePatternConverter converter = DatePatternConverter.newInstance(null);
-        final StringBuilder sb = new StringBuilder();
+        final DatePatternConverter converter = DatePatternConverter.newInstance(null, FormattingInfo.getDefault());
+        final TextBuffer sb = new TextBuffer();
         converter.format(date(2001, 1, 1), sb);
 
         final String expected = "2001-02-01 14:15:16,123";
@@ -90,8 +99,8 @@ public class DatePatternConverterTest {
 
     @Test
     public void testFormatDateStringBuilderIso8601() {
-        final DatePatternConverter converter = DatePatternConverter.newInstance(ISO8601_FORMAT);
-        final StringBuilder sb = new StringBuilder();
+        final DatePatternConverter converter = DatePatternConverter.newInstance(ISO8601_FORMAT, FormattingInfo.getDefault());
+        final TextBuffer sb = new TextBuffer();
         converter.format(date(2001, 1, 1), sb);
 
         final String expected = "2001-02-01T14:15:16,123";
@@ -100,8 +109,8 @@ public class DatePatternConverterTest {
 
     @Test
     public void testFormatStringBuilderObjectArrayDefaultPattern() {
-        final DatePatternConverter converter = DatePatternConverter.newInstance(null);
-        final StringBuilder sb = new StringBuilder();
+        final DatePatternConverter converter = DatePatternConverter.newInstance(null, FormattingInfo.getDefault());
+        final TextBuffer sb = new TextBuffer();
         converter.format(sb, date(2001, 1, 1), date(2002, 2, 2), date(2003, 3, 3));
 
         final String expected = "2001-02-01 14:15:16,123"; // only process first date
@@ -110,8 +119,8 @@ public class DatePatternConverterTest {
 
     @Test
     public void testFormatStringBuilderObjectArrayIso8601() {
-        final DatePatternConverter converter = DatePatternConverter.newInstance(ISO8601_FORMAT);
-        final StringBuilder sb = new StringBuilder();
+        final DatePatternConverter converter = DatePatternConverter.newInstance(ISO8601_FORMAT, FormattingInfo.getDefault());
+        final TextBuffer sb = new TextBuffer();
         converter.format(sb, date(2001, 1, 1), date(2002, 2, 2), date(2003, 3, 3));
 
         final String expected = "2001-02-01T14:15:16,123"; // only process first date
@@ -127,7 +136,7 @@ public class DatePatternConverterTest {
 
     @Test
     public void testGetPatternReturnsCorrectDefault() {
-        assertEquals(DatePatternConverter.DEFAULT_PATTERN, DatePatternConverter.newInstance(null).getPattern());
+        assertEquals(DatePatternConverter.DEFAULT_PATTERN, DatePatternConverter.newInstance(null, FormattingInfo.getDefault()).getPattern());
     }
 
 }

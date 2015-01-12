@@ -42,13 +42,14 @@ public class ThrowablePatternConverterTest {
     @Test(expected = Exception.class)
     public void testBadShortOption() {
         final String[] options = { "short.UNKNOWN" };
-        ThrowablePatternConverter.newInstance(options);
+        ThrowablePatternConverter.newInstance(options, FormattingInfo.getDefault());
     }
 
     @Test
     public void testFull() {
         final String[] options = { "full" };
-        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options);
+        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options,
+                FormattingInfo.getDefault());
         Throwable parent;
         try {
             try {
@@ -61,7 +62,7 @@ public class ThrowablePatternConverterTest {
         }
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         // System.out.print(result);
@@ -73,12 +74,13 @@ public class ThrowablePatternConverterTest {
     public void testShortClassName() {
         final String packageName = "org.apache.logging.log4j.core.pattern.";
         final String[] options = { "short.className" };
-        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options);
+        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options,
+                FormattingInfo.getDefault());
         final Throwable cause = new NullPointerException("null pointer");
         final Throwable parent = new IllegalArgumentException("IllegalArgument", cause);
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         assertEquals("The class names should be same", packageName + "ThrowablePatternConverterTest", result);
@@ -87,12 +89,13 @@ public class ThrowablePatternConverterTest {
     @Test
     public void testShortFileName() {
         final String[] options = { "short.fileName" };
-        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options);
+        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options,
+                FormattingInfo.getDefault());
         final Throwable cause = new NullPointerException("null pointer");
         final Throwable parent = new IllegalArgumentException("IllegalArgument", cause);
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         assertEquals("The file names should be same", "ThrowablePatternConverterTest.java", result);
@@ -101,7 +104,8 @@ public class ThrowablePatternConverterTest {
     @Test
     public void testShortLineNumber() {
         final String[] options = { "short.lineNumber" };
-        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options);
+        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options,
+                FormattingInfo.getDefault());
         final Throwable cause = new NullPointerException("null pointer");
         final Throwable parent = new IllegalArgumentException("IllegalArgument", cause);
         final StackTraceElement top = parent.getStackTrace()[0];
@@ -109,7 +113,7 @@ public class ThrowablePatternConverterTest {
 
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         assertTrue("The line numbers should be same", expectedLineNumber == Integer.parseInt(result));
@@ -118,11 +122,12 @@ public class ThrowablePatternConverterTest {
     @Test
     public void testShortLocalizedMessage() {
         final String[] options = { "short.localizedMessage" };
-        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options);
+        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options,
+                FormattingInfo.getDefault());
         final Throwable parent = new LocalizedException();
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         assertEquals("The messages should be same", "I am localized.", result);
@@ -131,12 +136,13 @@ public class ThrowablePatternConverterTest {
     @Test
     public void testShortMessage() {
         final String[] options = { "short.message" };
-        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options);
+        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options,
+                FormattingInfo.getDefault());
         final Throwable cause = new NullPointerException("null pointer");
         final Throwable parent = new IllegalArgumentException("IllegalArgument", cause);
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         assertEquals("The messages should be same", "IllegalArgument", result);
@@ -145,12 +151,13 @@ public class ThrowablePatternConverterTest {
     @Test
     public void testShortMethodName() {
         final String[] options = { "short.methodName" };
-        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options);
+        final ThrowablePatternConverter converter = ThrowablePatternConverter.newInstance(options,
+                FormattingInfo.getDefault());
         final Throwable cause = new NullPointerException("null pointer");
         final Throwable parent = new IllegalArgumentException("IllegalArgument", cause);
         final LogEvent event = new Log4jLogEvent("testLogger", null, this.getClass().getName(), Level.DEBUG,
                 new SimpleMessage("test exception"), parent);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         final String result = sb.toString();
         assertEquals("The method names should be same", "testShortMethodName", result);

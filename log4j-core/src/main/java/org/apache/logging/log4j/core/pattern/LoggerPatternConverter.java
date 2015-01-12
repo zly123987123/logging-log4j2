@@ -16,9 +16,10 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
-
 
 /**
  * Formats a logger name.
@@ -26,19 +27,14 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Plugin(name = "LoggerPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "c", "logger" })
 public final class LoggerPatternConverter extends NamePatternConverter {
-    /**
-     * Singleton.
-     */
-    private static final LoggerPatternConverter INSTANCE =
-        new LoggerPatternConverter(null);
 
     /**
      * Private constructor.
      *
      * @param options options, may be null.
      */
-    private LoggerPatternConverter(final String[] options) {
-        super("Logger", "logger", options);
+    private LoggerPatternConverter(final String[] options, final FormattingInfo formattingInfo) {
+        super("Logger", "logger", options, formattingInfo);
     }
 
     /**
@@ -47,20 +43,30 @@ public final class LoggerPatternConverter extends NamePatternConverter {
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static LoggerPatternConverter newInstance(
-        final String[] options) {
+    public static LoggerPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
         if (options == null || options.length == 0) {
-            return INSTANCE;
+            return new LoggerPatternConverter(null, formattingInfo);
         }
 
-        return new LoggerPatternConverter(options);
+        return new LoggerPatternConverter(options, formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
         toAppendTo.append(abbreviate(event.getLoggerName()));
+    }
+
+    /**
+     * Format a logging event.
+     *
+     * @param event event to format.
+     * @param toAppendTo buffer to which class name will be appended.
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        toAppendTo.append(abbreviateToBinary(event.getLoggerName(), charset));
     }
 }

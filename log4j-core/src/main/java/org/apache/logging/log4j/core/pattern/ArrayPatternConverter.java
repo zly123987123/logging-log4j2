@@ -23,8 +23,8 @@ public interface ArrayPatternConverter extends PatternConverter {
 
     /**
      * Formats an array of Objects.
-     * @param toAppendTo The StringBuilder to add the content to.
+     * @param toAppendTo The Buffer to add the content to.
      * @param objects The Object array.
      */
-    void format(final StringBuilder toAppendTo, Object... objects);
+    void format(final Buffer toAppendTo, Object... objects);
 }

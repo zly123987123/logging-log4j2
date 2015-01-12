@@ -17,6 +17,7 @@
 package org.apache.logging.log4j.core.pattern;
 
 import java.lang.management.ManagementFactory;
+import java.nio.charset.Charset;
 
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
@@ -27,18 +28,13 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Plugin(name = "RelativeTimePatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "r", "relative" })
 public class RelativeTimePatternConverter extends LogEventPatternConverter {
-    /**
-     * Cached formatted timestamp.
-     */
-    private long lastTimestamp = Long.MIN_VALUE;
     private final long startTime = ManagementFactory.getRuntimeMXBean().getStartTime();
-    private String relative;
 
     /**
      * Private constructor.
      */
-    public RelativeTimePatternConverter() {
-        super("Time", "time");
+    public RelativeTimePatternConverter(final FormattingInfo formattingInfo) {
+        super("Time", "time", formattingInfo);
     }
 
     /**
@@ -48,23 +44,31 @@ public class RelativeTimePatternConverter extends LogEventPatternConverter {
      * @return instance of RelativeTimePatternConverter.
      */
     public static RelativeTimePatternConverter newInstance(
-        final String[] options) {
-        return new RelativeTimePatternConverter();
+        final String[] options, final FormattingInfo formattingInfo) {
+        return new RelativeTimePatternConverter(formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        final long timestamp = event.getTimeMillis();
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        handle(event, toAppendTo);
+    }
 
-        synchronized (this) {
-            if (timestamp != lastTimestamp) {
-                lastTimestamp = timestamp;
-                relative = Long.toString(timestamp - startTime);
-            }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        handle(event, toAppendTo);
+    }
+    
+    private void handle(final LogEvent event, final Buffer toAppendTo) {
+        if (hasFormattingInfo) {
+            toAppendTo.append(event.getTimeMillis() - startTime, getFormattingInfo());
+        } else {
+            toAppendTo.append(event.getTimeMillis() - startTime);
         }
-        toAppendTo.append(relative);
     }
 }

@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 
@@ -26,17 +28,12 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Plugin(name = "FullLocationPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "l", "location" })
 public final class FullLocationPatternConverter extends LogEventPatternConverter {
-    /**
-     * Singleton.
-     */
-    private static final FullLocationPatternConverter INSTANCE =
-        new FullLocationPatternConverter();
 
     /**
      * Private constructor.
      */
-    private FullLocationPatternConverter() {
-        super("Full Location", "fullLocation");
+    private FullLocationPatternConverter(final FormattingInfo formattingInfo) {
+        super("Full Location", "fullLocation", formattingInfo);
     }
 
     /**
@@ -45,19 +42,29 @@ public final class FullLocationPatternConverter extends LogEventPatternConverter
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static FullLocationPatternConverter newInstance(final String[] options) {
-        return INSTANCE;
+    public static FullLocationPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new FullLocationPatternConverter(formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder output) {
+    public void format(final LogEvent event, final TextBuffer output) {
         final StackTraceElement element = event.getSource();
-
         if (element != null) {
-            output.append(element.toString());
+            output.append(getCachedFormattedString(element));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        final StackTraceElement element = event.getSource();
+        if (element != null) {
+            toAppendTo.append(getCachedFormattedBytes(element, charset));
         }
     }
 }

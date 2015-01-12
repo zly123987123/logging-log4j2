@@ -20,24 +20,18 @@ import java.util.Date;
 
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 
-
 /**
  * Formats an integer.
  */
 @Plugin(name = "IntegerPatternConverter", category = "FileConverter")
 @ConverterKeys({ "i", "index" })
 public final class IntegerPatternConverter extends AbstractPatternConverter implements ArrayPatternConverter {
-    
-    /**
-     * Singleton.
-     */
-    private static final IntegerPatternConverter INSTANCE = new IntegerPatternConverter();
 
     /**
      * Private constructor.
      */
-    private IntegerPatternConverter() {
-        super("Integer", "integer");
+    private IntegerPatternConverter(final FormattingInfo formattingInfo) {
+        super("Integer", "integer", formattingInfo);
     }
 
     /**
@@ -46,13 +40,12 @@ public final class IntegerPatternConverter extends AbstractPatternConverter impl
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static IntegerPatternConverter newInstance(
-        final String[] options) {
-        return INSTANCE;
+    public static IntegerPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new IntegerPatternConverter(formattingInfo);
     }
 
     @Override
-    public void format(final StringBuilder toAppendTo, final Object... objects) {
+    public void format(final Buffer toAppendTo, final Object... objects) {
         for (final Object obj : objects) {
             if (obj instanceof Integer) {
                 format(obj, toAppendTo);
@@ -65,7 +58,7 @@ public final class IntegerPatternConverter extends AbstractPatternConverter impl
      * {@inheritDoc}
      */
     @Override
-    public void format(final Object obj, final StringBuilder toAppendTo) {
+    public void format(final Object obj, final Buffer toAppendTo) {
         if (obj instanceof Integer) {
             toAppendTo.append(obj.toString());
         } else if (obj instanceof Date) {

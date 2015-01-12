@@ -39,8 +39,8 @@ public class MarkerPatternConverterTest {
         final Marker eventMarker = MarkerManager.getMarker("EVENT");
         final Marker auditMarker = MarkerManager.getMarker("AUDIT").setParents(eventMarker);
         final LogEvent event = new Log4jLogEvent("MyLogger", auditMarker, null, Level.DEBUG, msg, null);
-        final StringBuilder sb = new StringBuilder();
-        final MarkerPatternConverter converter = MarkerPatternConverter.newInstance(null);
+        final TextBuffer sb = new TextBuffer();
+        final MarkerPatternConverter converter = MarkerPatternConverter.newInstance(null, FormattingInfo.getDefault());
         converter.format(event, sb);
         assertEquals(auditMarker.toString(), sb.toString());
     }

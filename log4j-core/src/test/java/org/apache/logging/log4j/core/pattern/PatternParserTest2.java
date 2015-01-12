@@ -33,7 +33,7 @@ public class PatternParserTest2 {
     @Test
     public void testParseConvertBackslashes() {
         final boolean convert = true;
-        final StringBuilder buf = new StringBuilder();
+        final TextBuffer buf = new TextBuffer();
         final String pattern = "%d{HH-mm-ss} \\t ...";
 
         final Calendar cal = Calendar.getInstance();
@@ -48,7 +48,7 @@ public class PatternParserTest2 {
     @Test
     public void testParseDontConvertBackslashes() {
         final boolean convert = false;
-        final StringBuilder buf = new StringBuilder();
+        final TextBuffer buf = new TextBuffer();
         final String pattern = "%d{HH-mm-ss} \\t---";
 
         final Calendar cal = Calendar.getInstance();
@@ -60,7 +60,7 @@ public class PatternParserTest2 {
         assertEquals("13-24-59 \\t---", buf.toString());
     }
 
-    private void parse(final String pattern, final boolean convert, final StringBuilder buf, final Date date, final int i) {
+    private void parse(final String pattern, final boolean convert, final Buffer buf, final Date date, final int i) {
         final PatternParser parser0 = new PatternParser(null, "Converter", null);
         final List<PatternConverter> converters = new ArrayList<PatternConverter>();
         final List<FormattingInfo> fields = new ArrayList<FormattingInfo>();
@@ -79,14 +79,14 @@ public class PatternParserTest2 {
      * @param objects objects to be evaluated in formatting, may not be null.
      */
     protected final void formatFileName(final ArrayPatternConverter[] patternConverters,
-            final FormattingInfo[] patternFields, final StringBuilder buf, final Object... objects) {
+            final FormattingInfo[] patternFields, final Buffer buf, final Object... objects) {
         for (int i = 0; i < patternConverters.length; i++) {
-            final int fieldStart = buf.length();
+//            final int fieldStart = buf.length();
             patternConverters[i].format(buf, objects);
 
-            if (patternFields[i] != null) {
-                patternFields[i].format(fieldStart, buf);
-            }
+//            if (patternFields[i] != null) {
+//                patternFields[i].format(fieldStart, buf);
+//            }
         }
     }
 }

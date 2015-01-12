@@ -16,10 +16,12 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.util.Charsets;
 import org.apache.logging.log4j.core.util.OptionConverter;
-
 
 /**
  * Formats a string literal.
@@ -29,9 +31,8 @@ public final class LiteralPatternConverter extends LogEventPatternConverter impl
      * String literal.
      */
     private final String literal;
-
+    private byte[] cachedLiteralBytes;
     private final Configuration config;
-
     private final boolean substitute;
 
     /**
@@ -43,7 +44,7 @@ public final class LiteralPatternConverter extends LogEventPatternConverter impl
      *            sequences like "\" followed by "t" (backslash+t) are converted to special characters like '\t' (tab).
      */
     public LiteralPatternConverter(final Configuration config, final String literal, final boolean convertBackslashes) {
-        super("Literal", "literal");
+        super("Literal", "literal", FormattingInfo.getDefault());
         this.literal = convertBackslashes ? OptionConverter.convertSpecialChars(literal) : literal; // LOG4J2-829
         this.config = config;
         substitute = config != null && literal.contains("${");
@@ -53,15 +54,36 @@ public final class LiteralPatternConverter extends LogEventPatternConverter impl
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        // note: this converter ignores FormattingInfo on purpose
         toAppendTo.append(substitute ? config.getStrSubstitutor().replace(event, literal) : literal);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final Object obj, final StringBuilder output) {
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        // note: this converter ignores FormattingInfo on purpose
+        if (substitute) { // cannot use cache...
+            toAppendTo.append(config.getStrSubstitutor().replace(event, literal));
+        } else {
+            toAppendTo.append(cachedLiteral(charset));
+        }
+    }
+
+    private byte[] cachedLiteral(Charset charset) {
+        if (cachedLiteralBytes == null) {
+            cachedLiteralBytes = Charsets.getBytes(literal, charset);
+        }
+        return cachedLiteralBytes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final Object obj, final Buffer output) {
         output.append(substitute ? config.getStrSubstitutor().replace(literal) : literal);
     }
 
@@ -69,7 +91,7 @@ public final class LiteralPatternConverter extends LogEventPatternConverter impl
      * {@inheritDoc}
      */
     @Override
-    public void format(final StringBuilder output, final Object... objects) {
+    public void format(final Buffer output, final Object... objects) {
         output.append(substitute ? config.getStrSubstitutor().replace(literal) : literal);
     }
 

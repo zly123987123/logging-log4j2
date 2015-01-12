@@ -16,11 +16,11 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
-
 
 /**
  * Formats the event sequence number.
@@ -32,16 +32,10 @@ public final class SequenceNumberPatternConverter extends LogEventPatternConvert
     private static final AtomicLong SEQUENCE = new AtomicLong();
 
     /**
-     * Singleton.
-     */
-    private static final SequenceNumberPatternConverter INSTANCE =
-        new SequenceNumberPatternConverter();
-
-    /**
      * Private constructor.
      */
-    private SequenceNumberPatternConverter() {
-        super("Sequence Number", "sn");
+    private SequenceNumberPatternConverter(final FormattingInfo formattingInfo) {
+        super("Sequence Number", "sn", formattingInfo);
     }
 
     /**
@@ -50,16 +44,31 @@ public final class SequenceNumberPatternConverter extends LogEventPatternConvert
      * @param options options, currently ignored, may be null.
      * @return instance of SequencePatternConverter.
      */
-    public static SequenceNumberPatternConverter newInstance(
-        final String[] options) {
-        return INSTANCE;
+    public static SequenceNumberPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new SequenceNumberPatternConverter(formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        toAppendTo.append(Long.toString(SEQUENCE.incrementAndGet()));
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        if (hasFormattingInfo) {
+            toAppendTo.append(SEQUENCE.incrementAndGet(), getFormattingInfo());
+        } else {
+            toAppendTo.append(SEQUENCE.incrementAndGet());
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        if (hasFormattingInfo) {
+            toAppendTo.append(SEQUENCE.incrementAndGet(), getFormattingInfo());
+        } else {
+            toAppendTo.append(SEQUENCE.incrementAndGet());
+        }
     }
 }

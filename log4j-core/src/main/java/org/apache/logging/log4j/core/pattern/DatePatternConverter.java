@@ -16,12 +16,14 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
+import org.apache.logging.log4j.core.util.Assert;
 
 /**
  * Convert and format the event's date in a StringBuilder.
@@ -30,48 +32,112 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @ConverterKeys({ "d", "date" })
 public final class DatePatternConverter extends LogEventPatternConverter implements ArrayPatternConverter {
 
-    private abstract static class Formatter {
-        abstract String format(long time);
+    /**
+     * ADT for formatter helpers.
+     */
+    public abstract static interface Formatter {
+        void format(long time, Buffer buffer);
 
+        void format(Date time, Buffer buffer);
+
+        void format(long timestamp, BinaryBuffer output, Charset charset);
+
+        String toPattern();
+    }
+
+    private static class PatternFormatter implements Formatter {
+        private ThreadLocal<SimpleDateFormat> simpleDateFormat = new ThreadLocal<SimpleDateFormat>() {
+            @Override
+            protected SimpleDateFormat initialValue() {
+                final SimpleDateFormat result = new SimpleDateFormat(pattern);
+                if (timeZone != null) {
+                    result.setTimeZone(timeZone);
+                }
+                return result;
+            }
+        };
+        private final String pattern;
+        private final TimeZone timeZone;
+        private final boolean useFastFormat;
+
+        PatternFormatter(final String pattern, final TimeZone timeZone) {
+            this.pattern = Assert.requireNonNull(pattern, "pattern is null");
+            this.timeZone = timeZone;
+            this.useFastFormat = ABSOLUTE_TIME_PATTERN.equals(pattern);
+        }
+
+        @Override
+        public void format(final long time, final Buffer buffer) {
+            format(new Date(time), buffer);
+        }
+
+        @Override
+        public void format(final Date time, final Buffer buffer) {
+            if (useFastFormat) {
+
+            } else {
+                final String formatted = simpleDateFormat.get().format(time);
+                buffer.append(formatted);
+            }
+        }
+
+        @Override
+        public void format(final long timestamp, final BinaryBuffer output, final Charset charset) {
+            if (useFastFormat) {
+
+            } else {
+                format(new Date(timestamp), output); // use SimpleDateFormat
+            }
+        }
+
+        @Override
+        public String toPattern() {
+            return pattern;
+        }
+    }
+
+    private static class UnixFormatter implements Formatter {
+        @Override
+        public void format(final long time, final Buffer buffer) {
+            buffer.append(time / 1000);
+        }
+
+        @Override
+        public void format(final Date time, final Buffer buffer) {
+            format(time.getTime(), buffer);
+        }
+
+        @Override
+        public void format(final long timestamp, final BinaryBuffer output, final Charset charset) {
+            output.append(timestamp / 1000);
+        }
+
+        @Override
         public String toPattern() {
             return null;
         }
     }
 
-    private static class PatternFormatter extends Formatter {
-        private final SimpleDateFormat simpleDateFormat;
-
-        PatternFormatter(final SimpleDateFormat simpleDateFormat) {
-            this.simpleDateFormat = simpleDateFormat;
+    private static class UnixMillisFormatter implements Formatter {
+        @Override
+        public void format(final long time, final Buffer buffer) {
+            buffer.append(time);
         }
 
         @Override
-        String format(final long time) {
-            return simpleDateFormat.format(Long.valueOf(time));
+        public void format(final Date time, final Buffer buffer) {
+            format(time.getTime(), buffer);
+        }
+
+        @Override
+        public void format(final long timestamp, final BinaryBuffer output, final Charset charset) {
+            output.append(timestamp);
         }
 
         @Override
         public String toPattern() {
-            return simpleDateFormat.toPattern();
+            return null;
         }
-    }
-
-    private static class UnixFormatter extends Formatter {
-
-        @Override
-        String format(final long time) {
-            return Long.toString(time / 1000);
-        }
-
-    }
-
-    private static class UnixMillisFormatter extends Formatter {
-
-        @Override
-        String format(final long time) {
-            return Long.toString(time);
-        }
-
     }
 
     /**
@@ -82,7 +148,7 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
     /**
      * SimpleTimePattern for ABSOLUTE.
      */
-    private static final String ABSOLUTE_TIME_PATTERN = "HH:mm:ss,SSS";
+    static final String ABSOLUTE_TIME_PATTERN = "HH:mm:ss,SSS";
 
     /**
      * COMPACT string literal.
@@ -150,31 +216,22 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
     /**
      * Obtains an instance of pattern converter.
      *
-     * @param options
-     *            options, may be null.
+     * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static DatePatternConverter newInstance(final String[] options) {
-        return new DatePatternConverter(options);
+    public static DatePatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new DatePatternConverter(options, formattingInfo);
     }
 
-    /**
-     * Date format.
-     */
-    private String cachedDateString;
-
-    private final Formatter formatter;
-
-    private long lastTimestamp;
+    private Formatter formatter;
 
     /**
      * Private constructor.
      *
-     * @param options
-     *            options, may be null.
+     * @param options options, may be null.
      */
-    private DatePatternConverter(final String[] options) {
-        super("Date", "date");
+    private DatePatternConverter(final String[] options, final FormattingInfo formattingInfo) {
+        super("Date", "date", formattingInfo);
 
         // null patternOption is OK.
         final String patternOption = options != null && options.length > 0 ? options[0] : null;
@@ -203,62 +260,66 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
         }
 
         if (pattern != null) {
-            SimpleDateFormat tempFormat;
-
             try {
-                tempFormat = new SimpleDateFormat(pattern);
+                new SimpleDateFormat(pattern);
             } catch (final IllegalArgumentException e) {
                 LOGGER.warn("Could not instantiate SimpleDateFormat with pattern " + patternOption, e);
 
                 // default to the DEFAULT format
-                tempFormat = new SimpleDateFormat(DEFAULT_PATTERN);
+                pattern = DEFAULT_PATTERN;
             }
 
             // if the option list contains a TZ option, then set it.
-            if (options != null && options.length > 1) {
-                final TimeZone tz = TimeZone.getTimeZone(options[1]);
-                tempFormat.setTimeZone(tz);
-            }
-            tempFormatter = new PatternFormatter(tempFormat);
+            final TimeZone tz = (options != null && options.length > 1) ? TimeZone.getTimeZone(options[1]) : null;
+            tempFormatter = new PatternFormatter(pattern, tz);
         }
         formatter = tempFormatter;
+    }
+
+    @Override
+    public void setCharset(Charset charset) {
+        super.setCharset(charset);
+        if (formatter instanceof PatternFormatter) {
+            PatternFormatter paf = (PatternFormatter) formatter;
+            
+            // FastTimeFormat does not support time zones
+            if (paf.timeZone == null && paf.pattern.endsWith(ABSOLUTE_TIME_PATTERN)) {
+                formatter = new FastTimeFormatter(paf.pattern, charset);
+            }
+        }
     }
 
     /**
      * Append formatted date to string buffer.
      *
-     * @param date
-     *            date
-     * @param toAppendTo
-     *            buffer to which formatted date is appended.
+     * @param date date
+     * @param toAppendTo buffer to which formatted date is appended.
      */
-    public void format(final Date date, final StringBuilder toAppendTo) {
-        synchronized (this) {
-            toAppendTo.append(formatter.format(date.getTime()));
-        }
+    public void format(final Date date, final Buffer toAppendTo) {
+        formatter.format(date, toAppendTo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder output) {
-        final long timestamp = event.getTimeMillis();
-
-        synchronized (this) {
-            if (timestamp != lastTimestamp) {
-                lastTimestamp = timestamp;
-                cachedDateString = formatter.format(timestamp);
-            }
-        }
-        output.append(cachedDateString);
+    public void format(final LogEvent event, final TextBuffer output) {
+        formatter.format(event.getTimeMillis(), output);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final Object obj, final StringBuilder output) {
+    public void format(final LogEvent event, final BinaryBuffer output, final Charset charset) {
+        formatter.format(event.getTimeMillis(), output, charset);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final Object obj, final Buffer output) {
         if (obj instanceof Date) {
             format((Date) obj, output);
         }
@@ -266,7 +327,7 @@ public final class DatePatternConverter extends LogEventPatternConverter impleme
     }
 
     @Override
-    public void format(final StringBuilder toAppendTo, final Object... objects) {
+    public void format(final Buffer toAppendTo, final Object... objects) {
         for (final Object obj : objects) {
             if (obj instanceof Date) {
                 format(obj, toAppendTo);

@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 
@@ -25,17 +27,12 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 @Plugin(name = "LineLocationPatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "L", "line" })
 public final class LineLocationPatternConverter extends LogEventPatternConverter {
-    /**
-     * Singleton.
-     */
-    private static final LineLocationPatternConverter INSTANCE =
-        new LineLocationPatternConverter();
 
     /**
      * Private constructor.
      */
-    private LineLocationPatternConverter() {
-        super("Line", "line");
+    private LineLocationPatternConverter(final FormattingInfo formattingInfo) {
+        super("Line", "line", formattingInfo);
     }
 
     /**
@@ -44,20 +41,42 @@ public final class LineLocationPatternConverter extends LogEventPatternConverter
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static LineLocationPatternConverter newInstance(
-        final String[] options) {
-        return INSTANCE;
+    public static LineLocationPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new LineLocationPatternConverter(formattingInfo);
+    }
+
+    @Override
+    public String convert(final Object element) {
+        return String.valueOf(((StackTraceElement) element).getLineNumber());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder output) {
+    public void format(final LogEvent event, final TextBuffer output) {
         final StackTraceElement element = event.getSource();
-
         if (element != null) {
-            output.append(element.getLineNumber());
+            if (hasFormattingInfo) {
+                output.append(getCachedFormattedString(element));
+            } else {
+                output.append(element.getLineNumber());
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        final StackTraceElement element = event.getSource();
+        if (element != null) {
+            if (hasFormattingInfo) {
+                toAppendTo.append(getCachedFormattedBytes(element, charset));
+            } else {
+                toAppendTo.append(element.getLineNumber());
+            }
         }
     }
 }

@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 
 /**
  * Abstract base class for other pattern converters which can return only parts of their name.
@@ -33,8 +35,8 @@ public abstract class NamePatternConverter extends LogEventPatternConverter {
      * @param style   style name for associated output.
      * @param options options, may be null, first element will be interpreted as an abbreviation pattern.
      */
-    protected NamePatternConverter(final String name, final String style, final String[] options) {
-        super(name, style);
+    protected NamePatternConverter(final String name, final String style, final String[] options, final FormattingInfo formattingInfo) {
+        super(name, style, formattingInfo);
 
         if (options != null && options.length > 0) {
             abbreviator = NameAbbreviator.getAbbreviator(options[0]);
@@ -42,14 +44,39 @@ public abstract class NamePatternConverter extends LogEventPatternConverter {
             abbreviator = NameAbbreviator.getDefaultAbbreviator();
         }
     }
-
+    
     /**
-     * Abbreviate name in string buffer.
+     * Abbreviates specified name.
      *
-     * @param buf       string buffer containing name.
+     * @param name the name to abbreviate.
      * @return The abbreviated name.
      */
-    protected final String abbreviate(final String buf) {
-        return abbreviator.abbreviate(buf);
+    @Override
+    protected String convert(final Object name) {
+        return abbreviator.abbreviate(name.toString());
+    }
+
+    /**
+     * Abbreviates specified name.
+     *
+     * @param name the name to abbreviate.
+     * @return The abbreviated name.
+     */
+    protected final String abbreviate(final String name) {
+        if (abbreviator == NameAbbreviator.getDefaultAbbreviator() && !hasFormattingInfo) {
+            return name; // no formatting to do
+        }
+        return getCachedFormattedString(name);
+    }
+
+    /**
+     * Abbreviates specified name and returns the encoded result.
+     *
+     * @param name the name to abbreviate.
+     * @param charset the charset to use when converting text to bytes
+     * @return The abbreviated name as a byte array.
+     */
+    protected final byte[] abbreviateToBinary(final String name, final Charset charset) {
+        return getCachedFormattedBytes(name, charset);
     }
 }

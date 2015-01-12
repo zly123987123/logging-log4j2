@@ -19,9 +19,8 @@ package org.apache.logging.log4j.core.pattern;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 
 /**
- * Formats a date by delegating to {@link DatePatternConverter}.  The default
- * date pattern for a %d specifier in a file name is different than
- * the %d pattern in pattern layout.
+ * Formats a date by delegating to {@link DatePatternConverter}. The default date pattern for a %d specifier in a file
+ * name is different than the %d pattern in pattern layout.
  */
 @Plugin(name = "FileDatePatternConverter", category = "FileConverter")
 @ConverterKeys({ "d", "date" })
@@ -38,14 +37,11 @@ public final class FileDatePatternConverter {
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static PatternConverter newInstance(final String[] options) {
+    public static PatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
         if (options == null || options.length == 0) {
-            return DatePatternConverter.newInstance(
-                new String[]{
-                    "yyyy-MM-dd"
-                });
+            return DatePatternConverter.newInstance(new String[] { "yyyy-MM-dd" }, formattingInfo);
         }
 
-        return DatePatternConverter.newInstance(options);
+        return DatePatternConverter.newInstance(options, formattingInfo);
     }
 }

@@ -34,19 +34,19 @@ public class MessagePatternConverterTest {
 
     @Test
     public void testPattern() throws Exception {
-        final MessagePatternConverter converter = MessagePatternConverter.newInstance(null, null);
+        final MessagePatternConverter converter = MessagePatternConverter.newInstance(null, null, FormattingInfo.getDefault());
         Message msg = new SimpleMessage("Hello!");
         LogEvent event = new Log4jLogEvent("MyLogger", null, null, Level.DEBUG, msg, null);
-        StringBuilder sb = new StringBuilder();
+        TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         assertEquals("Unexpected result", "Hello!", sb.toString());
         event = new Log4jLogEvent("MyLogger", null, null, Level.DEBUG, null, null);
-        sb = new StringBuilder();
+        sb = new TextBuffer();
         converter.format(event, sb);
         assertEquals("Incorrect length: " + sb.length(), 0, sb.length());
         msg = new SimpleMessage(null);
         event = new Log4jLogEvent("MyLogger", null, null, Level.DEBUG, msg, null);
-        sb = new StringBuilder();
+        sb = new TextBuffer();
         converter.format(event, sb);
         assertEquals("Incorrect length: " + sb.length(), 4, sb.length());
 
@@ -55,19 +55,19 @@ public class MessagePatternConverterTest {
     @Test
     public void testPatternWithConfiguration() throws Exception {
         final Configuration config = new DefaultConfiguration();
-        final MessagePatternConverter converter = MessagePatternConverter.newInstance(config, null);
+        final MessagePatternConverter converter = MessagePatternConverter.newInstance(config, null, FormattingInfo.getDefault());
         Message msg = new SimpleMessage("Hello!");
         LogEvent event = new Log4jLogEvent("MyLogger", null, null, Level.DEBUG, msg, null);
-        StringBuilder sb = new StringBuilder();
+        TextBuffer sb = new TextBuffer();
         converter.format(event, sb);
         assertEquals("Unexpected result", "Hello!", sb.toString());
         event = new Log4jLogEvent("MyLogger", null, null, Level.DEBUG, null, null);
-        sb = new StringBuilder();
+        sb = new TextBuffer();
         converter.format(event, sb);
         assertEquals("Incorrect length: " + sb.length(), 0, sb.length());
         msg = new SimpleMessage(null);
         event = new Log4jLogEvent("MyLogger", null, null, Level.DEBUG, msg, null);
-        sb = new StringBuilder();
+        sb = new TextBuffer();
         converter.format(event, sb);
         assertEquals("Incorrect length: " + sb.length(), 4, sb.length());
     }

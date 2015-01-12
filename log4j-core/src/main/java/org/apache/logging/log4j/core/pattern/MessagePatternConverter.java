@@ -16,9 +16,12 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
+import org.apache.logging.log4j.core.util.Charsets;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.message.MultiformatMessage;
 
@@ -35,10 +38,12 @@ public final class MessagePatternConverter extends LogEventPatternConverter {
 
     /**
      * Private constructor.
+     * 
      * @param options options, may be null.
      */
-    private MessagePatternConverter(final Configuration config, final String[] options) {
-        super("Message", "message");
+    private MessagePatternConverter(final Configuration config, final String[] options,
+            final FormattingInfo formattingInfo) {
+        super("Message", "message", formattingInfo);
         formats = options;
         this.config = config;
     }
@@ -50,29 +55,49 @@ public final class MessagePatternConverter extends LogEventPatternConverter {
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static MessagePatternConverter newInstance(final Configuration config, final String[] options) {
-        return new MessagePatternConverter(config, options);
+    public static MessagePatternConverter newInstance(final Configuration config, final String[] options,
+            final FormattingInfo formattingInfo) {
+        return new MessagePatternConverter(config, options, formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
         final Message msg = event.getMessage();
         if (msg != null) {
-            String result;
-            if (msg instanceof MultiformatMessage) {
-                result = ((MultiformatMessage) msg).getFormattedMessage(formats);
-            } else {
-                result = msg.getFormattedMessage();
-            }
-            if (result != null) {
-                toAppendTo.append(config != null && result.contains("${") ?
-                    config.getStrSubstitutor().replace(event, result) : result);
-            } else {
-                toAppendTo.append("null");
-            }
+            final String msgString = messageString(event, msg);
+            toAppendTo.append(msgString, getFormattingInfo());
         }
+    }
+
+    /**
+     * Format a logging event.
+     *
+     * @param event event to format.
+     * @param toAppendTo buffer to which class name will be appended.
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        final Message msg = event.getMessage();
+        if (msg != null) {
+            final String msgString = messageString(event, msg);
+            final String formatted = applyFormattingInfo(msgString);
+            toAppendTo.append(Charsets.getBytes(formatted, charset));
+        }
+    }
+
+    private String messageString(final LogEvent event, final Message msg) {
+        String result;
+        if (msg instanceof MultiformatMessage) {
+            result = ((MultiformatMessage) msg).getFormattedMessage(formats);
+        } else {
+            result = msg.getFormattedMessage();
+        }
+        if (result == null) {
+            return "null";
+        }
+        return (config != null && result.contains("${")) ? config.getStrSubstitutor().replace(event, result) : result;
     }
 }

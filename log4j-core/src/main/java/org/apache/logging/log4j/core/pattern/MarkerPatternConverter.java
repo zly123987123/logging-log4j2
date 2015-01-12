@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
@@ -29,10 +31,11 @@ public final class MarkerPatternConverter extends LogEventPatternConverter {
 
     /**
      * Private constructor.
+     * 
      * @param options options, may be null.
      */
-    private MarkerPatternConverter(final String[] options) {
-        super("Marker", "marker");
+    private MarkerPatternConverter(final String[] options, final FormattingInfo formattingInfo) {
+        super("Marker", "marker", formattingInfo);
     }
 
     /**
@@ -41,18 +44,29 @@ public final class MarkerPatternConverter extends LogEventPatternConverter {
      * @param options options, may be null.
      * @return instance of pattern converter.
      */
-    public static MarkerPatternConverter newInstance(final String[] options) {
-        return new MarkerPatternConverter(options);
+    public static MarkerPatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new MarkerPatternConverter(options, formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
         final Marker marker = event.getMarker();
         if (marker != null) {
-            toAppendTo.append(marker.toString());
+            toAppendTo.append(getCachedFormattedString(marker));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        final Marker marker = event.getMarker();
+        if (marker != null) {
+            toAppendTo.append(getCachedFormattedBytes(marker, charset));
         }
     }
 }

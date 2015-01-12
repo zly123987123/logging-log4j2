@@ -46,6 +46,7 @@ import org.apache.logging.log4j.core.pattern.LogEventPatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternFormatter;
 import org.apache.logging.log4j.core.pattern.PatternParser;
+import org.apache.logging.log4j.core.pattern.TextBuffer;
 import org.apache.logging.log4j.core.pattern.ThrowablePatternConverter;
 import org.apache.logging.log4j.core.util.Charsets;
 import org.apache.logging.log4j.core.util.NetUtils;
@@ -337,7 +338,8 @@ public final class Rfc5424Layout extends AbstractStringLayout {
         }
 
         if (exceptionFormatters != null && event.getThrown() != null) {
-            final StringBuilder exception = new StringBuilder(LF);
+            final TextBuffer exception = new TextBuffer();
+            exception.append(LF);
             for (final PatternFormatter formatter : exceptionFormatters) {
                 formatter.format(event, exception);
             }
@@ -673,7 +675,7 @@ public final class Rfc5424Layout extends AbstractStringLayout {
             final Map<String, String> map = new HashMap<String, String>();
 
             for (final Map.Entry<String, List<PatternFormatter>> entry : delegateMap.entrySet()) {
-                final StringBuilder buffer = new StringBuilder();
+                final TextBuffer buffer = new TextBuffer();
                 for (final PatternFormatter formatter : entry.getValue()) {
                     formatter.format(event, buffer);
                 }

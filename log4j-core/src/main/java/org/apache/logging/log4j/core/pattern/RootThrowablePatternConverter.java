@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
@@ -23,12 +25,11 @@ import org.apache.logging.log4j.core.impl.ThrowableProxy;
 import org.apache.logging.log4j.core.util.Constants;
 
 /**
- * Outputs the Throwable portion of the LoggingEvent as a full stacktrace
- * unless this converter's option is 'short', where it just outputs the first line of the trace, or if
- * the number of lines to print is explicitly specified.
+ * Outputs the Throwable portion of the LoggingEvent as a full stacktrace unless this converter's option is 'short',
+ * where it just outputs the first line of the trace, or if the number of lines to print is explicitly specified.
  * <p>
- * The extended stack trace will also include the location of where the class was loaded from and the
- * version of the jar if available.
+ * The extended stack trace will also include the location of where the class was loaded from and the version of the jar
+ * if available.
  */
 @Plugin(name = "RootThrowablePatternConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "rEx", "rThrowable", "rException" })
@@ -39,26 +40,38 @@ public final class RootThrowablePatternConverter extends ThrowablePatternConvert
      *
      * @param options options, may be null.
      */
-    private RootThrowablePatternConverter(final String[] options) {
-        super("RootThrowable", "throwable", options);
+    private RootThrowablePatternConverter(final String[] options, final FormattingInfo formattingInfo) {
+        super("RootThrowable", "throwable", options, formattingInfo);
     }
 
     /**
      * Gets an instance of the class.
      *
-     * @param options pattern options, may be null.  If first element is "short",
-     *                only the first line of the throwable will be formatted.
+     * @param options pattern options, may be null. If first element is "short", only the first line of the throwable
+     *            will be formatted.
      * @return instance of class.
      */
-    public static RootThrowablePatternConverter newInstance(final String[] options) {
-        return new RootThrowablePatternConverter(options);
+    public static RootThrowablePatternConverter newInstance(final String[] options, final FormattingInfo formattingInfo) {
+        return new RootThrowablePatternConverter(options, formattingInfo);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        handle(event, toAppendTo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        handle(event, toAppendTo);
+    }
+
+    private void handle(final LogEvent event, final Buffer toAppendTo) {
         ThrowableProxy proxy = null;
         if (event instanceof Log4jLogEvent) {
             proxy = ((Log4jLogEvent) event).getThrownProxy();
@@ -70,13 +83,12 @@ public final class RootThrowablePatternConverter extends ThrowablePatternConvert
                 return;
             }
             final String trace = proxy.getCauseStackTraceAsString(options.getPackages());
-            final int len = toAppendTo.length();
-            if (len > 0 && !Character.isWhitespace(toAppendTo.charAt(len - 1))) {
+            if (!toAppendTo.hasTrailingWhitespace()) {
                 toAppendTo.append(' ');
             }
             if (!options.allLines() || !Constants.LINE_SEPARATOR.equals(options.getSeparator())) {
-                final StringBuilder sb = new StringBuilder();
                 final String[] array = trace.split(Constants.LINE_SEPARATOR);
+                final StringBuilder sb = new StringBuilder(array.length << 7); // *128: estimate 128 chars per line
                 final int limit = options.minLines(array.length) - 1;
                 for (int i = 0; i <= limit; ++i) {
                     sb.append(array[i]);

@@ -16,6 +16,7 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -126,8 +127,7 @@ public final class HighlightConverter extends LogEventPatternConverter implement
      * {@linkplain AnsiEscape} enum, case is normalized to upper-case internally.
      * </p>
      *
-     * @param options
-     *        The second slot can optionally contain the style map.
+     * @param options The second slot can optionally contain the style map.
      * @return a new map
      */
     private static Map<Level, String> createLevelStyleMap(final String[] options) {
@@ -137,7 +137,7 @@ public final class HighlightConverter extends LogEventPatternConverter implement
         // Feels like a hack. Should String[] options change to a Map<String,String>?
         final String string = options[1].replaceAll(PatternParser.NO_CONSOLE_NO_ANSI + "=(true|false)", Strings.EMPTY);
         //
-        final Map<String, String> styles = AnsiEscape.createMap(string, new String[] {STYLE_KEY});
+        final Map<String, String> styles = AnsiEscape.createMap(string, new String[] { STYLE_KEY });
         final Map<Level, String> levelStyles = new HashMap<Level, String>(DEFAULT_STYLES);
         for (final Map.Entry<String, String> entry : styles.entrySet()) {
             final String key = entry.getKey().toUpperCase(Locale.ENGLISH);
@@ -145,16 +145,16 @@ public final class HighlightConverter extends LogEventPatternConverter implement
             if (STYLE_KEY.equalsIgnoreCase(key)) {
                 final Map<Level, String> enumMap = STYLES.get(value.toUpperCase(Locale.ENGLISH));
                 if (enumMap == null) {
-                    LOGGER.error("Unknown level style: " + value + ". Use one of " +
-                        Arrays.toString(STYLES.keySet().toArray()));
+                    LOGGER.error("Unknown level style: " + value + ". Use one of "
+                            + Arrays.toString(STYLES.keySet().toArray()));
                 } else {
                     levelStyles.putAll(enumMap);
                 }
             } else {
                 final Level level = Level.toLevel(key);
                 if (level == null) {
-                    LOGGER.error("Unknown level name: " + key + ". Use one of " +
-                        Arrays.toString(DEFAULT_STYLES.keySet().toArray()));
+                    LOGGER.error("Unknown level name: " + key + ". Use one of "
+                            + Arrays.toString(DEFAULT_STYLES.keySet().toArray()));
                 } else {
                     levelStyles.put(level, value);
                 }
@@ -167,11 +167,12 @@ public final class HighlightConverter extends LogEventPatternConverter implement
      * Gets an instance of the class.
      *
      * @param config The current Configuration.
-     * @param options pattern options, may be null. If first element is "short", only the first line of the
-     *                throwable will be formatted.
+     * @param options pattern options, may be null. If first element is "short", only the first line of the throwable
+     *            will be formatted.
      * @return instance of class.
      */
-    public static HighlightConverter newInstance(final Configuration config, final String[] options) {
+    public static HighlightConverter newInstance(final Configuration config, final String[] options,
+            final FormattingInfo formattingInfo) {
         if (options.length < 1) {
             LOGGER.error("Incorrect number of options on style. Expected at least 1, received " + options.length);
             return null;
@@ -182,7 +183,7 @@ public final class HighlightConverter extends LogEventPatternConverter implement
         }
         final PatternParser parser = PatternLayout.createPatternParser(config);
         final List<PatternFormatter> formatters = parser.parse(options[0]);
-        return new HighlightConverter(formatters, createLevelStyleMap(options));
+        return new HighlightConverter(formatters, createLevelStyleMap(options), formattingInfo);
     }
 
     private final Map<Level, String> levelStyles;
@@ -192,11 +193,11 @@ public final class HighlightConverter extends LogEventPatternConverter implement
     /**
      * Construct the converter.
      *
-     * @param patternFormatters
-     *            The PatternFormatters to generate the text to manipulate.
+     * @param patternFormatters The PatternFormatters to generate the text to manipulate.
      */
-    private HighlightConverter(final List<PatternFormatter> patternFormatters, final Map<Level, String> levelStyles) {
-        super("style", "style");
+    private HighlightConverter(final List<PatternFormatter> patternFormatters, final Map<Level, String> levelStyles,
+            final FormattingInfo formattingInfo) {
+        super("style", "style", formattingInfo);
         this.patternFormatters = patternFormatters;
         this.levelStyles = levelStyles;
     }
@@ -205,25 +206,38 @@ public final class HighlightConverter extends LogEventPatternConverter implement
      * {@inheritDoc}
      */
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
-        final StringBuilder buf = new StringBuilder();
-        for (final PatternFormatter formatter : patternFormatters) {
-            formatter.format(event, buf);
-        }
+    public void format(final LogEvent event, final TextBuffer toAppendTo) {
+        format0(event, toAppendTo, null);
+    }
 
-        if (buf.length() > 0) {
-            toAppendTo.append(levelStyles.get(event.getLevel())).append(buf.toString()).
-                append(AnsiEscape.getDefaultStyle());
-        }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void format(final LogEvent event, final BinaryBuffer toAppendTo, final Charset charset) {
+        format0(event, toAppendTo, charset);
+    }
+
+    private void format0(final LogEvent event, final Buffer toAppendTo, final Charset charset) {
+        StyleConverter.formatNested(event, toAppendTo, charset, false, patternFormatters,
+                levelStyles.get(event.getLevel()), AnsiEscape.getDefaultStyle());
     }
 
     @Override
     public boolean handlesThrowable() {
         for (final PatternFormatter formatter : patternFormatters) {
-            if (formatter .handlesThrowable()) {
+            if (formatter.handlesThrowable()) {
                 return true;
             }
         }
         return false;
+    }
+    
+    @Override
+    public void setCharset(final Charset charset) {
+        super.setCharset(charset);
+        for (PatternFormatter paf : patternFormatters) {
+            paf.getConverter().setCharset(charset);
+        }
     }
 }

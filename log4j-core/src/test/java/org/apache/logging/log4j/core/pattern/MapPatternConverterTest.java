@@ -36,9 +36,9 @@ public class MapPatternConverterTest {
         msg.put("subject", "I");
         msg.put("verb", "love");
         msg.put("object", "Log4j");
-        final MapPatternConverter converter = MapPatternConverter.newInstance(null);
+        final MapPatternConverter converter = MapPatternConverter.newInstance(null, FormattingInfo.getDefault());
         final LogEvent event = new Log4jLogEvent("MyLogger", null, null, Level.DEBUG, msg, null);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();;
         converter.format(event, sb);
         final String str = sb.toString();
         String expected = "subject=I";
@@ -56,9 +56,9 @@ public class MapPatternConverterTest {
         msg.put("subject", "I");
         msg.put("verb", "love");
         msg.put("object", "Log4j");
-        final MapPatternConverter converter = MapPatternConverter.newInstance(new String[] {"object"});
+        final MapPatternConverter converter = MapPatternConverter.newInstance(new String[] {"object"}, FormattingInfo.getDefault());
         final LogEvent event = new Log4jLogEvent("MyLogger", null, null, Level.DEBUG, msg, null);
-        final StringBuilder sb = new StringBuilder();
+        final TextBuffer sb = new TextBuffer();;
         converter.format(event, sb);
         final String str = sb.toString();
         final String expected = "Log4j";

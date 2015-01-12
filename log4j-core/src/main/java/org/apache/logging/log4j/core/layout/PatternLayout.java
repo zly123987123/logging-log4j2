@@ -33,10 +33,13 @@ import org.apache.logging.log4j.core.config.plugins.PluginBuilderFactory;
 import org.apache.logging.log4j.core.config.plugins.PluginConfiguration;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
+import org.apache.logging.log4j.core.pattern.BinaryBuffer;
 import org.apache.logging.log4j.core.pattern.LogEventPatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternFormatter;
 import org.apache.logging.log4j.core.pattern.PatternParser;
 import org.apache.logging.log4j.core.pattern.RegexReplacement;
+import org.apache.logging.log4j.core.pattern.TextBuffer;
+import org.apache.logging.log4j.util.PropertiesUtil;
 
 /**
  * A flexible layout configurable with pattern string.
@@ -58,25 +61,20 @@ public final class PatternLayout extends AbstractStringLayout {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Default pattern string for log output. Currently set to the
-     * string <b>"%m%n"</b> which just prints the application supplied
-     * message.
+     * Default pattern string for log output. Currently set to the string <b>"%m%n"</b> which just prints the
+     * application supplied message.
      */
     public static final String DEFAULT_CONVERSION_PATTERN = "%m%n";
 
     /**
-     * A conversion pattern equivalent to the TTCCCLayout.
-     * Current value is <b>%r [%t] %p %c %x - %m%n</b>.
+     * A conversion pattern equivalent to the TTCCCLayout. Current value is <b>%r [%t] %p %c %x - %m%n</b>.
      */
-    public static final String TTCC_CONVERSION_PATTERN =
-        "%r [%t] %p %c %x - %m%n";
+    public static final String TTCC_CONVERSION_PATTERN = "%r [%t] %p %c %x - %m%n";
 
     /**
-     * A simple pattern.
-     * Current value is <b>%d [%t] %p %c - %m%n</b>.
+     * A simple pattern. Current value is <b>%d [%t] %p %c - %m%n</b>.
      */
-    public static final String SIMPLE_CONVERSION_PATTERN =
-        "%d [%t] %p %c - %m%n";
+    public static final String SIMPLE_CONVERSION_PATTERN = "%d [%t] %p %c - %m%n";
 
     /** Key to identify pattern converters. */
     public static final String KEY = "Converter";
@@ -84,13 +82,13 @@ public final class PatternLayout extends AbstractStringLayout {
     /**
      * Initial converter for pattern.
      */
-    private final List<PatternFormatter> formatters;
+    // store in raw array instead of a collection for performance reasons
+    private final PatternFormatter[] formatters;
 
     /**
      * Conversion pattern.
      */
     private final String conversionPattern;
-
 
     /**
      * The current Configuration.
@@ -103,22 +101,24 @@ public final class PatternLayout extends AbstractStringLayout {
 
     private final boolean noConsoleNoAnsi;
 
+    private final boolean supportsBinaryOutput;
+
     /**
-     * Constructs a EnhancedPatternLayout using the supplied conversion pattern.
+     * Constructs a PatternLayout using the supplied conversion pattern.
      *
      * @param config The Configuration.
      * @param replace The regular expression to match.
      * @param pattern conversion pattern.
      * @param charset The character set.
      * @param alwaysWriteExceptions Whether or not exceptions should always be handled in this pattern (if {@code true},
-     *                         exceptions will be written even if the pattern does not specify so).
-     * @param noConsoleNoAnsi
-     *            If {@code "true"} (default) and {@link System#console()} is null, do not output ANSI escape codes
+     *            exceptions will be written even if the pattern does not specify so).
+     * @param noConsoleNoAnsi If {@code "true"} (default) and {@link System#console()} is null, do not output ANSI
+     *            escape codes
      * @param header
      */
     private PatternLayout(final Configuration config, final RegexReplacement replace, final String pattern,
-                          final Charset charset, final boolean alwaysWriteExceptions, final boolean noConsoleNoAnsi,
-                          final String header, final String footer) {
+            final Charset charset, final boolean alwaysWriteExceptions, final boolean noConsoleNoAnsi,
+            final String header, final String footer) {
         super(charset, toBytes(header, charset), toBytes(footer, charset));
         this.replace = replace;
         this.conversionPattern = pattern;
@@ -126,7 +126,17 @@ public final class PatternLayout extends AbstractStringLayout {
         this.alwaysWriteExceptions = alwaysWriteExceptions;
         this.noConsoleNoAnsi = noConsoleNoAnsi;
         final PatternParser parser = createPatternParser(config);
-        this.formatters = parser.parse(pattern == null ? DEFAULT_CONVERSION_PATTERN : pattern, this.alwaysWriteExceptions, this.noConsoleNoAnsi);
+        final List<PatternFormatter> list = parser.parse(pattern == null ? DEFAULT_CONVERSION_PATTERN : pattern,
+                this.alwaysWriteExceptions, this.noConsoleNoAnsi);
+        this.formatters = (PatternFormatter[]) list.toArray(new PatternFormatter[list.size()]);
+        this.supportsBinaryOutput = replace == null && supportBinaryOutput(formatters);
+        for (PatternFormatter patternFormatter : list) {
+            patternFormatter.getConverter().setCharset(charset);
+        }
+    }
+
+    private static boolean supportBinaryOutput(final PatternFormatter[] formatters) {
+        return PropertiesUtil.getProperties().getBooleanProperty("log4j.use.BinaryBuffers", true);
     }
 
     private static byte[] toBytes(final String str, final Charset charset) {
@@ -136,7 +146,7 @@ public final class PatternLayout extends AbstractStringLayout {
         return null;
     }
 
-    private byte[] strSubstitutorReplace(final byte... b) {
+    private byte[] strSubstitutorReplace(final byte[] b) {
         if (b != null && config != null) {
             return getBytes(config.getStrSubstitutor().replace(new String(b, getCharset())));
         }
@@ -173,14 +183,20 @@ public final class PatternLayout extends AbstractStringLayout {
      * @return Map of content format keys supporting PatternLayout
      */
     @Override
-    public Map<String, String> getContentFormat()
-    {
+    public Map<String, String> getContentFormat() {
         final Map<String, String> result = new HashMap<String, String>();
         result.put("structured", "false");
         result.put("formatType", "conversion");
         result.put("format", conversionPattern);
         return result;
     }
+    
+    private ThreadLocal<TextBuffer> textBuffer = new ThreadLocal<TextBuffer>() {
+        @Override
+        protected TextBuffer initialValue() {
+            return new TextBuffer();
+        }
+    };
 
     /**
      * Formats a logging event to a writer.
@@ -191,9 +207,12 @@ public final class PatternLayout extends AbstractStringLayout {
      */
     @Override
     public String toSerializable(final LogEvent event) {
-        final StringBuilder buf = new StringBuilder();
-        for (final PatternFormatter formatter : formatters) {
-            formatter.format(event, buf);
+        final TextBuffer buf = textBuffer.get();
+        buf.setLength(0);
+        
+        // PERFORMANCE-SENSITIVE CODE: do not refactor to for-each loop
+        for (int i = 0, len = formatters.length; i < len; i++) {
+            formatters[i].format(event, buf);
         }
         String str = buf.toString();
         if (replace != null) {
@@ -201,9 +220,39 @@ public final class PatternLayout extends AbstractStringLayout {
         }
         return str;
     }
+    
+    private ThreadLocal<BinaryBuffer> binaryBuffer = new ThreadLocal<BinaryBuffer>() {
+        @Override
+        protected BinaryBuffer initialValue() {
+            return new BinaryBuffer(getCharset());
+        }
+    };
+
+    /**
+     * Formats the Log Event as a byte array.
+     *
+     * @param event The Log Event.
+     * @return The formatted event as a byte array.
+     */
+    @Override
+    public byte[] toByteArray(final LogEvent event) {
+        if (!supportsBinaryOutput) {
+            return getBytes(toSerializable(event));
+        }
+        final Charset charset = getCharset();
+        final BinaryBuffer buf = binaryBuffer.get();
+        buf.setLength(0);
+
+        // PERFORMANCE-SENSITIVE CODE: do not refactor to for-each loop
+        for (int i = 0, len = formatters.length; i < len; i++) {
+            formatters[i].format(event, buf, charset);
+        }
+        return buf.toByteArray();
+    }
 
     /**
      * Create a PatternParser.
+     * 
      * @param config The Configuration.
      * @return The PatternParser.
      */
@@ -228,22 +277,16 @@ public final class PatternLayout extends AbstractStringLayout {
     /**
      * Create a pattern layout.
      *
-     * @param pattern
-     *        The pattern. If not specified, defaults to DEFAULT_CONVERSION_PATTERN.
-     * @param config
-     *        The Configuration. Some Converters require access to the Interpolator.
-     * @param replace
-     *        A Regex replacement String.
-     * @param charset
-     *        The character set.
-     * @param alwaysWriteExceptions
-     *        If {@code "true"} (default) exceptions are always written even if the pattern contains no exception tokens.
-     * @param noConsoleNoAnsi
-     *        If {@code "true"} (default is false) and {@link System#console()} is null, do not output ANSI escape codes
-     * @param header
-     *        The footer to place at the top of the document, once.
-     * @param footer
-     *        The footer to place at the bottom of the document, once.
+     * @param pattern The pattern. If not specified, defaults to DEFAULT_CONVERSION_PATTERN.
+     * @param config The Configuration. Some Converters require access to the Interpolator.
+     * @param replace A Regex replacement String.
+     * @param charset The character set.
+     * @param alwaysWriteExceptions If {@code "true"} (default) exceptions are always written even if the pattern
+     *            contains no exception tokens.
+     * @param noConsoleNoAnsi If {@code "true"} (default is false) and {@link System#console()} is null, do not output
+     *            ANSI escape codes
+     * @param header The footer to place at the top of the document, once.
+     * @param footer The footer to place at the bottom of the document, once.
      * @return The PatternLayout.
      */
     @PluginFactory
@@ -251,21 +294,14 @@ public final class PatternLayout extends AbstractStringLayout {
             @PluginAttribute(value = "pattern", defaultString = DEFAULT_CONVERSION_PATTERN) final String pattern,
             @PluginConfiguration final Configuration config,
             @PluginElement("Replace") final RegexReplacement replace,
-            @PluginAttribute(value = "charset", defaultString = "UTF-8") final Charset charset,
+            /* Cannot do defaultString = Charset.defaultCharset().name() for charset... */
+            @PluginAttribute(value = "charset") final Charset charset,
             @PluginAttribute(value = "alwaysWriteExceptions", defaultBoolean = true) final boolean alwaysWriteExceptions,
             @PluginAttribute(value = "noConsoleNoAnsi", defaultBoolean = false) final boolean noConsoleNoAnsi,
-            @PluginAttribute("header") final String header,
-            @PluginAttribute("footer") final String footer) {
-        return newBuilder()
-            .withPattern(pattern)
-            .withConfiguration(config)
-            .withRegexReplacement(replace)
-            .withCharset(charset)
-            .withAlwaysWriteExceptions(alwaysWriteExceptions)
-            .withNoConsoleNoAnsi(noConsoleNoAnsi)
-            .withHeader(header)
-            .withFooter(footer)
-            .build();
+            @PluginAttribute("header") final String header, @PluginAttribute("footer") final String footer) {
+        return newBuilder().withPattern(pattern).withConfiguration(config).withRegexReplacement(replace)
+                .withCharset(charset).withAlwaysWriteExceptions(alwaysWriteExceptions)
+                .withNoConsoleNoAnsi(noConsoleNoAnsi).withHeader(header).withFooter(footer).build();
     }
 
     /**
@@ -281,6 +317,7 @@ public final class PatternLayout extends AbstractStringLayout {
 
     /**
      * Creates a builder for a custom PatternLayout.
+     * 
      * @return a PatternLayout builder.
      */
     @PluginBuilderFactory
@@ -331,7 +368,6 @@ public final class PatternLayout extends AbstractStringLayout {
             return this;
         }
 
-
         public Builder withConfiguration(final Configuration configuration) {
             this.configuration = configuration;
             return this;
@@ -343,7 +379,9 @@ public final class PatternLayout extends AbstractStringLayout {
         }
 
         public Builder withCharset(final Charset charset) {
-            this.charset = charset;
+            if (charset != null) {
+                this.charset = charset; // else use platform default (NOT utf-8!)
+            }
             return this;
         }
 
@@ -374,7 +412,7 @@ public final class PatternLayout extends AbstractStringLayout {
                 configuration = new DefaultConfiguration();
             }
             return new PatternLayout(configuration, regexReplacement, pattern, charset, alwaysWriteExceptions,
-                noConsoleNoAnsi, header, footer);
+                    noConsoleNoAnsi, header, footer);
         }
     }
 }
