@@ -89,8 +89,7 @@ public final class PatternParser {
     /**
      * Constructor.
      *
-     * @param converterKey
-     *            The type of converters that will be used.
+     * @param converterKey The type of converters that will be used.
      */
     public PatternParser(final String converterKey) {
         this(null, converterKey, null, null);
@@ -99,12 +98,9 @@ public final class PatternParser {
     /**
      * Constructor.
      *
-     * @param config
-     *            The current Configuration.
-     * @param converterKey
-     *            The key to lookup the converters.
-     * @param expected
-     *            The expected base Class of each Converter.
+     * @param config The current Configuration.
+     * @param converterKey The key to lookup the converters.
+     * @param expected The expected base Class of each Converter.
      */
     public PatternParser(final Configuration config, final String converterKey, final Class<?> expected) {
         this(config, converterKey, expected, null);
@@ -113,14 +109,10 @@ public final class PatternParser {
     /**
      * Constructor.
      *
-     * @param config
-     *            The current Configuration.
-     * @param converterKey
-     *            The key to lookup the converters.
-     * @param expectedClass
-     *            The expected base Class of each Converter.
-     * @param filterClass
-     *            Filter the returned plugins after calling the plugin manager.
+     * @param config The current Configuration.
+     * @param converterKey The key to lookup the converters.
+     * @param expectedClass The expected base Class of each Converter.
+     * @param filterClass Filter the returned plugins after calling the plugin manager.
      */
     public PatternParser(final Configuration config, final String converterKey, final Class<?> expectedClass,
             final Class<?> filterClass) {
@@ -141,9 +133,9 @@ public final class PatternParser {
                 if (keys != null) {
                     for (final String key : keys.value()) {
                         if (converters.containsKey(key)) {
-                            LOGGER.warn("Converter key '{}' is already mapped to '{}'. " +
-                                    "Sorry, Dave, I can't let you do that! Ignoring plugin [{}].",
-                                key, converters.get(key), clazz);
+                            LOGGER.warn("Converter key '{}' is already mapped to '{}'. "
+                                    + "Sorry, Dave, I can't let you do that! Ignoring plugin [{}].", key,
+                                    converters.get(key), clazz);
                         } else {
                             converters.put(key, clazz);
                         }
@@ -186,11 +178,12 @@ public final class PatternParser {
             } else {
                 field = FormattingInfo.getDefault();
             }
-            list.add(new PatternFormatter(pc, field));
+            list.add(new PatternFormatter(pc));
         }
         if (alwaysWriteExceptions && !handlesThrowable) {
-            final LogEventPatternConverter pc = ExtendedThrowablePatternConverter.newInstance(null);
-            list.add(new PatternFormatter(pc, FormattingInfo.getDefault()));
+            FormattingInfo formattingInfo = FormattingInfo.getDefault();
+            final LogEventPatternConverter pc = ExtendedThrowablePatternConverter.newInstance(null, formattingInfo);
+            list.add(new PatternFormatter(pc));
         }
         return list;
     }
@@ -206,16 +199,11 @@ public final class PatternParser {
      * returned.
      * </p>
      *
-     * @param lastChar
-     *        last processed character.
-     * @param pattern
-     *        format string.
-     * @param i
-     *        current index into pattern format.
-     * @param convBuf
-     *        buffer to receive conversion specifier.
-     * @param currentLiteral
-     *        literal to be output in case format specifier in unrecognized.
+     * @param lastChar last processed character.
+     * @param pattern format string.
+     * @param i current index into pattern format.
+     * @param convBuf buffer to receive conversion specifier.
+     * @param currentLiteral literal to be output in case format specifier in unrecognized.
      * @return position in pattern after converter.
      */
     private static int extractConverter(final char lastChar, final String pattern, final int start,
@@ -246,12 +234,9 @@ public final class PatternParser {
     /**
      * Extract options.
      *
-     * @param pattern
-     *            conversion pattern.
-     * @param i
-     *            start of options.
-     * @param options
-     *            array to receive extracted options
+     * @param pattern conversion pattern.
+     * @param i start of options.
+     * @param options array to receive extracted options
      * @return position in pattern after options.
      */
     private static int extractOptions(final String pattern, final int start, final List<String> options) {
@@ -289,20 +274,15 @@ public final class PatternParser {
     /**
      * Parse a format specifier.
      *
-     * @param pattern
-     *            pattern to parse.
-     * @param patternConverters
-     *            list to receive pattern converters.
-     * @param formattingInfos
-     *            list to receive field specifiers corresponding to pattern converters.
-     * @param noConsoleNoAnsi
-     *            TODO
+     * @param pattern pattern to parse.
+     * @param patternConverters list to receive pattern converters.
+     * @param formattingInfos list to receive field specifiers corresponding to pattern converters.
+     * @param noConsoleNoAnsi TODO
      * @param convertBackslashes if {@code true}, backslash characters are treated as escape characters and character
      *            sequences like "\" followed by "t" (backslash+t) are converted to special characters like '\t' (tab).
      */
     public void parse(final String pattern, final List<PatternConverter> patternConverters,
-            final List<FormattingInfo> formattingInfos, final boolean noConsoleNoAnsi,
-            final boolean convertBackslashes) {
+            final List<FormattingInfo> formattingInfos, final boolean noConsoleNoAnsi, final boolean convertBackslashes) {
         if (pattern == null) {
             throw new NullPointerException("pattern");
         }
@@ -452,20 +432,17 @@ public final class PatternParser {
     /**
      * Creates a new PatternConverter.
      *
-     * @param converterId
-     *            converterId.
-     * @param currentLiteral
-     *            literal to be used if converter is unrecognized or following converter if converterId contains extra
-     *            characters.
-     * @param rules
-     *            map of stock pattern converters keyed by format specifier.
-     * @param options
-     *            converter options.
+     * @param converterId converterId.
+     * @param currentLiteral literal to be used if converter is unrecognized or following converter if converterId
+     *            contains extra characters.
+     * @param rules map of stock pattern converters keyed by format specifier.
+     * @param options converter options.
      * @param noConsoleNoAnsi TODO
      * @return converter or null.
      */
     private PatternConverter createConverter(final String converterId, final StringBuilder currentLiteral,
-            final Map<String, Class<PatternConverter>> rules, final List<String> options, final boolean noConsoleNoAnsi) {
+            final Map<String, Class<PatternConverter>> rules, final List<String> options,
+            final boolean noConsoleNoAnsi, final FormattingInfo formattingInfo) {
         String converterName = converterId;
         Class<PatternConverter> converterClass = null;
 
@@ -518,6 +495,8 @@ public final class PatternParser {
                     parms[i] = optionsArray;
                 } else if (clazz.isAssignableFrom(Configuration.class)) {
                     parms[i] = config;
+                } else if (clazz.isAssignableFrom(FormattingInfo.class)) {
+                    parms[i] = formattingInfo;
                 } else {
                     LOGGER.error("Unknown parameter type " + clazz.getName() + " for static newInstance method of "
                             + converterClass.getName());
@@ -549,24 +528,15 @@ public final class PatternParser {
     /**
      * Processes a format specifier sequence.
      *
-     * @param c
-     *            initial character of format specifier.
-     * @param pattern
-     *            conversion pattern
-     * @param i
-     *            current position in conversion pattern.
-     * @param currentLiteral
-     *            current literal.
-     * @param formattingInfo
-     *            current field specifier.
-     * @param rules
-     *            map of stock pattern converters keyed by format specifier.
-     * @param patternConverters
-     *            list to receive parsed pattern converter.
-     * @param formattingInfos
-     *            list to receive corresponding field specifier.
-     * @param noConsoleNoAnsi
-     *            TODO
+     * @param c initial character of format specifier.
+     * @param pattern conversion pattern
+     * @param i current position in conversion pattern.
+     * @param currentLiteral current literal.
+     * @param formattingInfo current field specifier.
+     * @param rules map of stock pattern converters keyed by format specifier.
+     * @param patternConverters list to receive parsed pattern converter.
+     * @param formattingInfos list to receive corresponding field specifier.
+     * @param noConsoleNoAnsi TODO
      * @param convertBackslashes if {@code true}, backslash characters are treated as escape characters and character
      *            sequences like "\" followed by "t" (backslash+t) are converted to special characters like '\t' (tab).
      * @return position after format specifier sequence.
@@ -584,7 +554,8 @@ public final class PatternParser {
         final List<String> options = new ArrayList<String>();
         i = extractOptions(pattern, i, options);
 
-        final PatternConverter pc = createConverter(converterId, currentLiteral, rules, options, noConsoleNoAnsi);
+        final PatternConverter pc = createConverter(converterId, currentLiteral, rules, options, noConsoleNoAnsi,
+                formattingInfo);
 
         if (pc == null) {
             StringBuilder msg;
