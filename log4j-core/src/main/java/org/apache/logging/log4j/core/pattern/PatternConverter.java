@@ -29,25 +29,33 @@ public interface PatternConverter {
     String CATEGORY = "Converter";
 
     /**
-     * Formats an object into a string buffer.
+     * Formats an object into the specified buffer.
      *
-     * @param obj        event to format, may not be null.
-     * @param toAppendTo string buffer to which the formatted event will be appended.  May not be null.
+     * @param obj event to format, may not be null.
+     * @param toAppendTo string buffer to which the formatted event will be appended. May not be null.
      */
-    void format(Object obj, StringBuilder toAppendTo);
+    void format(Object obj, Buffer toAppendTo);
 
     /**
      * Returns the name of the converter.
+     * 
      * @return The name of the converter.
      */
     String getName();
 
     /**
-     * This method returns the CSS style class that should be applied to
-     * the LoggingEvent passed as parameter, which can be null.
+     * This method returns the CSS style class that should be applied to the LoggingEvent passed as parameter, which can
+     * be null.
      *
      * @param e null values are accepted
      * @return the name of the conversion pattern
      */
     String getStyleClass(Object e);
+
+    /**
+     * Returns the {@code FormattingInfo} responsible for alignment and output width.
+     * 
+     * @return the {@code FormattingInfo} for this converter or {@code null} if not applicable
+     */
+    FormattingInfo getFormattingInfo();
 }
