@@ -17,20 +17,63 @@
 
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+
+import org.apache.logging.log4j.core.util.Assert;
+import org.apache.logging.log4j.core.util.Charsets;
+
 /**
  * Buffer implementation that internally tracks the appended data as text.
  */
 public class TextBuffer implements Buffer {
-    private StringBuilder buffer = new StringBuilder(1024);
+    private final StringBuilder buffer;
+
+    /**
+     * Constructs a {@code TextBuffer} with a 1024-character initial capacity.
+     */
+    public TextBuffer() {
+        this(new StringBuilder(1024));
+    }
+
+    /**
+     * Constructs a {@code TextBuffer} wrapping the specified {@code StringBuilder}.
+     * 
+     * @param buffer the internal buffer to use
+     */
+    public TextBuffer(final StringBuilder buffer) {
+        this.buffer = Assert.requireNonNull(buffer, "buffer is null");
+    }
 
     @Override
-    public TextBuffer append(Object object) {
+    public TextBuffer append(final Object object) {
         return append(String.valueOf(object));
     }
 
     @Override
-    public TextBuffer append(String text) {
+    public TextBuffer append(final String text) {
         buffer.append(text);
+        return this;
+    }
+
+    @Override
+    public TextBuffer append(final String unformatted, final FormattingInfo formattingInfo) {
+        final int position = buffer.length();
+        buffer.append(unformatted);
+        formattingInfo.format(position, buffer);
+        return this;
+    }
+
+    /**
+     * Appends the specified long to this buffer and applies the specified alignment and width adjustments.
+     * 
+     * @param value the value to append (before applying alignment and width adjustments)
+     * @param formattingInfo can apply alignment and width adjustments
+     */
+    public TextBuffer append(final long value, final FormattingInfo formattingInfo) {
+        final int position = buffer.length();
+        buffer.append(value);
+        formattingInfo.format(position, buffer);
         return this;
     }
 
@@ -40,26 +83,32 @@ public class TextBuffer implements Buffer {
      * @see org.apache.logging.log4j.core.pattern.Buffer#append(byte[])
      */
     @Override
-    public TextBuffer append(byte[] data) {
+    public TextBuffer append(final byte[] data) {
         final String text = new String(data); // don't specify Charset: avoid StringDecoder instantiation
         buffer.append(text);
         return this;
     }
 
     @Override
-    public TextBuffer append(char ch) {
+    public TextBuffer append(final byte ch) {
+        buffer.append((char) ch);
+        return this;
+    }
+    
+    @Override
+    public TextBuffer append(final char ch) {
         buffer.append(ch);
         return this;
     }
 
     @Override
-    public TextBuffer append(int number) {
+    public TextBuffer append(final int number) {
         buffer.append(number);
         return this;
     }
 
     @Override
-    public TextBuffer append(long number) {
+    public TextBuffer append(final long number) {
         buffer.append(number);
         return this;
     }
@@ -80,7 +129,7 @@ public class TextBuffer implements Buffer {
      * @see org.apache.logging.log4j.core.pattern.Buffer#setLength(int)
      */
     @Override
-    public void setLength(int length) {
+    public void setLength(final int length) {
         buffer.setLength(length);
     }
 
@@ -92,7 +141,7 @@ public class TextBuffer implements Buffer {
     @Override
     public boolean hasTrailingWhitespace() {
         final int len = buffer.length();
-        return len > 0 && !Character.isWhitespace(buffer.charAt(len - 1));
+        return len == 0 || Character.isWhitespace(buffer.charAt(len - 1));
     }
 
     /**
@@ -105,7 +154,7 @@ public class TextBuffer implements Buffer {
      * @return the char value at the specified index.
      * @throws IndexOutOfBoundsException if index is negative or greater than or equal to length().
      */
-    public char charAt(int index) {
+    public char charAt(final int index) {
         return buffer.charAt(index);
     }
 
@@ -115,5 +164,15 @@ public class TextBuffer implements Buffer {
     @Override
     public String toString() {
         return buffer.toString();
+    }
+
+    /**
+     * Writes the content of this buffer into the specified destination.
+     * 
+     * @param destination the destination buffer to write into
+     * @param charset used to convert the buffered text to bytes
+     */
+    public void writeInto(final ByteBuffer destination, final Charset charset) {
+        destination.put(Charsets.getBytes(buffer.toString(), charset));
     }
 }
