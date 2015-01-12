@@ -31,6 +31,7 @@ import org.apache.logging.log4j.core.pattern.DatePatternConverter;
 import org.apache.logging.log4j.core.pattern.FormattingInfo;
 import org.apache.logging.log4j.core.pattern.PatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternParser;
+import org.apache.logging.log4j.core.pattern.TextBuffer;
 import org.apache.logging.log4j.status.StatusLogger;
 
 /**
@@ -43,9 +44,9 @@ public class PatternProcessor {
 
     private static final char YEAR_CHAR = 'y';
     private static final char MONTH_CHAR = 'M';
-    private static final char[] WEEK_CHARS = {'w', 'W'};
-    private static final char[] DAY_CHARS = {'D', 'd', 'F', 'E'};
-    private static final char[] HOUR_CHARS = {'H', 'K', 'h', 'k'};
+    private static final char[] WEEK_CHARS = { 'w', 'W' };
+    private static final char[] DAY_CHARS = { 'D', 'd', 'F', 'E' };
+    private static final char[] HOUR_CHARS = { 'H', 'K', 'h', 'k' };
     private static final char MINUTE_CHAR = 'm';
     private static final char SECOND_CHAR = 's';
     private static final char MILLIS_CHAR = 'S';
@@ -60,6 +61,7 @@ public class PatternProcessor {
 
     /**
      * Constructor.
+     * 
      * @param pattern The file pattern.
      */
     public PatternProcessor(final String pattern) {
@@ -67,10 +69,13 @@ public class PatternProcessor {
         final List<PatternConverter> converters = new ArrayList<PatternConverter>();
         final List<FormattingInfo> fields = new ArrayList<FormattingInfo>();
         parser.parse(pattern, converters, fields, false, false);
-        final FormattingInfo[] infoArray = new FormattingInfo[fields.size()];
-        patternFields = fields.toArray(infoArray);
-        final ArrayPatternConverter[] converterArray = new ArrayPatternConverter[converters.size()];
-        patternConverters = converters.toArray(converterArray);
+        patternFields = fields.toArray(new FormattingInfo[fields.size()]);
+        patternConverters = converters.toArray(new ArrayPatternConverter[converters.size()]);
+
+        // FIXME parser.parse should just return the converter list:
+        // final PatternParser parser = createPatternParser();
+        // final List<PatternConverter> converters = parser.parse(pattern, false, false);
+        // patternConverters = converters.toArray(new ArrayPatternConverter[converters.size()]);
 
         for (final ArrayPatternConverter converter : patternConverters) {
             if (converter instanceof DatePatternConverter) {
@@ -82,6 +87,7 @@ public class PatternProcessor {
 
     /**
      * Returns the next potential rollover time.
+     * 
      * @param current The current time.
      * @param increment The increment to the next time.
      * @param modulus If true the time will be rounded to occur on a boundary aligned with the increment.
@@ -169,8 +175,10 @@ public class PatternProcessor {
 
     private long debugGetNextTime(final long nextTime) {
         if (LOGGER.isTraceEnabled()) {
-            LOGGER.trace("PatternProcessor.getNextTime returning {}, nextFileTime={}, prevFileTime={}, current={}, freq={}", //
-                    format(nextTime), format(nextFileTime), format(prevFileTime), format(System.currentTimeMillis()), frequency);
+            LOGGER.trace(
+                    "PatternProcessor.getNextTime returning {}, nextFileTime={}, prevFileTime={}, current={}, freq={}", //
+                    format(nextTime), format(nextFileTime), format(prevFileTime), format(System.currentTimeMillis()),
+                    frequency);
         }
         return nextTime;
     }
@@ -180,12 +188,13 @@ public class PatternProcessor {
     }
 
     private void increment(final Calendar cal, final int type, final int increment, final boolean modulate) {
-        final int interval =  modulate ? increment - (cal.get(type) % increment) : increment;
+        final int interval = modulate ? increment - (cal.get(type) % increment) : increment;
         cal.add(type, interval);
     }
 
     /**
      * Format file name.
+     * 
      * @param buf string buffer to which formatted file name is appended, may not be null.
      * @param obj object to be evaluated in formatting, may not be null.
      */
@@ -196,13 +205,14 @@ public class PatternProcessor {
 
     /**
      * Format file name.
+     * 
      * @param subst The StrSubstitutor.
      * @param buf string buffer to which formatted file name is appended, may not be null.
      * @param obj object to be evaluated in formatting, may not be null.
      */
     public final void formatFileName(final StrSubstitutor subst, final StringBuilder buf, final Object obj) {
         // LOG4J2-628: we deliberately use System time, not the log4j.Clock time
-        // for creating the file name of rolled-over files. 
+        // for creating the file name of rolled-over files.
         final long time = prevFileTime == 0 ? System.currentTimeMillis() : prevFileTime;
         formatFileName(buf, new Date(time), obj);
         final LogEvent event = new Log4jLogEvent(time);
@@ -213,13 +223,15 @@ public class PatternProcessor {
 
     /**
      * Format file name.
+     * 
      * @param buf string buffer to which formatted file name is appended, may not be null.
      * @param objects objects to be evaluated in formatting, may not be null.
      */
     protected final void formatFileName(final StringBuilder buf, final Object... objects) {
+        TextBuffer buffer = new TextBuffer(buf);
         for (int i = 0; i < patternConverters.length; i++) {
             final int fieldStart = buf.length();
-            patternConverters[i].format(buf, objects);
+            patternConverters[i].format(buffer, objects);
 
             if (patternFields[i] != null) {
                 patternFields[i].format(fieldStart, buf);
