@@ -16,6 +16,8 @@
  */
 package org.apache.logging.log4j.core.pattern;
 
+import java.nio.charset.Charset;
+
 import org.apache.logging.log4j.core.LogEvent;
 
 
@@ -24,25 +26,21 @@ import org.apache.logging.log4j.core.LogEvent;
  */
 public class PatternFormatter {
     private final LogEventPatternConverter converter;
-    private final FormattingInfo field;
 
-    public PatternFormatter(final LogEventPatternConverter converter, final FormattingInfo field) {
+    public PatternFormatter(final LogEventPatternConverter converter) {
         this.converter = converter;
-        this.field = field;
     }
 
-    public void format(final LogEvent event, final StringBuilder buf) {
-        final int startField = buf.length();
+    public void format(final LogEvent event, final TextBuffer buf) {
         converter.format(event, buf);
-        field.format(startField, buf);
+    }
+
+    public void format(final LogEvent event, final BinaryBuffer buf, Charset charset) {
+        converter.format(event, buf, charset);
     }
 
     public LogEventPatternConverter getConverter() {
         return converter;
-    }
-
-    public FormattingInfo getFormattingInfo() {
-        return field;
     }
 
     /**
@@ -69,8 +67,8 @@ public class PatternFormatter {
         sb.append(super.toString());
         sb.append("[converter=");
         sb.append(converter);
-        sb.append(", field=");
-        sb.append(field);
+//        sb.append(", field=");
+//        sb.append(field);
         sb.append(']');
         return sb.toString();
     }
