@@ -23,15 +23,13 @@ package org.apache.logging.log4j.core.pattern;
  */
 public interface Buffer {
 
-    public static interface Factory {
-        Buffer createBuffer();
-    }
-
     Buffer append(Object object);
 
     Buffer append(String text);
 
     Buffer append(byte[] data);
+
+    Buffer append(byte byt);
 
     Buffer append(char ch);
 
@@ -39,6 +37,22 @@ public interface Buffer {
 
     Buffer append(long value);
     
+    /**
+     * Appends the specified long to this buffer and applies the specified alignment and width adjustments.
+     * 
+     * @param value the value to append (before applying alignment and width adjustments)
+     * @param formattingInfo can apply alignment and width adjustments
+     */
+    Buffer append(long value, FormattingInfo formattingInfo);
+
+    /**
+     * Appends the specified text to this buffer and applies the specified alignment and width adjustments.
+     * 
+     * @param unformatted the text to append (before applying alignment and width adjustments)
+     * @param formattingInfo can apply alignment and width adjustments
+     */
+    Buffer append(String value, FormattingInfo formattingInfo);
+
     int length();
 
     void setLength(int length);
