@@ -16,13 +16,14 @@
  */
 package org.apache.logging.log4j.core.util;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 import org.apache.logging.log4j.status.StatusLogger;
 
 /**
- * Charset utilities. Contains the standard character sets guaranteed to be available on all implementations of the
- * Java platform. Parts adapted from JDK 1.7 (in particular, the {@code java.nio.charset.StandardCharsets} class).
+ * Charset utilities. Contains the standard character sets guaranteed to be available on all implementations of the Java
+ * platform. Parts adapted from JDK 1.7 (in particular, the {@code java.nio.charset.StandardCharsets} class).
  *
  * @see java.nio.charset.Charset
  */
@@ -62,8 +63,7 @@ public final class Charsets {
      * Returns a Charset, if possible the Charset for the specified {@code charsetName}, otherwise (if the specified
      * {@code charsetName} is {@code null} or not supported) this method returns the platform default Charset.
      *
-     * @param charsetName
-     *            name of the preferred charset or {@code null}
+     * @param charsetName name of the preferred charset or {@code null}
      * @return a Charset, not null.
      */
     public static Charset getSupportedCharset(final String charsetName) {
@@ -74,10 +74,8 @@ public final class Charsets {
      * Returns a Charset, if possible the Charset for the specified {@code charsetName}, otherwise (if the specified
      * {@code charsetName} is {@code null} or not supported) this method returns the platform default Charset.
      *
-     * @param charsetName
-     *            name of the preferred charset or {@code null}
-     * @param defaultCharset
-     *            returned if {@code charsetName} is null or is not supported.
+     * @param charsetName name of the preferred charset or {@code null}
+     * @param defaultCharset returned if {@code charsetName} is null or is not supported.
      * @return a Charset, never null.
      */
     public static Charset getSupportedCharset(final String charsetName, final Charset defaultCharset) {
@@ -93,6 +91,24 @@ public final class Charsets {
             }
         }
         return charset;
+    }
+
+    /**
+     * Returns a sequence of bytes that encodes the specified String, using the named Charset.
+     * 
+     * @param txt the string to encode
+     * @param charset the {@code Charset} to use
+     * @return the encoded String
+     */
+    public static byte[] getBytes(final String txt, final Charset charset) {
+        try {
+            // PERFORMANCE-SENSITIVE CODE (called for every log event by most layouts).
+            // String.getBytes(Charset) creates a new StringEncoder instance
+            // every call and is slightly slower than String.getBytes(String)
+            return txt.getBytes(charset.name());
+        } catch (UnsupportedEncodingException e) {
+            return txt.getBytes(charset);
+        }
     }
 
     private Charsets() {
