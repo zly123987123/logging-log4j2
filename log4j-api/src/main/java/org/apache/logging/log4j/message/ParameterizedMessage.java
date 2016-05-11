@@ -67,6 +67,8 @@ public class ParameterizedMessage implements Message, StringBuilderFormattable {
 
     private String formattedMessage;
     private transient Throwable throwable;
+    private int[] indices;
+    private int usedCount;
 
     /**
      * Creates a parameterized message.
@@ -107,7 +109,7 @@ public class ParameterizedMessage implements Message, StringBuilderFormattable {
      * @param messagePattern the message pattern that to be checked for placeholders.
      * @param arguments      the argument array to be converted.
      */
-    public ParameterizedMessage(final String messagePattern, final Object[] arguments) {
+    public ParameterizedMessage(final String messagePattern, final Object... arguments) {
         this.argArray = arguments;
         init(messagePattern);
     }
@@ -133,8 +135,10 @@ public class ParameterizedMessage implements Message, StringBuilderFormattable {
 
     private void init(String messagePattern) {
         this.messagePattern = messagePattern;
-        final int usedCount = countArgumentPlaceholders(messagePattern);
+        this.indices = new int[messagePattern == null ? 0 : messagePattern.length() >> 1]; // divide by 2
+        int usedCount = ParameterFormatter.countArgumentPlaceholders2(messagePattern, indices);
         initThrowable(argArray, usedCount);
+        this.usedCount = Math.min(usedCount, (argArray == null) ? 0 : argArray.length);
     }
 
     private void initThrowable(final Object[] params, final int usedParams) {
@@ -207,8 +211,11 @@ public class ParameterizedMessage implements Message, StringBuilderFormattable {
         if (formattedMessage != null) {
             buffer.append(formattedMessage);
         } else {
-            ParameterFormatter.formatMessage(buffer, messagePattern, argArray,
-                    argArray == null ? 0 : argArray.length);
+            if (indices[0] < 0) {
+                ParameterFormatter.formatMessage(buffer, messagePattern, argArray, usedCount);
+            } else {
+                ParameterFormatter.formatMessage2(buffer, messagePattern, argArray, usedCount, indices);
+            }
         }
     }
 

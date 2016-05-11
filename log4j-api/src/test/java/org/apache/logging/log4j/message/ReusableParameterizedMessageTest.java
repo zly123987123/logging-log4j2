@@ -30,14 +30,83 @@ public class ReusableParameterizedMessageTest {
     public void testNoArgs() {
         final String testMsg = "Test message {}";
         ReusableParameterizedMessage msg = new ReusableParameterizedMessage();
-        msg.set(testMsg, null);
+        msg.set(testMsg, (Object[]) null);
         String result = msg.getFormattedMessage();
+        assertEquals(testMsg, result);
+
+        msg.set(testMsg, null);
+        result = msg.getFormattedMessage();
         assertEquals(testMsg, result);
 
         msg.set(testMsg, null, null);
         result = msg.getFormattedMessage();
         assertEquals("Test message null", result);
     }
+
+    @Test
+    public void testFormat3StringArgs() {
+        final String testMsg = "Test message {}{} {}";
+        final String[] args = { "a", "b", "c" };
+        final String result = new ReusableParameterizedMessage().set(testMsg, args).getFormattedMessage();
+        assertEquals("Test message ab c", result);
+    }
+
+    @Test
+    public void testFormatNullArgs() {
+        final String testMsg = "Test message {} {} {} {} {} {}";
+        final String[] args = { "a", null, "c", null, null, null };
+        final String result = new ReusableParameterizedMessage().set(testMsg, args).getFormattedMessage();
+        assertEquals("Test message a null c null null null", result);
+    }
+
+    @Test
+    public void testFormatStringArgsIgnoresSuperfluousArgs() {
+        final String testMsg = "Test message {}{} {}";
+        final String[] args = { "a", "b", "c", "unnecessary", "superfluous" };
+        final String result = new ReusableParameterizedMessage().set(testMsg, args).getFormattedMessage();
+        assertEquals("Test message ab c", result);
+    }
+
+    @Test
+    public void testFormatStringArgsWithEscape() {
+        final String testMsg = "Test message \\{}{} {}";
+        final String[] args = { "a", "b", "c" };
+        final String result = new ReusableParameterizedMessage().set(testMsg, args).getFormattedMessage();
+        assertEquals("Test message {}a b", result);
+    }
+
+    @Test
+    public void testFormatStringArgsWithTrailingEscape() {
+        final String testMsg = "Test message {}{} {}\\";
+        final String[] args = { "a", "b", "c" };
+        final String result = new ReusableParameterizedMessage().set(testMsg, args).getFormattedMessage();
+        assertEquals("Test message ab c\\", result);
+    }
+
+    @Test
+    public void testFormatStringArgsWithTrailingText() {
+        final String testMsg = "Test message {}{} {}Text";
+        final String[] args = { "a", "b", "c" };
+        final String result = new ReusableParameterizedMessage().set(testMsg, args).getFormattedMessage();;
+        assertEquals("Test message ab cText", result);
+    }
+
+    @Test
+    public void testFormatStringArgsWithTrailingEscapedEscape() {
+        final String testMsg = "Test message {}{} {}\\\\";
+        final String[] args = { "a", "b", "c" };
+        final String result = new ReusableParameterizedMessage().set(testMsg, args).getFormattedMessage();
+        assertEquals("Test message ab c\\\\", result);
+    }
+
+    @Test
+    public void testFormatStringArgsWithEscapedEscape() {
+        final String testMsg = "Test message \\\\{}{} {}";
+        final String[] args = { "a", "b", "c" };
+        final String result = new ReusableParameterizedMessage().set(testMsg, args).getFormattedMessage();
+        assertEquals("Test message \\ab c", result);
+    }
+
 
     @Test
     public void testNotSafeWithMutableParams() {

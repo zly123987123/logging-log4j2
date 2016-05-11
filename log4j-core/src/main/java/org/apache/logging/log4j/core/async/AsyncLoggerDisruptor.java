@@ -47,7 +47,7 @@ class AsyncLoggerDisruptor {
 
     private boolean useThreadLocalTranslator = true;
     private long backgroundThreadId;
-    private AsyncEventRouter asyncEventRouter;
+    private AsyncQueueFullPolicy asyncQueueFullPolicy;
     private int ringBufferSize;
 
     AsyncLoggerDisruptor(String contextName) {
@@ -83,13 +83,12 @@ class AsyncLoggerDisruptor {
         final WaitStrategy waitStrategy = DisruptorUtil.createWaitStrategy("AsyncLogger.WaitStrategy");
         executor = Executors.newSingleThreadExecutor(new DaemonThreadFactory("AsyncLogger[" + contextName + "]"));
         backgroundThreadId = DisruptorUtil.getExecutorThreadId(executor);
-        asyncEventRouter = AsyncEventRouterFactory.create();
+        asyncQueueFullPolicy = AsyncQueueFullPolicyFactory.create();
 
         disruptor = new Disruptor<>(RingBufferLogEvent.FACTORY, ringBufferSize, executor, ProducerType.MULTI,
                 waitStrategy);
 
-        final ExceptionHandler<RingBufferLogEvent> errorHandler = DisruptorUtil.getExceptionHandler(
-                "AsyncLogger.ExceptionHandler", RingBufferLogEvent.class);
+        final ExceptionHandler<RingBufferLogEvent> errorHandler = DisruptorUtil.getAsyncLoggerExceptionHandler();
         disruptor.handleExceptionsWith(errorHandler);
 
         final RingBufferLogEventHandler[] handlers = {new RingBufferLogEventHandler()};
@@ -134,9 +133,9 @@ class AsyncLoggerDisruptor {
         executor.shutdown(); // finally, kill the processor thread
         executor = null;
 
-        if (DiscardingAsyncEventRouter.getDiscardCount(asyncEventRouter) > 0) {
-            LOGGER.trace("AsyncLoggerDisruptor: {} discarded {} events.", asyncEventRouter,
-                    DiscardingAsyncEventRouter.getDiscardCount(asyncEventRouter));
+        if (DiscardingAsyncQueueFullPolicy.getDiscardCount(asyncQueueFullPolicy) > 0) {
+            LOGGER.trace("AsyncLoggerDisruptor: {} discarded {} events.", asyncQueueFullPolicy,
+                    DiscardingAsyncQueueFullPolicy.getDiscardCount(asyncQueueFullPolicy));
         }
     }
 
@@ -164,7 +163,7 @@ class AsyncLoggerDisruptor {
         if (remainingCapacity < 0) {
             return EventRoute.DISCARD;
         }
-        return asyncEventRouter.getRoute(backgroundThreadId, logLevel);
+        return asyncQueueFullPolicy.getRoute(backgroundThreadId, logLevel);
     }
 
     private int remainingDisruptorCapacity() {
@@ -186,7 +185,13 @@ class AsyncLoggerDisruptor {
     }
 
     public boolean tryPublish(final RingBufferLogEventTranslator translator) {
-        return disruptor.getRingBuffer().tryPublishEvent(translator);
+        // LOG4J2-639: catch NPE if disruptor field was set to null in stop()
+        try {
+            return disruptor.getRingBuffer().tryPublishEvent(translator);
+        } catch (final NullPointerException npe) {
+            LOGGER.warn("[{}] Ignoring log event after log4j was shut down.", contextName);
+            return false;
+        }
     }
 
     void enqueueLogMessageInfo(final RingBufferLogEventTranslator translator) {

@@ -20,12 +20,15 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AsyncAppender;
-import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.apache.logging.log4j.message.Message;
 
 /**
  * Enumeration over the different destinations where a log event can be sent.
  *
+ * @see AsyncQueueFullPolicy
+ * @see AsyncQueueFullPolicyFactory
+ * @see DefaultAsyncQueueFullPolicy
+ * @see DiscardingAsyncQueueFullPolicy
  * @since 2.6
  */
 public enum EventRoute {
@@ -44,7 +47,7 @@ public enum EventRoute {
         }
 
         @Override
-        public void logMessage(final AsyncAppender asyncAppender, final Log4jLogEvent logEvent) {
+        public void logMessage(final AsyncAppender asyncAppender, final LogEvent logEvent) {
             asyncAppender.logMessageInBackgroundThread(logEvent);
         }
     },
@@ -63,7 +66,7 @@ public enum EventRoute {
         }
 
         @Override
-        public void logMessage(final AsyncAppender asyncAppender, final Log4jLogEvent logEvent) {
+        public void logMessage(final AsyncAppender asyncAppender, final LogEvent logEvent) {
             asyncAppender.logMessageInCurrentThread(logEvent);
         }
     },
@@ -83,7 +86,7 @@ public enum EventRoute {
         }
 
         @Override
-        public void logMessage(final AsyncAppender asyncAppender, final Log4jLogEvent coreEvent) {
+        public void logMessage(final AsyncAppender asyncAppender, final LogEvent coreEvent) {
             // do nothing: drop the event
         }
     };
@@ -93,5 +96,5 @@ public enum EventRoute {
 
     public abstract void logMessage(final AsyncLoggerConfig asyncLoggerConfig, final LogEvent event);
 
-    public abstract void logMessage(final AsyncAppender asyncAppender, final Log4jLogEvent coreEvent);
+    public abstract void logMessage(final AsyncAppender asyncAppender, final LogEvent coreEvent);
 }

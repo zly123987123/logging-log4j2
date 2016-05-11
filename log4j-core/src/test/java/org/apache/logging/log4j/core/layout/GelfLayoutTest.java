@@ -38,6 +38,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
 
 import static net.javacrumbs.jsonunit.JsonAssert.assertJsonEquals;
+import static org.junit.Assert.assertEquals;
 
 public class GelfLayoutTest {
     static ConfigurationFactory configFactory = new BasicConfigurationFactory();
@@ -73,14 +74,14 @@ public class GelfLayoutTest {
 
     Logger root = ctx.getLogger("");
 
-    private void testCompressedLayout(final CompressionType compressionType) throws IOException {
+    private void testCompressedLayout(final CompressionType compressionType, boolean includeStacktrace) throws IOException {
         for (final Appender appender : root.getAppenders().values()) {
             root.removeAppender(appender);
         }
         // set up appenders
         final GelfLayout layout = GelfLayout.createLayout(HOSTNAME, new KeyValuePair[] {
                 new KeyValuePair(KEY1, VALUE1),
-                new KeyValuePair(KEY2, VALUE2), }, compressionType, 1024);
+                new KeyValuePair(KEY2, VALUE2), }, compressionType, 1024, includeStacktrace);
         final ListAppender eventAppender = new ListAppender("Events", null, null, true, false);
         final ListAppender rawAppender = new ListAppender("Raw", null, layout, true, true);
         final ListAppender formattedAppender = new ListAppender("Formatted", null, layout, true, false);
@@ -184,7 +185,7 @@ public class GelfLayoutTest {
                 "\"_logger\": \"\"," +
                 "\"short_message\": \"" + LINE3 + "\"," +
                 "\"full_message\": \"" + String.valueOf(JsonStringEncoder.getInstance().quoteAsString(
-                GelfLayout.formatThrowable(exception))) + "\"," +
+                includeStacktrace ? GelfLayout.formatThrowable(exception).toString() : exception.toString())) + "\"," +
                 "\"_" + KEY1 + "\": \"" + VALUE1 + "\"," +
                 "\"_" + KEY2 + "\": \"" + VALUE2 + "\"," +
                 "\"_" + MDCKEY1 + "\": \"" + MDCVALUE1 + "\"," +
@@ -197,16 +198,32 @@ public class GelfLayoutTest {
 
     @Test
     public void testLayoutGzipCompression() throws Exception {
-        testCompressedLayout(CompressionType.GZIP);
+        testCompressedLayout(CompressionType.GZIP, true);
     }
 
     @Test
     public void testLayoutNoCompression() throws Exception {
-        testCompressedLayout(CompressionType.OFF);
+        testCompressedLayout(CompressionType.OFF, true);
     }
 
     @Test
     public void testLayoutZlibCompression() throws Exception {
-        testCompressedLayout(CompressionType.ZLIB);
+        testCompressedLayout(CompressionType.ZLIB, true);
+    }
+
+    @Test
+    public void testLayoutNoStacktrace() throws Exception {
+        testCompressedLayout(CompressionType.OFF, false);
+    }
+
+    @Test
+    public void testFormatTimestamp() {
+        assertEquals("0", GelfLayout.formatTimestamp(0L).toString());
+        assertEquals("1.000", GelfLayout.formatTimestamp(1000L).toString());
+        assertEquals("1.001", GelfLayout.formatTimestamp(1001L).toString());
+        assertEquals("1.010", GelfLayout.formatTimestamp(1010L).toString());
+        assertEquals("1.100", GelfLayout.formatTimestamp(1100L).toString());
+        assertEquals("1458741206.653", GelfLayout.formatTimestamp(1458741206653L).toString());
+        assertEquals("9223372036854775.807", GelfLayout.formatTimestamp(Long.MAX_VALUE).toString());
     }
 }

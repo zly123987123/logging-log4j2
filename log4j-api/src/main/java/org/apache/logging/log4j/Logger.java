@@ -132,6 +132,24 @@ public interface Logger {
     void debug(Marker marker, MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the {@link Level#DEBUG DEBUG} level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     */
+    void debug(Marker marker, CharSequence message);
+
+    /**
+     * Logs a message CharSequence at the {@link Level#DEBUG DEBUG} level including the stack trace of the
+     * {@link Throwable} <code>t</code> passed as parameter.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void debug(Marker marker, CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the {@link Level#DEBUG DEBUG} level.
      *
      * @param marker the marker data specific to this log statement
@@ -251,6 +269,22 @@ public interface Logger {
     void debug(MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the {@link Level#DEBUG DEBUG} level.
+     *
+     * @param message the message object to log.
+     */
+    void debug(CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#DEBUG DEBUG} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void debug(CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the {@link Level#DEBUG DEBUG} level.
      *
      * @param message the message object to log.
@@ -322,6 +356,272 @@ public interface Logger {
     void debug(Supplier<?> msgSupplier, Throwable t);
 
     /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5,
+            Object p6);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void debug(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void debug(String message, Object p0);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+
+    /**
+     * Logs a message with parameters at debug level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void debug(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
+
+    /**
      * Logs entry to a method. Used when the method in question has no parameters or when the parameters should not be
      * logged.
      * @deprecated Use {@link #traceEntry()} instead which performs the same function.
@@ -330,7 +630,7 @@ public interface Logger {
     void entry();
 
     /**
-     * Logs entry to a method along with its parameters (consider using one of the {@code traceEntry(...)} methods instead.) 
+     * Logs entry to a method along with its parameters (consider using one of the {@code traceEntry(...)} methods instead.)
      * <p>
      * For example:
      * </p>
@@ -392,6 +692,24 @@ public interface Logger {
      */
     @Deprecated
     void error(Marker marker, MessageSupplier msgSupplier, Throwable t);
+
+    /**
+     * Logs a message CharSequence with the {@link Level#ERROR ERROR} level.
+     *
+     * @param marker the marker data specific to this log statement.
+     * @param message the message CharSequence to log.
+     */
+    void error(Marker marker, CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#ERROR ERROR} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param marker the marker data specific to this log statement.
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void error(Marker marker, CharSequence message, Throwable t);
 
     /**
      * Logs a message object with the {@link Level#ERROR ERROR} level.
@@ -513,6 +831,22 @@ public interface Logger {
     void error(MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the {@link Level#ERROR ERROR} level.
+     *
+     * @param message the message CharSequence to log.
+     */
+    void error(CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#ERROR ERROR} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void error(CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the {@link Level#ERROR ERROR} level.
      *
      * @param message the message object to log.
@@ -584,6 +918,272 @@ public interface Logger {
     void error(Supplier<?> msgSupplier, Throwable t);
 
     /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5,
+            Object p6);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void error(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void error(String message, Object p0);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+
+    /**
+     * Logs a message with parameters at error level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void error(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
+
+    /**
      * Logs exit from a method. Used for methods that do not return anything.
      * @deprecated Use {@link #traceExit()} instead which performs the same function.
      */
@@ -648,6 +1248,24 @@ public interface Logger {
      */
     @Deprecated
     void fatal(Marker marker, MessageSupplier msgSupplier, Throwable t);
+
+    /**
+     * Logs a message CharSequence with the {@link Level#FATAL FATAL} level.
+     *
+     * @param marker The marker data specific to this log statement.
+     * @param message the message CharSequence to log.
+     */
+    void fatal(Marker marker, CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#FATAL FATAL} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param marker The marker data specific to this log statement.
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void fatal(Marker marker, CharSequence message, Throwable t);
 
     /**
      * Logs a message object with the {@link Level#FATAL FATAL} level.
@@ -769,6 +1387,22 @@ public interface Logger {
     void fatal(MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the {@link Level#FATAL FATAL} level.
+     *
+     * @param message the message CharSequence to log.
+     */
+    void fatal(CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#FATAL FATAL} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void fatal(CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the {@link Level#FATAL FATAL} level.
      *
      * @param message the message object to log.
@@ -840,6 +1474,272 @@ public interface Logger {
     void fatal(Supplier<?> msgSupplier, Throwable t);
 
     /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5,
+            Object p6);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void fatal(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void fatal(String message, Object p0);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+
+    /**
+     * Logs a message with parameters at fatal level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void fatal(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
+
+    /**
      * Gets the Level associated with the Logger.
      *
      * @return the Level associate with the Logger.
@@ -903,6 +1803,24 @@ public interface Logger {
      */
     @Deprecated
     void info(Marker marker, MessageSupplier msgSupplier, Throwable t);
+
+    /**
+     * Logs a message CharSequence with the {@link Level#INFO INFO} level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     */
+    void info(Marker marker, CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#INFO INFO} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void info(Marker marker, CharSequence message, Throwable t);
 
     /**
      * Logs a message object with the {@link Level#INFO INFO} level.
@@ -1024,6 +1942,22 @@ public interface Logger {
     void info(MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the {@link Level#INFO INFO} level.
+     *
+     * @param message the message CharSequence to log.
+     */
+    void info(CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#INFO INFO} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void info(CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the {@link Level#INFO INFO} level.
      *
      * @param message the message object to log.
@@ -1093,6 +2027,272 @@ public interface Logger {
      * @since 2.4
      */
     void info(Supplier<?> msgSupplier, Throwable t);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5,
+            Object p6);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void info(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void info(String message, Object p0);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+
+    /**
+     * Logs a message with parameters at info level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void info(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
 
     /**
      * Checks whether this Logger is enabled for the {@link Level#DEBUG DEBUG} Level.
@@ -1260,6 +2460,26 @@ public interface Logger {
     void log(Level level, Marker marker, MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the given level.
+     *
+     * @param level the logging level
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     */
+    void log(Level level, Marker marker, CharSequence message);
+
+    /**
+     * Logs a CharSequence at the given level including the stack trace of the {@link Throwable} <code>t</code> passed as
+     * parameter.
+     *
+     * @param level the logging level
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void log(Level level, Marker marker, CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the given level.
      *
      * @param level the logging level
@@ -1389,6 +2609,24 @@ public interface Logger {
     void log(Level level, MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the given level.
+     *
+     * @param level the logging level
+     * @param message the message CharSequence to log.
+     */
+    void log(Level level, CharSequence message);
+
+    /**
+     * Logs a CharSequence at the given level including the stack trace of the {@link Throwable} <code>t</code> passed as
+     * parameter.
+     *
+     * @param level the logging level
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void log(Level level, CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the given level.
      *
      * @param level the logging level
@@ -1465,6 +2703,272 @@ public interface Logger {
      * @since 2.4
      */
     void log(Level level, Supplier<?> msgSupplier, Throwable t);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5,
+            Object p6);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void log(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void log(Level level, String message, Object p0);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+
+    /**
+     * Logs a message with parameters at the specified level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void log(Level level, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
 
     /**
      * Logs a formatted message using the specified format string and arguments.
@@ -1555,6 +3059,25 @@ public interface Logger {
      */
     @Deprecated
     void trace(Marker marker, MessageSupplier msgSupplier, Throwable t);
+
+    /**
+     * Logs a message CharSequence with the {@link Level#TRACE TRACE} level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     */
+    void trace(Marker marker, CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#TRACE TRACE} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     * @see #debug(String)
+     */
+    void trace(Marker marker, CharSequence message, Throwable t);
 
     /**
      * Logs a message object with the {@link Level#TRACE TRACE} level.
@@ -1678,6 +3201,23 @@ public interface Logger {
     void trace(MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the {@link Level#TRACE TRACE} level.
+     *
+     * @param message the message CharSequence to log.
+     */
+    void trace(CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#TRACE TRACE} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     * @see #debug(String)
+     */
+    void trace(CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the {@link Level#TRACE TRACE} level.
      *
      * @param message the message object to log.
@@ -1751,9 +3291,275 @@ public interface Logger {
     void trace(Supplier<?> msgSupplier, Throwable t);
 
     /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5,
+            Object p6);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void trace(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void trace(String message, Object p0);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+
+    /**
+     * Logs a message with parameters at trace level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void trace(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
+
+    /**
      * Logs entry to a method. Used when the method in question has no parameters or when the parameters should not be
      * logged.
-     * 
+     *
      * @return built message
      * @since 2.6
      */
@@ -1780,7 +3586,7 @@ public interface Logger {
      * @param format The format String for the parameters.
      * @param params The parameters to the method.
      * @return The built Message
-     * 
+     *
      * @since 2.6
      */
     EntryMessage traceEntry(String format, Object... params);
@@ -1797,7 +3603,7 @@ public interface Logger {
      *
      * @param paramSuppliers The Suppliers for the parameters to the method.
      * @return built message
-     * 
+     *
      * @since 2.6
      */
     EntryMessage traceEntry(Supplier<?>... paramSuppliers);
@@ -1815,7 +3621,7 @@ public interface Logger {
      * @param format The format String for the parameters.
      * @param paramSuppliers The Suppliers for the parameters to the method.
      * @return built message
-     * 
+     *
      * @since 2.6
      */
     EntryMessage traceEntry(String format, Supplier<?>... paramSuppliers);
@@ -1831,14 +3637,14 @@ public interface Logger {
      *
      * @param message The message.
      * @return the built message
-     * 
+     *
      * @since 2.6
      */
     EntryMessage traceEntry(Message message);
 
     /**
      * Logs exit from a method. Used for methods that do not return anything.
-     * 
+     *
      * @since 2.6
      */
     void traceExit();
@@ -1853,7 +3659,7 @@ public interface Logger {
      * @param <R> The type of the parameter and object being returned.
      * @param result The result being returned from the method call.
      * @return the result.
-     * 
+     *
      * @since 2.6
      */
     <R> R traceExit(R result);
@@ -1869,7 +3675,7 @@ public interface Logger {
      * @param format The format String for the result.
      * @param result The result being returned from the method call.
      * @return the result.
-     * 
+     *
      * @since 2.6
      */
     <R> R traceExit(String format, R result);
@@ -1906,7 +3712,7 @@ public interface Logger {
      *
      * @param <R> The type of the parameter and object being returned.
      * @return the result.
-     * 
+     *
      * @since 2.6
      */
     <R> R traceExit(EntryMessage message, R result);
@@ -1922,7 +3728,7 @@ public interface Logger {
      *
      * @param <R> The type of the parameter and object being returned.
      * @return the result.
-     * 
+     *
      * @since 2.6
      */
     <R> R traceExit(Message message, R result);
@@ -1970,6 +3776,24 @@ public interface Logger {
      */
     @Deprecated
     void warn(Marker marker, MessageSupplier msgSupplier, Throwable t);
+
+    /**
+     * Logs a message CharSequence with the {@link Level#WARN WARN} level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     */
+    void warn(Marker marker, CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#WARN WARN} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void warn(Marker marker, CharSequence message, Throwable t);
 
     /**
      * Logs a message object with the {@link Level#WARN WARN} level.
@@ -2091,6 +3915,22 @@ public interface Logger {
     void warn(MessageSupplier msgSupplier, Throwable t);
 
     /**
+     * Logs a message CharSequence with the {@link Level#WARN WARN} level.
+     *
+     * @param message the message CharSequence to log.
+     */
+    void warn(CharSequence message);
+
+    /**
+     * Logs a CharSequence at the {@link Level#WARN WARN} level including the stack trace of the {@link Throwable}
+     * <code>t</code> passed as parameter.
+     *
+     * @param message the message CharSequence to log.
+     * @param t the exception to log, including its stack trace.
+     */
+    void warn(CharSequence message, Throwable t);
+
+    /**
      * Logs a message object with the {@link Level#WARN WARN} level.
      *
      * @param message the message object to log.
@@ -2161,5 +4001,270 @@ public interface Logger {
      */
     void warn(Supplier<?> msgSupplier, Throwable t);
 
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5,
+            Object p6);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param marker the marker data specific to this log statement
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void warn(Marker marker, String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6,
+            Object p7, Object p8, Object p9);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     */
+    void warn(String message, Object p0);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1, Object p2);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1, Object p2, Object p3);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1, Object p2, Object p3, Object p4);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8);
+
+    /**
+     * Logs a message with parameters at warn level.
+     *
+     * @param message the message to log; the format depends on the message factory.
+     * @param p0 parameter to the message.
+     * @param p1 parameter to the message.
+     * @param p2 parameter to the message.
+     * @param p3 parameter to the message.
+     * @param p4 parameter to the message.
+     * @param p5 parameter to the message.
+     * @param p6 parameter to the message.
+     * @param p7 parameter to the message.
+     * @param p8 parameter to the message.
+     * @param p9 parameter to the message.
+     */
+    void warn(String message, Object p0, Object p1, Object p2, Object p3, Object p4, Object p5, Object p6, Object p7,
+            Object p8, Object p9);
 
 }

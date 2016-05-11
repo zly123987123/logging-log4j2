@@ -17,6 +17,7 @@
 package org.apache.logging.log4j.message;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import org.apache.logging.log4j.util.PerformanceSensitive;
 
@@ -35,6 +36,8 @@ public class ReusableParameterizedMessage implements ReusableMessage {
 
     private String messagePattern;
     private int argCount;
+    private int usedCount;
+    private final int[] indices = new int[256];
     private transient Object[] varargs;
     private transient Object[] params = new Object[10];
     private transient Throwable throwable;
@@ -53,18 +56,52 @@ public class ReusableParameterizedMessage implements ReusableMessage {
         return varargs == null ? params : varargs;
     }
 
-    private void init(String messagePattern, int argCount, Object[] paramArray) {
-        this.varargs = null;
-        this.messagePattern = messagePattern;
-        this.argCount= argCount;
-        int usedCount = ParameterFormatter.countArgumentPlaceholders(messagePattern);
-        initThrowable(paramArray, usedCount);
+    // see interface javadoc
+    @Override
+    public Object[] swapParameters(final Object[] emptyReplacement) {
+        Object[] result;
+        if (varargs == null) {
+            result = params;
+            params = Objects.requireNonNull(emptyReplacement);
+        } else {
+            result = varargs;
+            varargs = Objects.requireNonNull(emptyReplacement);
+        }
+        return result;
     }
 
-    private void initThrowable(final Object[] params, final int usedParams) {
+    // see interface javadoc
+    @Override
+    public short getParameterCount() {
+        return (short) argCount;
+    }
+
+    @Override
+    public Message memento() {
+        return new ParameterizedMessage(messagePattern, getTrimmedParams());
+    }
+
+    private void init(final String messagePattern, final int argCount, final Object[] paramArray) {
+        this.varargs = null;
+        this.messagePattern = messagePattern;
+        this.argCount = argCount;
+        int placeholderCount = count(messagePattern, indices);
+        initThrowable(paramArray, argCount, placeholderCount);
+        this.usedCount = Math.min(placeholderCount, argCount);
+    }
+
+    private static int count(final String messagePattern, final int[] indices) {
+        try {
+            // try the fast path first
+            return ParameterFormatter.countArgumentPlaceholders2(messagePattern, indices);
+        } catch (final Exception ex) { // fallback if more than int[] length (256) parameter placeholders
+            return ParameterFormatter.countArgumentPlaceholders(messagePattern);
+        }
+    }
+
+    private void initThrowable(final Object[] params, final int argCount, final int usedParams) {
         if (usedParams < argCount && this.throwable == null && params[argCount - 1] instanceof Throwable) {
             this.throwable = (Throwable) params[argCount - 1];
-            argCount--;
         }
     }
 
@@ -229,7 +266,8 @@ public class ReusableParameterizedMessage implements ReusableMessage {
     private StringBuilder getBuffer() {
         StringBuilder result = buffer.get();
         if (result == null) {
-            result = new StringBuilder(Math.min(512, messagePattern.length() * 2));
+            final int currentPatternLength = messagePattern == null ? 0 : messagePattern.length();
+            result = new StringBuilder(Math.min(512, currentPatternLength * 2));
             buffer.set(result);
         }
         result.setLength(0);
@@ -238,7 +276,11 @@ public class ReusableParameterizedMessage implements ReusableMessage {
 
     @Override
     public void formatTo(final StringBuilder buffer) {
-        ParameterFormatter.formatMessage(buffer, messagePattern, getParams(), argCount);
+        if (indices[0] < 0) {
+            ParameterFormatter.formatMessage(buffer, messagePattern, getParams(), argCount);
+        } else {
+            ParameterFormatter.formatMessage2(buffer, messagePattern, getParams(), usedCount, indices);
+        }
     }
 
 

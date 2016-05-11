@@ -36,7 +36,7 @@ import org.apache.logging.log4j.core.util.Integers;
 
 /**
  * Memory Mapped File Appender.
- * 
+ *
  * @since 2.1
  */
 @Plugin(name = "MemoryMappedFile", category = "Core", elementType = "appender", printObject = true)
@@ -87,8 +87,8 @@ public final class MemoryMappedFileAppender extends AbstractOutputStreamAppender
         // From a user's point of view, this means that all log events are
         // _always_ available in the log file, without incurring the overhead
         // of immediateFlush=true.
-        getManager().setEndOfBatch(event.isEndOfBatch());
-        super.append(event);
+        getManager().setEndOfBatch(event.isEndOfBatch()); // FIXME manager's EndOfBatch threadlocal can be deleted
+        super.append(event); // TODO should only call force() if immediateFlush && endOfBatch?
     }
 
     /**
@@ -102,7 +102,7 @@ public final class MemoryMappedFileAppender extends AbstractOutputStreamAppender
 
     /**
      * Returns the length of the memory mapped region.
-     * 
+     *
      * @return the length of the memory mapped region
      */
     public int getRegionLength() {
@@ -170,7 +170,7 @@ public final class MemoryMappedFileAppender extends AbstractOutputStreamAppender
             return null;
         }
 
-        return new MemoryMappedFileAppender(name, layout, filter, manager, fileName, ignoreExceptions, isForce,
+        return new MemoryMappedFileAppender(name, layout, filter, manager, fileName, ignoreExceptions, false,
                 isAdvertise ? config.getAdvertiser() : null);
     }
 

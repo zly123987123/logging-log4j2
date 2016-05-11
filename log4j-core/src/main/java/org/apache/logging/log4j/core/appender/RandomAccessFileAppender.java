@@ -83,19 +83,10 @@ public final class RandomAccessFileAppender extends AbstractOutputStreamAppender
         // From a user's point of view, this means that all log events are
         // _always_ available in the log file, without incurring the overhead
         // of immediateFlush=true.
-        getManager().setEndOfBatch(event.isEndOfBatch());
+        getManager().setEndOfBatch(event.isEndOfBatch()); // FIXME manager's EndOfBatch threadlocal can be deleted
 
-        // LOG4J2-1292 utilize gc-free Layout.encode() method
-        // super.append(event);
-        try {
-            getLayout().encode(event, getManager());
-            if (getImmediateFlush() || event.isEndOfBatch()) {
-                getManager().flush();
-            }
-        } catch (final AppenderLoggingException ex) {
-            error("Unable to write to stream " + getManager().getName() + " for appender " + getName());
-            throw ex;
-        }
+        // LOG4J2-1292 utilize gc-free Layout.encode() method: taken care of in superclass
+        super.append(event);
     }
 
     /**

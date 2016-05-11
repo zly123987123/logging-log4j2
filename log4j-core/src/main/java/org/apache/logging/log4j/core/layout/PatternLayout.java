@@ -38,7 +38,6 @@ import org.apache.logging.log4j.core.pattern.LogEventPatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternFormatter;
 import org.apache.logging.log4j.core.pattern.PatternParser;
 import org.apache.logging.log4j.core.pattern.RegexReplacement;
-import org.apache.logging.log4j.core.util.Constants;
 import org.apache.logging.log4j.util.Strings;
 
 /**
@@ -174,13 +173,13 @@ public final class PatternLayout extends AbstractStringLayout {
 
     @Override
     public void encode(final LogEvent event, final ByteBufferDestination destination) {
-        if (!Constants.ENABLE_THREADLOCALS || !(eventSerializer instanceof Serializer2)) {
+        if (!(eventSerializer instanceof Serializer2)) {
             super.encode(event, destination);
             return;
         }
         final StringBuilder text = toText((Serializer2) eventSerializer, event, getStringBuilder());
-        final TextEncoderHelper helper = getCachedTextEncoderHelper();
-        helper.encodeText(text, destination);
+        final Encoder<StringBuilder> encoder = getStringBuilderEncoder();
+        encoder.encode(text, destination);
     }
 
     /**

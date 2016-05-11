@@ -20,6 +20,7 @@ import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.StringLayout;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
+import org.apache.logging.log4j.core.util.Constants;
 import org.apache.logging.log4j.core.util.StringEncoder;
 import org.apache.logging.log4j.util.Strings;
 
@@ -60,7 +61,7 @@ public abstract class AbstractStringLayout extends AbstractLayout<String> implem
 
     private static final ThreadLocal<StringBuilder> threadLocal = new ThreadLocal<>();
 
-    private final ThreadLocal<TextEncoderHelper> textEncoderHelper = new ThreadLocal<>();
+    private Encoder<StringBuilder> textEncoder;
 
     /**
      * Returns a {@code StringBuilder} that this Layout implementation can use to write the formatted log event to.
@@ -74,20 +75,6 @@ public abstract class AbstractStringLayout extends AbstractLayout<String> implem
             threadLocal.set(result);
         }
         result.setLength(0);
-        return result;
-    }
-
-    /**
-     * Returns a {@code TextEncoderHelper} that this Layout implementation can use for encoding log events.
-     *
-     * @return a {@code TextEncoderHelper}
-     */
-    protected TextEncoderHelper getCachedTextEncoderHelper() {
-        TextEncoderHelper result = textEncoderHelper.get();
-        if (result == null) {
-            result = new TextEncoderHelper(getCharset());
-            textEncoderHelper.set(result);
-        }
         return result;
     }
 
@@ -122,37 +109,52 @@ public abstract class AbstractStringLayout extends AbstractLayout<String> implem
 
     /**
      * Builds a new layout.
-     * @param charset the charset used to encode the header bytes, footer bytes and anything else that needs to be
+     * @param aCharset the charset used to encode the header bytes, footer bytes and anything else that needs to be
      *      converted from strings to bytes.
      * @param header the header bytes
      * @param footer the footer bytes
      */
-    protected AbstractStringLayout(final Charset charset, final byte[] header, final byte[] footer) {
+    protected AbstractStringLayout(final Charset aCharset, final byte[] header, final byte[] footer) {
         super(null, header, footer);
         this.headerSerializer = null;
         this.footerSerializer = null;
-        this.charset = charset == null ? StandardCharsets.UTF_8 : charset;
+        this.charset = aCharset == null ? StandardCharsets.UTF_8 : aCharset;
         this.charsetName = this.charset.name();
         useCustomEncoding = isPreJava8()
-                && (StandardCharsets.ISO_8859_1.equals(charset) || StandardCharsets.US_ASCII.equals(charset));
+                && (StandardCharsets.ISO_8859_1.equals(aCharset) || StandardCharsets.US_ASCII.equals(aCharset));
+        textEncoder = Constants.ENABLE_DIRECT_ENCODERS ? new StringBuilderEncoder(charset) : null;
     }
 
     /**
      * Builds a new layout.
      * @param config the configuration
-     * @param charset the charset used to encode the header bytes, footer bytes and anything else that needs to be
+     * @param aCharset the charset used to encode the header bytes, footer bytes and anything else that needs to be
      *      converted from strings to bytes.
      * @param headerSerializer the header bytes serializer
      * @param footerSerializer the footer bytes serializer
      */
-    protected AbstractStringLayout(final Configuration config, final Charset charset, final Serializer headerSerializer, final Serializer footerSerializer) {
+    protected AbstractStringLayout(final Configuration config, final Charset aCharset,
+            final Serializer headerSerializer, final Serializer footerSerializer) {
         super(config, null, null);
         this.headerSerializer = headerSerializer;
         this.footerSerializer = footerSerializer;
-        this.charset = charset == null ? StandardCharsets.UTF_8 : charset;
+        this.charset = aCharset == null ? StandardCharsets.UTF_8 : aCharset;
         this.charsetName = this.charset.name();
         useCustomEncoding = isPreJava8()
-                && (StandardCharsets.ISO_8859_1.equals(charset) || StandardCharsets.US_ASCII.equals(charset));
+                && (StandardCharsets.ISO_8859_1.equals(aCharset) || StandardCharsets.US_ASCII.equals(aCharset));
+        textEncoder = Constants.ENABLE_DIRECT_ENCODERS ? new StringBuilderEncoder(charset) : null;
+    }
+
+    /**
+     * Returns a {@code Encoder<StringBuilder>} that this Layout implementation can use for encoding log events.
+     *
+     * @return a {@code Encoder<StringBuilder>}
+     */
+    protected Encoder<StringBuilder> getStringBuilderEncoder() {
+        if (textEncoder == null) {
+            textEncoder = new StringBuilderEncoder(getCharset());
+        }
+        return textEncoder;
     }
 
     protected byte[] getBytes(final String s) {

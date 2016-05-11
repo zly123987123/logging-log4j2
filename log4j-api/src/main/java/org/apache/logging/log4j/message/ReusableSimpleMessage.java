@@ -23,23 +23,27 @@ import org.apache.logging.log4j.util.PerformanceSensitive;
  * @since 2.6
  */
 @PerformanceSensitive("allocation")
-public class ReusableSimpleMessage implements ReusableMessage {
+public class ReusableSimpleMessage implements ReusableMessage, CharSequence {
     private static final long serialVersionUID = -9199974506498249809L;
     private static Object[] EMPTY_PARAMS = new Object[0];
-    private String message;
+    private CharSequence charSequence;
 
-    public void set(String message) {
-        this.message = message;
+    public void set(final String message) {
+        this.charSequence = message;
+    }
+
+    public void set(final CharSequence charSequence) {
+        this.charSequence = charSequence;
     }
 
     @Override
     public String getFormattedMessage() {
-        return message;
+        return String.valueOf(charSequence);
     }
 
     @Override
     public String getFormat() {
-        return message;
+        return getFormattedMessage();
     }
 
     @Override
@@ -54,7 +58,48 @@ public class ReusableSimpleMessage implements ReusableMessage {
 
     @Override
     public void formatTo(final StringBuilder buffer) {
-        buffer.append(message);
+        buffer.append(charSequence);
+    }
+
+    /**
+     * This message does not have any parameters, so this method returns the specified array.
+     * @param emptyReplacement the parameter array to return
+     * @return the specified array
+     */
+    @Override
+    public Object[] swapParameters(final Object[] emptyReplacement) {
+        return emptyReplacement;
+    }
+
+    /**
+     * This message does not have any parameters so this method always returns zero.
+     * @return 0 (zero)
+     */
+    @Override
+    public short getParameterCount() {
+        return 0;
+    }
+
+    @Override
+    public Message memento() {
+        return new SimpleMessage(charSequence);
+    }
+
+    // CharSequence impl
+
+    @Override
+    public int length() {
+        return charSequence == null ? 0 : charSequence.length();
+    }
+
+    @Override
+    public char charAt(int index) {
+        return charSequence.charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return charSequence.subSequence(start, end);
     }
 }
 

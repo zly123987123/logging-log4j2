@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
@@ -31,6 +32,8 @@ import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
+import org.apache.logging.log4j.core.impl.Log4jLogEvent;
+import org.apache.logging.log4j.core.impl.MutableLogEvent;
 import org.apache.logging.log4j.core.layout.SerializedLayout;
 
 /**
@@ -58,6 +61,8 @@ public class ListAppender extends AbstractAppender {
 
     private static final String WINDOWS_LINE_SEP = "\r\n";
 
+    public CountDownLatch countDownLatch = null;
+
     public ListAppender(final String name) {
         super(name, null, null);
         newLine = false;
@@ -81,7 +86,12 @@ public class ListAppender extends AbstractAppender {
     public synchronized void append(final LogEvent event) {
         final Layout<? extends Serializable> layout = getLayout();
         if (layout == null) {
-            events.add(event);
+            if (event instanceof MutableLogEvent) {
+                // must take snapshot or subsequent calls to logger.log() will modify this event
+                events.add(((MutableLogEvent) event).createMemento());
+            } else {
+                events.add(event);
+            }
         } else if (layout instanceof SerializedLayout) {
             final byte[] header = layout.getHeader();
             final byte[] content = layout.toByteArray(event);
@@ -91,6 +101,9 @@ public class ListAppender extends AbstractAppender {
             data.add(record);
         } else {
             write(layout.toByteArray(event));
+        }
+        if (countDownLatch != null) {
+            countDownLatch.countDown();
         }
     }
 

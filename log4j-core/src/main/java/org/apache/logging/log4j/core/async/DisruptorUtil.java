@@ -17,6 +17,7 @@
 
 package org.apache.logging.log4j.core.async;
 
+import java.util.Locale;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -50,25 +51,28 @@ final class DisruptorUtil {
         final String key = propertyName.startsWith("AsyncLogger.")
                 ? "AsyncLogger.Timeout"
                 : "AsyncLoggerConfig.Timeout";
-        final long timeout = DisruptorUtil.getTimeout(key, 10L);
-        return createWaitStrategy(propertyName, timeout);
+        final long timeoutMillis = DisruptorUtil.getTimeout(key, 10L);
+        return createWaitStrategy(propertyName, timeoutMillis);
     }
 
-    static WaitStrategy createWaitStrategy(final String propertyName, final long timeoutMs) {
-        final String strategy = PropertiesUtil.getProperties().getStringProperty(propertyName);
-        if (strategy != null) {
-            LOGGER.trace("property {}={}", propertyName, strategy);
-            if ("Sleep".equalsIgnoreCase(strategy)) {
-                return new SleepingWaitStrategy();
-            } else if ("Yield".equalsIgnoreCase(strategy)) {
-                return new YieldingWaitStrategy();
-            } else if ("Block".equalsIgnoreCase(strategy)) {
-                return new BlockingWaitStrategy();
-            } else if ("Timeout".equalsIgnoreCase(strategy)) {
-                return new TimeoutBlockingWaitStrategy(timeoutMs, TimeUnit.MILLISECONDS);
-            }
+    static WaitStrategy createWaitStrategy(final String propertyName, final long timeoutMillis) {
+        final String strategy = PropertiesUtil.getProperties().getStringProperty(propertyName, "TIMEOUT");
+        LOGGER.trace("property {}={}", propertyName, strategy);
+        final String strategyUp = strategy.toUpperCase(Locale.ROOT); // TODO Refactor into Strings.toRootUpperCase(String)
+        switch (strategyUp) { // TODO Define a DisruptorWaitStrategy enum?
+        case "SLEEP":
+            return new SleepingWaitStrategy();
+        case "YIELD":
+            return new YieldingWaitStrategy();
+        case "BLOCK":
+            return new BlockingWaitStrategy();
+        case "BUSYSPIN":
+            return new BusySpinWaitStrategy();
+        case "TIMEOUT":
+            return new TimeoutBlockingWaitStrategy(timeoutMillis, TimeUnit.MILLISECONDS);
+        default:
+            return new TimeoutBlockingWaitStrategy(timeoutMillis, TimeUnit.MILLISECONDS);
         }
-        return new TimeoutBlockingWaitStrategy(timeoutMs, TimeUnit.MILLISECONDS);
     }
 
     static int calculateRingBufferSize(final String propertyName) {
@@ -89,19 +93,35 @@ final class DisruptorUtil {
         return Integers.ceilingNextPowerOfTwo(ringBufferSize);
     }
 
-    static <T> ExceptionHandler<T> getExceptionHandler(final String propertyName, Class<T> type) {
-        final String cls = PropertiesUtil.getProperties().getStringProperty(propertyName);
+    static ExceptionHandler<RingBufferLogEvent> getAsyncLoggerExceptionHandler() {
+        final String cls = PropertiesUtil.getProperties().getStringProperty("AsyncLogger.ExceptionHandler");
         if (cls == null) {
-            return null;
+            return new AsyncLoggerDefaultExceptionHandler();
         }
         try {
             @SuppressWarnings("unchecked")
-            final Class<? extends ExceptionHandler<T>> klass =
-                (Class<? extends ExceptionHandler<T>>) LoaderUtil.loadClass(cls);
+            final Class<? extends ExceptionHandler<RingBufferLogEvent>> klass =
+                (Class<? extends ExceptionHandler<RingBufferLogEvent>>) LoaderUtil.loadClass(cls);
             return klass.newInstance();
         } catch (final Exception ignored) {
-            LOGGER.debug("Invalid {} value: error creating {}: ", propertyName, cls, ignored);
-            return null;
+            LOGGER.debug("Invalid AsyncLogger.ExceptionHandler value: error creating {}: ", cls, ignored);
+            return new AsyncLoggerDefaultExceptionHandler();
+        }
+    }
+
+    static ExceptionHandler<AsyncLoggerConfigDisruptor.Log4jEventWrapper> getAsyncLoggerConfigExceptionHandler() {
+        final String cls = PropertiesUtil.getProperties().getStringProperty("AsyncLoggerConfig.ExceptionHandler");
+        if (cls == null) {
+            return new AsyncLoggerConfigDefaultExceptionHandler();
+        }
+        try {
+            @SuppressWarnings("unchecked")
+            final Class<? extends ExceptionHandler<AsyncLoggerConfigDisruptor.Log4jEventWrapper>> klass =
+                    (Class<? extends ExceptionHandler<AsyncLoggerConfigDisruptor.Log4jEventWrapper>>) LoaderUtil.loadClass(cls);
+            return klass.newInstance();
+        } catch (final Exception ignored) {
+            LOGGER.debug("Invalid AsyncLoggerConfig.ExceptionHandler value: error creating {}: ", cls, ignored);
+            return new AsyncLoggerConfigDefaultExceptionHandler();
         }
     }
 

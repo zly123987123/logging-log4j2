@@ -48,10 +48,10 @@ public class ReusableObjectMessage implements ReusableMessage {
     public void formatTo(final StringBuilder buffer) {
         if (obj == null || obj instanceof String) {
             buffer.append((String) obj);
-        } else if (obj instanceof StringBuilder) {
-            buffer.append((StringBuilder) obj);
         } else if (obj instanceof StringBuilderFormattable) {
             ((StringBuilderFormattable) obj).formatTo(buffer);
+        } else if (obj instanceof CharSequence) {
+            buffer.append((CharSequence) obj);
         } else {
             buffer.append(obj);
         }
@@ -90,5 +90,29 @@ public class ReusableObjectMessage implements ReusableMessage {
     @Override
     public Throwable getThrowable() {
         return obj instanceof Throwable ? (Throwable) obj : null;
+    }
+
+    /**
+     * This message does not have any parameters, so this method returns the specified array.
+     * @param emptyReplacement the parameter array to return
+     * @return the specified array
+     */
+    @Override
+    public Object[] swapParameters(final Object[] emptyReplacement) {
+        return emptyReplacement;
+    }
+
+    /**
+     * This message does not have any parameters so this method always returns zero.
+     * @return 0 (zero)
+     */
+    @Override
+    public short getParameterCount() {
+        return 0;
+    }
+
+    @Override
+    public Message memento() {
+        return new ObjectMessage(obj);
     }
 }

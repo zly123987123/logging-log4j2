@@ -17,6 +17,7 @@
 package org.apache.logging.log4j.core.async;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,9 +31,10 @@ import org.apache.logging.log4j.core.impl.ThrowableProxy;
 import org.apache.logging.log4j.core.lookup.StrSubstitutor;
 import org.apache.logging.log4j.core.util.Constants;
 import org.apache.logging.log4j.message.Message;
+import org.apache.logging.log4j.message.ParameterizedMessage;
 import org.apache.logging.log4j.message.ReusableMessage;
 import org.apache.logging.log4j.message.SimpleMessage;
-import org.apache.logging.log4j.util.PropertiesUtil;
+import org.apache.logging.log4j.message.TimestampMessage;
 import org.apache.logging.log4j.util.Strings;
 
 import com.lmax.disruptor.EventFactory;
@@ -41,18 +43,13 @@ import com.lmax.disruptor.EventFactory;
  * When the Disruptor is started, the RingBuffer is populated with event objects. These objects are then re-used during
  * the life of the RingBuffer.
  */
-public class RingBufferLogEvent implements LogEvent {
+public class RingBufferLogEvent implements LogEvent, ReusableMessage, CharSequence {
 
     /** The {@code EventFactory} for {@code RingBufferLogEvent}s. */
     public static final Factory FACTORY = new Factory();
 
     private static final long serialVersionUID = 8462119088943934758L;
-    private static final int INITIAL_REUSABLE_MESSAGE_SIZE = size("log4j.initialReusableMsgSize", 128);
-    private static final int MAX_REUSABLE_MESSAGE_SIZE = size("log4j.maxReusableMsgSize", (128 * 2 + 2) * 2 + 2);
-
-    private static int size(final String property, final int defaultValue) {
-        return PropertiesUtil.getProperties().getIntegerProperty(property, defaultValue);
-    }
+    private static final Message EMPTY = new SimpleMessage(Strings.EMPTY);
 
     /**
      * Creates the events that will be put in the RingBuffer.
@@ -63,103 +60,83 @@ public class RingBufferLogEvent implements LogEvent {
         public RingBufferLogEvent newInstance() {
             RingBufferLogEvent result = new RingBufferLogEvent();
             if (Constants.ENABLE_THREADLOCALS) {
-                result.messageText = new StringBuilder(INITIAL_REUSABLE_MESSAGE_SIZE);
+                result.messageText = new StringBuilder(Constants.INITIAL_REUSABLE_MESSAGE_SIZE);
+                result.parameters = new Object[10];
             }
             return result;
         }
     }
 
-    private static class StringBuilderWrapperMessage implements ReusableMessage {
-        static final StringBuilderWrapperMessage INSTANCE = new StringBuilderWrapperMessage();
-        private StringBuilder stringBuilder;
-
-        @Override
-        public String getFormattedMessage() {
-            return null;
-        }
-
-        @Override
-        public String getFormat() {
-            return null;
-        }
-
-        @Override
-        public Object[] getParameters() {
-            return new Object[0];
-        }
-
-        @Override
-        public Throwable getThrowable() {
-            return null;
-        }
-
-        @Override
-        public void formatTo(final StringBuilder buffer) {
-            buffer.append(stringBuilder);
-
-            // ensure that excessively long char[] arrays are not kept in memory forever
-            if (stringBuilder.length() > MAX_REUSABLE_MESSAGE_SIZE) {
-                stringBuilder.setLength(MAX_REUSABLE_MESSAGE_SIZE);
-                stringBuilder.trimToSize();
-            }
-        }
-
-        public Message setFormattedMessage(final StringBuilder messageText) {
-            this.stringBuilder = messageText;
-            return this;
-        }
-    }
-
-    private transient AsyncLogger asyncLogger;
-    private String loggerName;
-    private Marker marker;
-    private String fqcn;
+    private int threadPriority;
+    private long threadId;
+    private long currentTimeMillis;
+    private long nanoTime;
+    private short parameterCount;
+    private boolean includeLocation;
+    private boolean endOfBatch = false;
     private Level level;
-    private StringBuilder messageText;
+    private String threadName;
+    private String loggerName;
     private Message message;
+    private StringBuilder messageText;
+    private Object[] parameters;
     private transient Throwable thrown;
     private ThrowableProxy thrownProxy;
     private Map<String, String> contextMap;
-    private ContextStack contextStack;
-    private long threadId;
-    private String threadName;
-    private int threadPriority;
+    private Marker marker;
+    private String fqcn;
     private StackTraceElement location;
-    private long currentTimeMillis;
-    private boolean endOfBatch;
-    private boolean includeLocation;
-    private long nanoTime;
+    private ContextStack contextStack;
+
+    private transient AsyncLogger asyncLogger;
 
     public void setValues(final AsyncLogger anAsyncLogger, final String aLoggerName, final Marker aMarker,
             final String theFqcn, final Level aLevel, final Message msg, final Throwable aThrowable,
             final Map<String, String> aMap, final ContextStack aContextStack, long threadId,
             final String threadName, int threadPriority, final StackTraceElement aLocation, final long aCurrentTimeMillis, final long aNanoTime) {
-        this.asyncLogger = anAsyncLogger;
-        this.loggerName = aLoggerName;
-        this.marker = aMarker;
-        this.fqcn = theFqcn;
+        this.threadPriority = threadPriority;
+        this.threadId = threadId;
+        this.currentTimeMillis = aCurrentTimeMillis;
+        this.nanoTime = aNanoTime;
         this.level = aLevel;
-        if (msg instanceof ReusableMessage) {
-            if (messageText == null) {
-                // Should never happen:
-                // only happens if user logs a custom reused message when Constants.ENABLE_THREADLOCALS is false
-                messageText = new StringBuilder(INITIAL_REUSABLE_MESSAGE_SIZE);
-            }
-            messageText.setLength(0);
-            ((ReusableMessage) msg).formatTo(messageText);
-        } else {
-            this.message = msg;
-        }
+        this.threadName = threadName;
+        this.loggerName = aLoggerName;
+        setMessage(msg);
         this.thrown = aThrowable;
         this.thrownProxy = null;
         this.contextMap = aMap;
-        this.contextStack = aContextStack;
-        this.threadId = threadId;
-        this.threadName = threadName;
-        this.threadPriority = threadPriority;
+        this.marker = aMarker;
+        this.fqcn = theFqcn;
         this.location = aLocation;
-        this.currentTimeMillis = aCurrentTimeMillis;
-        this.nanoTime = aNanoTime;
+        this.contextStack = aContextStack;
+        this.asyncLogger = anAsyncLogger;
+    }
+
+    private void setMessage(final Message msg) {
+        if (msg instanceof ReusableMessage) {
+            ReusableMessage reusable = (ReusableMessage) msg;
+            reusable.formatTo(getMessageTextForWriting());
+            if (parameters != null) {
+                parameters = reusable.swapParameters(parameters);
+                parameterCount = reusable.getParameterCount();
+            }
+        } else {
+            // if the Message instance is reused, there is no point in freezing its message here
+            if (!Constants.FORMAT_MESSAGES_IN_BACKGROUND && msg != null) { // LOG4J2-898: user may choose
+                msg.getFormattedMessage(); // LOG4J2-763: ask message to freeze parameters
+            }
+            this.message = msg;
+        }
+    }
+
+    private StringBuilder getMessageTextForWriting() {
+        if (messageText == null) {
+            // Should never happen:
+            // only happens if user logs a custom reused message when Constants.ENABLE_THREADLOCALS is false
+            messageText = new StringBuilder(Constants.INITIAL_REUSABLE_MESSAGE_SIZE);
+        }
+        messageText.setLength(0);
+        return messageText;
     }
 
     /**
@@ -223,14 +200,98 @@ public class RingBufferLogEvent implements LogEvent {
     @Override
     public Message getMessage() {
         if (message == null) {
-            if (messageText == null) {
-                message = new SimpleMessage(Strings.EMPTY);
-            } else {
-                message = StringBuilderWrapperMessage.INSTANCE.setFormattedMessage(messageText);
-            }
+            return (messageText == null) ? EMPTY : this;
         }
         return message;
     }
+
+    /**
+     * @see ReusableMessage#getFormattedMessage()
+     */
+    @Override
+    public String getFormattedMessage() {
+        return messageText.toString();
+    }
+
+    /**
+     * @see ReusableMessage#getFormat()
+     */
+    @Override
+    public String getFormat() {
+        return null;
+    }
+
+    /**
+     * @see ReusableMessage#getParameters()
+     */
+    @Override
+    public Object[] getParameters() {
+        return parameters == null ? null : Arrays.copyOf(parameters, parameterCount);
+    }
+
+    /**
+     * @see ReusableMessage#getThrowable()
+     */
+    @Override
+    public Throwable getThrowable() {
+        return getThrown();
+    }
+
+    /**
+     * @see ReusableMessage#formatTo(StringBuilder)
+     */
+    @Override
+    public void formatTo(final StringBuilder buffer) {
+        buffer.append(messageText);
+    }
+
+    /**
+     * Replaces this ReusableMessage's parameter array with the specified value and return the original array
+     * @param emptyReplacement the parameter array that can be used for subsequent uses of this reusable message
+     * @return the original parameter array
+     * @see ReusableMessage#swapParameters(Object[])
+     */
+    @Override
+    public Object[] swapParameters(final Object[] emptyReplacement) {
+        final Object[] result = this.parameters;
+        this.parameters = emptyReplacement;
+        return result;
+    }
+
+    /*
+     * @see ReusableMessage#getParameterCount
+     */
+    @Override
+    public short getParameterCount() {
+        return parameterCount;
+    }
+
+    @Override
+    public Message memento() {
+        if (message != null) {
+            return message;
+        }
+        Object[] params = parameters == null ? new Object[0] : Arrays.copyOf(parameters, parameterCount);
+        return new ParameterizedMessage(messageText.toString(), params);
+    }
+
+    // CharSequence impl
+
+    @Override
+    public int length() {
+        return messageText.length();
+    }
+
+    @Override
+    public char charAt(int index) {
+        return messageText.charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return messageText.subSequence(start, end);
+    }
+
 
     private Message getNonNullImmutableMessage() {
         return message != null ? message : new SimpleMessage(String.valueOf(messageText));
@@ -290,7 +351,7 @@ public class RingBufferLogEvent implements LogEvent {
 
     @Override
     public long getTimeMillis() {
-        return currentTimeMillis;
+        return message instanceof TimestampMessage ? ((TimestampMessage) message).getTimestamp() :currentTimeMillis;
     }
 
     @Override
@@ -330,25 +391,31 @@ public class RingBufferLogEvent implements LogEvent {
      * Release references held by ring buffer to allow objects to be garbage-collected.
      */
     public void clear() {
-        setValues(null, // asyncLogger
-                null, // loggerName
-                null, // marker
-                null, // fqcn
-                null, // level
-                null, // data
-                null, // t
-                null, // map
-                null, // contextStack
-                0, // threadName
-                null, // location
-                0, // currentTimeMillis
-                null,
-                0, 0 // nanoTime
-        );
+        this.asyncLogger = null;
+        this.loggerName = null;
+        this.marker = null;
+        this.fqcn = null;
+        this.level = null;
+        this.message = null;
+        this.thrown = null;
+        this.thrownProxy = null;
+        this.contextMap = null;
+        this.contextStack = null;
+        this.location = null;
 
-        // ensure that excessively long char[] arrays are not kept in memory forever
-        if (messageText != null && messageText.length() > MAX_REUSABLE_MESSAGE_SIZE) {
-            messageText.setLength(MAX_REUSABLE_MESSAGE_SIZE);
+        trimMessageText();
+
+        if (parameters != null) {
+            for (int i = 0; i < parameters.length; i++) {
+                parameters[i] = null;
+            }
+        }
+    }
+
+    // ensure that excessively long char[] arrays are not kept in memory forever
+    private void trimMessageText() {
+        if (messageText != null && messageText.length() > Constants.MAX_REUSABLE_MESSAGE_SIZE) {
+            messageText.setLength(Constants.MAX_REUSABLE_MESSAGE_SIZE);
             messageText.trimToSize();
         }
     }

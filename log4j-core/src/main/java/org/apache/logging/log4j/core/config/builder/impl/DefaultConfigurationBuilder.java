@@ -141,6 +141,11 @@ public class DefaultConfigurationBuilder<T extends BuiltConfiguration> implement
 
     @Override
     public T build() {
+        return build(true);
+    }
+
+    @Override
+    public T build(boolean initialize) {
         T configuration;
         try {
             if (source == null) {
@@ -149,6 +154,7 @@ public class DefaultConfigurationBuilder<T extends BuiltConfiguration> implement
             final Constructor<T> constructor = clazz.getConstructor(ConfigurationSource.class, Component.class);
             configuration = constructor.newInstance(source, root);
             configuration.setMonitorInterval(monitorInterval);
+            configuration.getRootNode().getAttributes().putAll(root.getAttributes());
             if (name != null) {
                 configuration.setName(name);
             }
@@ -171,7 +177,9 @@ public class DefaultConfigurationBuilder<T extends BuiltConfiguration> implement
             throw new IllegalArgumentException("Invalid Configuration class specified", ex);
         }
         configuration.getStatusConfiguration().initialize();
-        configuration.initialize();
+        if (initialize) {
+            configuration.initialize();
+        }
         return configuration;
     }
 
@@ -203,22 +211,42 @@ public class DefaultConfigurationBuilder<T extends BuiltConfiguration> implement
 
     @Override
     public LoggerComponentBuilder newAsyncLogger(final String name, final Level level) {
-        return new DefaultLoggerComponentBuilder(this, name, level.toString(), "AsyncLogger");
+        return new DefaultLoggerComponentBuilder(this, name, level.toString(), "AsyncLogger", false);
+    }
+
+    @Override
+    public LoggerComponentBuilder newAsyncLogger(final String name, final Level level, boolean includeLocation) {
+        return new DefaultLoggerComponentBuilder(this, name, level.toString(), "AsyncLogger", includeLocation);
     }
 
     @Override
     public LoggerComponentBuilder newAsyncLogger(final String name, final String level) {
+        return new DefaultLoggerComponentBuilder(this, name, level, "AsyncLogger", false);
+    }
+
+    @Override
+    public LoggerComponentBuilder newAsyncLogger(final String name, final String level, boolean includeLocation) {
         return new DefaultLoggerComponentBuilder(this, name, level, "AsyncLogger");
     }
 
     @Override
     public RootLoggerComponentBuilder newAsyncRootLogger(final Level level) {
-        return new DefaultRootLoggerComponentBuilder(this, level.toString(), "AsyncRoot");
+        return new DefaultRootLoggerComponentBuilder(this, level.toString(), "AsyncRoot", false);
+    }
+
+    @Override
+    public RootLoggerComponentBuilder newAsyncRootLogger(final Level level, boolean includeLocation) {
+        return new DefaultRootLoggerComponentBuilder(this, level.toString(), "AsyncRoot", includeLocation);
     }
 
     @Override
     public RootLoggerComponentBuilder newAsyncRootLogger(final String level) {
-        return new DefaultRootLoggerComponentBuilder(this, level, "AsyncRoot");
+        return new DefaultRootLoggerComponentBuilder(this, level, "AsyncRoot", false);
+    }
+
+    @Override
+    public RootLoggerComponentBuilder newAsyncRootLogger(final String level, boolean includeLocation) {
+        return new DefaultRootLoggerComponentBuilder(this, level, "AsyncRoot", includeLocation);
     }
 
 
@@ -263,22 +291,42 @@ public class DefaultConfigurationBuilder<T extends BuiltConfiguration> implement
 
     @Override
     public LoggerComponentBuilder newLogger(final String name, final Level level) {
-        return new DefaultLoggerComponentBuilder(this, name, level.toString());
+        return new DefaultLoggerComponentBuilder(this, name, level.toString(), true);
+    }
+
+    @Override
+    public LoggerComponentBuilder newLogger(final String name, final Level level, boolean includeLocation) {
+        return new DefaultLoggerComponentBuilder(this, name, level.toString(), includeLocation);
     }
 
     @Override
     public LoggerComponentBuilder newLogger(final String name, final String level) {
-        return new DefaultLoggerComponentBuilder(this, name, level);
+        return new DefaultLoggerComponentBuilder(this, name, level, true);
+    }
+
+    @Override
+    public LoggerComponentBuilder newLogger(final String name, final String level, boolean includeLocation) {
+        return new DefaultLoggerComponentBuilder(this, name, level, includeLocation);
     }
 
     @Override
     public RootLoggerComponentBuilder newRootLogger(final Level level) {
-        return new DefaultRootLoggerComponentBuilder(this, level.toString());
+        return new DefaultRootLoggerComponentBuilder(this, level.toString(), true);
+    }
+
+    @Override
+    public RootLoggerComponentBuilder newRootLogger(final Level level, boolean includeLocation) {
+        return new DefaultRootLoggerComponentBuilder(this, level.toString(), includeLocation);
     }
 
     @Override
     public RootLoggerComponentBuilder newRootLogger(final String level) {
-        return new DefaultRootLoggerComponentBuilder(this, level);
+        return new DefaultRootLoggerComponentBuilder(this, level, true);
+    }
+
+    @Override
+    public RootLoggerComponentBuilder newRootLogger(final String level, boolean includeLocation) {
+        return new DefaultRootLoggerComponentBuilder(this, level, includeLocation);
     }
 
     @Override
@@ -338,6 +386,12 @@ public class DefaultConfigurationBuilder<T extends BuiltConfiguration> implement
     @Override
     public ConfigurationBuilder<T> setVerbosity(final String verbosity) {
         this.verbosity = verbosity;
+        return this;
+    }
+
+    @Override
+    public ConfigurationBuilder<T> addRootProperty(String key, String value) {
+        root.getAttributes().put(key, value);
         return this;
     }
 }
