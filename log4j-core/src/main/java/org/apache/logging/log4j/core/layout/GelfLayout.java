@@ -16,6 +16,17 @@
  */
 package org.apache.logging.log4j.core.layout;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Map;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.GZIPOutputStream;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
@@ -31,17 +42,6 @@ import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.status.StatusLogger;
 import org.apache.logging.log4j.util.StringBuilderFormattable;
 import org.apache.logging.log4j.util.Strings;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.Map;
-import java.util.zip.DeflaterOutputStream;
-import java.util.zip.GZIPOutputStream;
 
 /**
  * Lays out events in the Graylog Extended Log Format (GELF) 1.1.
@@ -144,7 +144,7 @@ public final class GelfLayout extends AbstractStringLayout {
     @Override
     public byte[] toByteArray(final LogEvent event) {
         StringBuilder text = toText(event, getStringBuilder(), false);
-        final byte[] bytes = getBytes(text.toString());
+        final byte[] bytes = getBytes(text);
         return compressionType != CompressionType.OFF && bytes.length > compressionThreshold ? compress(bytes) : bytes;
     }
 
