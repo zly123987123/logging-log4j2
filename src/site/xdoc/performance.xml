@@ -258,12 +258,54 @@ if (logger.isDebugEnabled()) {
         See the FileAppenderBenchmark source code in the log4j-perf module.</p>
 
       <h4>Synchronous File Logging - Response Time Comparison</h4>
-      <p>TODO</p>
+      <p>Response time for synchronous file logging varies a lot with the workload and the
+      number of threads. Below is a sample for a workload of 32,000 events per second,
+      with 2 threads logging 16,000 events per second each.</p>
+      <p><img src="images/SynchronousFileResponseTime2T32k-labeled.png" /></p>
+      <p>The above result was obtained with the ResponseTimeTest class which can be found in the Log4j 2
+        unit test source directory, running on JDK 1.8.0_45 on RHEL 6.5 (Linux 2.6.32-573.1.1.el6.x86_64)
+        with 10-core Xeon CPU E5-2660 v3 @2.60GHz with hyperthreading switched on (20 virtual cores).</p>
 <!--
 TODO
       <h4>Synchronous Socket Sustained Throughput Comparison</h4>
       <h4>Synchronous Syslog Sustained Throughput Comparison</h4>
 -->
+      <a name="filtering" />
+      <h4>Filtering by Level</h4>
+      <p>The most basic filtering a logging framework provides is filtering by log level.
+        When logging is turned off entirely or just for a set of Levels, the cost of a log request consists
+        of a number of method invocations plus an integer comparison.
+        Unlike Log4j, Log4j 2 Loggers don't "walk a hierarchy".
+        Loggers point directly to the Logger configuration that best matches the Logger's name.
+        This incurs extra overhead when the Logger is first created but reduces the overhead every
+        time the Logger is used.
+      </p>
+      <h4>Advanced Filtering</h4>
+      <p>
+        Both Logback and Log4j 2 support advanced filtering. Logback calls them TurboFilters while
+        Log4j 2 has a single Filter object. Advanced filtering provides the capability to filter
+        LogEvents using more than just the Level before the events are passed to Appenders.
+        However, this flexibility does come with some cost.
+        Since multi-threading can also have an impact on the
+        performance of advanced filtering, the chart below shows the difference in performance of filtering based
+        on a Marker or a Marker's parent.</p>
+      <p>
+        The "Simple Marker" comparison checks to see if a Marker that has no references
+        to other markers matches the requested Marker. The "Parent Marker" comparison checks to see
+        if a Marker that does have references to other markers matches the requested Marker. </p>
+      <p>It appears that coarse-grained synchronization in SLF4J can impact performance in
+        multi-threaded scenarios. See
+        <a href="http://jira.qos.ch/browse/SLF4J-240">SLF4J-240</a>.</p>
+      <p><img src="images/MarkerFilterCostComparison.png" /></p>
+      <p>Log4j and Logback also support filtering
+        on a value in the Log4j ThreadContext vs filtering in Logback on a value in the MDC.
+        The graph below shows that the performance difference between Log4j 2 and Logback
+        is small for the ThreadContext filter.
+      </p><p><img src="images/ThreadContextFilterCostComparison.png" /></p>
+      <p>The Filter comparison results above are obtained with the
+        <a href="http://openjdk.java.net/projects/code-tools/jmh/">JMH</a> Java benchmark harness.
+        See the MarkerFilterBenchmark and MDCFilterBenchmark in the log4j-perf module for details on these
+        benchmarks.</p>
       <a name="tradeoffs" />
       <h3>Trade-offs</h3>
       <a name="whichAppender" />
@@ -273,6 +315,23 @@ TODO
         selecting a specific Log4j 2 configuration. For example, there are three appenders
         for logging to a file: the File, RandomAccessFile and MemoryMappedFile appenders.
         Which one should you use?</p>
+      <p>If performance is all you care about, the graphs below show your best choice is either
+        the MemoryMappedFile appender or the RandomAccessFile appender.
+        Some things to bear in mind:
+      </p>
+      <ul>
+        <li>MemoryMappedFile appender does not have a rolling variant yet.</li>
+        <li>When the log file size exceeds the MemoryMappedFile's region length, the file needs to be remapped.
+          This can be a very expensive operation, taking several seconds if the region is large.</li>
+        <li>MemoryMappedFile appender creates a presized file from the beginning and fills it up gradually.
+          This can confuse tools like <tt>tail</tt>; many such tools don't work very well with memory mapped files.</li>
+        <li>On Windows, using a tool like <tt>tail</tt> on a file created by RandomAccessFile appender
+          can hold a lock on this file which may prevent Log4j from opening the file again when the
+          application is restarted. In a development environment where you expect to restart your application
+          regularly while using tools like tail to view the log file contents, the File appender may be
+          a reasonable trade-off between performance and flexibility. For production environments
+          performance may have higher priority.</li>
+      </ul>
       <p>
         The graph below shows sustained throughput for the console and file appenders in Log4j 2.6,
         and for reference also provides the 2.5 performance.</p>
@@ -403,79 +462,7 @@ TODO
             Log4j 2's fine-grained filtering capabilities.
           </p>
         -->
-          <h4>Advanced Filtering</h4>
-          <p>
-            Both Logback and Log4j 2 support advanced filtering. Logback calls them TurboFilters while
-            Log4j 2 has a single Filter object. Advanced filtering provides the capability to filter
-            LogEvents using more than just the Level before the events are passed to Appenders.
-            However, this flexibility does come with some cost. Since multi-threading can also have an impact on the
-            performance of advanced filtering, the table below shows the difference in performance in two different
-            sets of context-wide filters running on the same hardware as the previous tests using
-            various numbers of threads.
-          </p>
-          <table>
-            <tr>
-              <th>Test</th>
-              <th>1 thread</th>
-              <th>2 threads</th>
-              <th>5 threads</th>
-              <th>10 threads</th>
-              <th>20 threads</th>
-              <th>50 threads</th>
-            </tr>
-            <tr>
-              <td>Logback MDCFilter</td>
-              <td>37</td>
-              <td>50</td>
-              <td>145</td>
-              <td>316</td>
-              <td>606</td>
-              <td>1670</td>
-            </tr>
-            <tr>
-              <td>Log4j 2 ThreadContextMapFilter</td>
-              <td>30</td>
-              <td>35</td>
-              <td>85</td>
-              <td>165</td>
-              <td>341</td>
-              <td>864</td>
-            </tr>
-            <tr>
-              <td>Logback MarkerFilter</td>
-              <td>17</td>
-              <td>24</td>
-              <td>59</td>
-              <td>115</td>
-              <td>234</td>
-              <td>547</td>
-            </tr>
-             <tr>
-              <td>Log4j 2 MarkerFilter</td>
-              <td>4</td>
-              <td>5</td>
-              <td>7</td>
-              <td>20</td>
-              <td>35</td>
-              <td>92</td>
-            </tr>
-          </table>
 
-          <h4>Client vs Server</h4>
-          <p>
-            Java supports a "client" and a "server" mode of operation. By default, applications that are
-            run in Java 5 on machines with 2 CPUs or more and 2GB of memory or more on operating systems
-            other than Windows or are run in a 64-bit JVM are automatically configured to run in "server" mode.
-            Testing has shown that Log4j 2 benefits greatly from running in server mode and user's are
-            strongly encouraged to configure their applications to run in server mode when using Log4j 2.
-          </p>
-
-
-      <p>
-        The performance results above were all derived from running the DebugDisabledPerformanceComparison,
-        FilterPerformanceComparison, and PerformanceComparison junit tests which can be found in the
-        Log4j 2 unit test source directory.
-      </p>
     </section>
   </body>
 </document>
