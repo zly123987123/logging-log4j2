@@ -17,6 +17,7 @@
 
 package org.apache.logging.log4j.perf.jmh;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -27,8 +28,11 @@ import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.apache.logging.log4j.core.layout.AbstractStringLayout;
+import org.apache.logging.log4j.core.layout.ByteBufferDestination;
+import org.apache.logging.log4j.core.layout.Encoder;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.message.SimpleMessage;
+import org.apache.logging.log4j.util.StringBuilderFormattable;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -59,7 +63,14 @@ public class AbstractStringLayoutStringEncodingBenchmark {
     private Layout utf8CseqLayout;
     private Layout utf16CseqLayout;
 
+    private Layout usAsciiEncodingLayout;
+    private Layout iso8859_1EncodingLayout;
+    private Layout utf8EncodingLayout;
+    private Layout utf16EncodingLayout;
+
     private LogEvent logEvent;
+
+    private Destination destination;
 
     @Setup
     public void setUp() {
@@ -78,10 +89,17 @@ public class AbstractStringLayoutStringEncodingBenchmark {
         utf8CseqLayout = new CseqLayout(Charset.forName("UTF-8"));
         utf16CseqLayout = new CseqLayout(Charset.forName("UTF-16"));
 
+        usAsciiEncodingLayout = new EncodingLayout(Charset.forName("US-ASCII"));
+        iso8859_1EncodingLayout = new EncodingLayout(Charset.forName("ISO-8859-1"));
+        utf8EncodingLayout = new EncodingLayout(Charset.forName("UTF-8"));
+        utf16EncodingLayout = new EncodingLayout(Charset.forName("UTF-16"));
+
         StringBuilder msg = new StringBuilder();
         msg.append(MESSAGE);
 
         logEvent = createLogEvent(new SimpleMessage(msg));
+
+        destination = new Destination();
     }
 
     private static LogEvent createLogEvent(Message message) {
@@ -134,6 +152,13 @@ public class AbstractStringLayoutStringEncodingBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
+    public void usAsciiEncoding() {
+        usAsciiEncodingLayout.encode(logEvent, destination);
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @Benchmark
     public void iso8859_1String() {
         consume(iso8859_1StringLayout.toByteArray(logEvent));
     }
@@ -143,6 +168,13 @@ public class AbstractStringLayoutStringEncodingBenchmark {
     @Benchmark
     public void iso8859_1Cseq() {
         consume(iso8859_1CseqLayout.toByteArray(logEvent));
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @Benchmark
+    public void iso8859_1Encoding() {
+        iso8859_1EncodingLayout.encode(logEvent, destination);
     }
 
     @BenchmarkMode(Mode.Throughput)
@@ -162,6 +194,13 @@ public class AbstractStringLayoutStringEncodingBenchmark {
     @BenchmarkMode(Mode.Throughput)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @Benchmark
+    public void utf8Encoding() {
+        utf8EncodingLayout.encode(logEvent, destination);
+    }
+
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @Benchmark
     public void utf16String() {
         consume(utf16StringLayout.toByteArray(logEvent));
     }
@@ -173,9 +212,24 @@ public class AbstractStringLayoutStringEncodingBenchmark {
         consume(utf16CseqLayout.toByteArray(logEvent));
     }
 
-    private long consume(byte[] bytes) {
+    @BenchmarkMode(Mode.Throughput)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @Benchmark
+    public void utf16Encoding() {
+        utf16EncodingLayout.encode(logEvent, destination);
+    }
+
+    private static long consume(byte[] bytes) {
         long checksum = 0;
         for (byte b : bytes) checksum += b;
+        return checksum;
+    }
+
+    private static long consume(byte[] bytes, int offset, int length) {
+        long checksum = 0;
+        for (int i = offset; i < length; i++) {
+            checksum += bytes[i];
+        }
         return checksum;
     }
 
@@ -220,6 +274,47 @@ public class AbstractStringLayoutStringEncodingBenchmark {
             else
                 sb.append(message.getFormattedMessage());
             return getBytes(sb);
+        }
+    }
+
+    private static class EncodingLayout extends AbstractStringLayout {
+        public EncodingLayout(Charset charset) {
+            super(charset);
+        }
+
+        @Override
+        public String toSerializable(LogEvent event) {
+            return null;
+        }
+
+        @Override
+        public byte[] toByteArray(LogEvent event) {
+            return null;
+        }
+
+        @Override
+        public void encode(final LogEvent event, final ByteBufferDestination destination) {
+            StringBuilder sb = getStringBuilder();
+            ((StringBuilderFormattable) event.getMessage()).formatTo(sb);
+            final Encoder<StringBuilder> helper = getStringBuilderEncoder();
+            helper.encode(sb, destination);
+        }
+    }
+
+    private static class Destination implements ByteBufferDestination {
+        ByteBuffer buffer = ByteBuffer.wrap(new byte[512]);
+
+        @Override
+        public ByteBuffer getByteBuffer() {
+            return buffer;
+        }
+
+        @Override
+        public ByteBuffer drain(ByteBuffer buf) {
+            buf.flip();
+            consume(buf.array(), buf.position(), buf.limit());
+            buf.clear();
+            return buf;
         }
     }
 
