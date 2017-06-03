@@ -35,7 +35,7 @@ import org.apache.logging.log4j.util.StringBuilders;
  * @see <a href="https://tools.ietf.org/html/rfc5424">RFC 5424</a>
  */
 @AsynchronouslyFormattable
-public class StructuredDataMessage extends MapMessage implements StringBuilderFormattable {
+public class StructuredDataMessage extends MapMessage<StructuredDataMessage, String> implements StringBuilderFormattable {
 
     private static final long serialVersionUID = 1703221292892071920L;
     private static final int MAX_LENGTH = 32;
@@ -371,7 +371,7 @@ public class StructuredDataMessage extends MapMessage implements StringBuilderFo
 
 
     @Override
-    public MapMessage newInstance(final Map<String, String> map) {
+    public StructuredDataMessage newInstance(final Map<String, String> map) {
         return new StructuredDataMessage(this, map);
     }
 
@@ -410,4 +410,50 @@ public class StructuredDataMessage extends MapMessage implements StringBuilderFo
         result = HASHVAL * result + (message != null ? message.hashCode() : 0);
         return result;
     }
+
+    @Override
+    protected void validate(String key, boolean value) {
+        validateKey(key);
+    }
+    
+    @Override
+    protected void validate(String key, char value) {
+        validateKey(key);
+    }
+    
+    @Override
+    protected void validate(String key, byte value) {
+        validateKey(key);
+    }
+
+    @Override
+    protected void validate(String key, short value) {
+        validateKey(key);
+    }
+
+    @Override
+    protected void validate(String key, Object value) {
+        validateKey(key);
+    }
+
+    @Override
+    protected void validate(String key, float value) {
+        validateKey(key);
+    }
+
+    @Override
+    protected void validate(String key, double value) {
+        validateKey(key);
+    }
+
+    @Override
+    protected void validate(String key, int value) {
+        validateKey(key);
+    }
+
+    @Override
+    protected void validate(String key, long value) {
+        validateKey(key);
+    }
+
 }

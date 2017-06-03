@@ -40,10 +40,17 @@ import org.apache.logging.log4j.util.TriConsumer;
  * logged, because it is undefined whether the logged message string will contain the old values or the modified
  * values.
  * </p>
+ * <p>
+ * This class was pulled up from {@link MapMessage} to allow for Objects as values.
+ * </p>
+ * @param <M> A hack to allow subclasses to use fluent APIs and override methods that return instances of subclasses.
+ * @param <V> The value type
  */
 @PerformanceSensitive("allocation")
 @AsynchronouslyFormattable
-public class MapMessage implements MultiformatMessage, StringBuilderFormattable {
+public class MapMessage<M extends MapMessage<M, V>, V> implements MultiformatMessage, StringBuilderFormattable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * When set as the format specifier causes the Map to be formatted as XML.
@@ -82,8 +89,6 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
         }
     }
 
-    private static final long serialVersionUID = -5031471831131487120L;
-
     private final IndexedStringMap data;
 
     /**
@@ -94,10 +99,19 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
     }
 
     /**
+     * Constructs a new instance.
+     * 
+     * @param  initialCapacity the initial capacity.
+     */
+    public MapMessage(final int initialCapacity) {
+        data = new SortedArrayStringMap(initialCapacity);
+    }
+
+    /**
      * Constructs a new instance based on an existing Map.
      * @param map The Map.
      */
-    public MapMessage(final Map<String, String> map) {
+    public MapMessage(final Map<String, V> map) {
         this.data = new SortedArrayStringMap(map);
     }
 
@@ -172,9 +186,10 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
      * @param value The value of the data item.
      * @return {@code this}
      */
-    public MapMessage with(final String key, final String value) {
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final String value) {
         put(key, value);
-        return this;
+        return (M) this;
     }
 
     /**
@@ -190,8 +205,161 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
         data.putValue(key, value);
     }
 
-    protected void validate(final String key, final String value) {
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final int value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
 
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final long value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final boolean value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final char value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final byte value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final short value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final Object value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final float value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final double value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    protected void validate(final String key, final boolean value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final char value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final byte value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final short value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final Object value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final float value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final double value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final String value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final int value) {
+        // do nothing
+    }
+
+    protected void validate(final String key, final long value) {
+        // do nothing
     }
 
     /**
@@ -258,14 +426,14 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
      * </p>
      *
      * @param action The action to be performed for each key-value pair in this collection
-     * @param <V> type of the value
+     * @param <CV> type of the consumer value
      * @throws java.util.ConcurrentModificationException some implementations may not support structural modifications
      *          to this data structure while iterating over the contents with {@link #forEach(BiConsumer)} or
      *          {@link #forEach(TriConsumer, Object)}.
      * @see ReadOnlyStringMap#forEach(BiConsumer)
      * @since 2.9
      */
-    public <V> void forEach(final BiConsumer<String, ? super V> action) {
+    public <CV> void forEach(final BiConsumer<String, ? super CV> action) {
         data.forEach(action);
     }
 
@@ -286,7 +454,7 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
      * @param action The action to be performed for each key-value pair in this collection
      * @param state the object to be passed as the third parameter to each invocation on the specified
      *          triconsumer
-     * @param <V> type of the value
+     * @param <CV> type of the consumer value
      * @param <S> type of the third parameter
      * @throws java.util.ConcurrentModificationException some implementations may not support structural modifications
      *          to this data structure while iterating over the contents with {@link #forEach(BiConsumer)} or
@@ -294,7 +462,7 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
      * @see ReadOnlyStringMap#forEach(TriConsumer, Object)
      * @since 2.9
      */
-    public <V, S> void forEach(final TriConsumer<String, ? super V, S> action, final S state) {
+    public <CV, S> void forEach(final TriConsumer<String, ? super CV, S> action, final S state) {
         data.forEach(action, state);
     }
     
@@ -415,8 +583,9 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
      * @param map The Map.
      * @return A new MapMessage
      */
-    public MapMessage newInstance(final Map<String, String> map) {
-        return new MapMessage(map);
+    @SuppressWarnings("unchecked")
+    public M newInstance(final Map<String, String> map) {
+        return (M) new MapMessage<>(map);
     }
 
     @Override
@@ -438,7 +607,7 @@ public class MapMessage implements MultiformatMessage, StringBuilderFormattable 
             return false;
         }
 
-        final MapMessage that = (MapMessage) o;
+        final MapMessage<?, ?> that = (MapMessage<?, ?>) o;
 
         return this.data.equals(that.data);
     }
