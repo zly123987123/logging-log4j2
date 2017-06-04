@@ -181,18 +181,6 @@ public class MapMessage<M extends MapMessage<M, V>, V> implements MultiformatMes
     }
 
     /**
-     * Adds an item to the data Map in fluent style.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return {@code this}
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final String value) {
-        put(key, value);
-        return (M) this;
-    }
-
-    /**
      * Adds an item to the data Map.
      * @param key The name of the data item.
      * @param value The value of the data item.
@@ -203,163 +191,6 @@ public class MapMessage<M extends MapMessage<M, V>, V> implements MultiformatMes
         }
         validate(key, value);
         data.putValue(key, value);
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final int value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final long value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final boolean value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final char value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final byte value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final short value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final Object value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final float value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    /**
-     * Adds an item to the data Map.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return this object
-     */
-    @SuppressWarnings("unchecked")
-    public M with(final String key, final double value) {
-        validate(key, value);
-        data.putValue(key, value);
-        return (M) this;
-    }
-
-    protected void validate(final String key, final boolean value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final char value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final byte value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final short value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final Object value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final float value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final double value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final String value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final int value) {
-        // do nothing
-    }
-
-    protected void validate(final String key, final long value) {
-        // do nothing
     }
 
     /**
@@ -626,4 +457,213 @@ public class MapMessage<M extends MapMessage<M, V>, V> implements MultiformatMes
     public Throwable getThrowable() {
         return null;
     }
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final boolean value) {
+        // do nothing
+    }
+
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final byte value) {
+        // do nothing
+    }
+
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final char value) {
+        // do nothing
+    }
+
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final double value) {
+        // do nothing
+    }
+
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final float value) {
+        // do nothing
+    }
+    
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final int value) {
+        // do nothing
+    }
+
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final long value) {
+        // do nothing
+    }
+    
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final Object value) {
+        // do nothing
+    }
+
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final short value) {
+        // do nothing
+    }
+
+    /**
+     * @since 2.9
+     */
+    protected void validate(final String key, final String value) {
+        // do nothing
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final boolean value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final byte value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final char value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final double value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final float value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final int value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final long value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final Object value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return this object
+     * @since 2.9
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final short value) {
+        validate(key, value);
+        data.putValue(key, value);
+        return (M) this;
+    }
+
+    /**
+     * Adds an item to the data Map in fluent style.
+     * @param key The name of the data item.
+     * @param value The value of the data item.
+     * @return {@code this}
+     */
+    @SuppressWarnings("unchecked")
+    public M with(final String key, final String value) {
+        put(key, value);
+        return (M) this;
+    }
+
 }

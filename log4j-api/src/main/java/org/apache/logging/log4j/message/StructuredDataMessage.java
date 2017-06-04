@@ -134,18 +134,6 @@ public class StructuredDataMessage extends MapMessage<StructuredDataMessage, Str
     }
 
     /**
-     * Add an item to the data Map in fluent style.
-     * @param key The name of the data item.
-     * @param value The value of the data item.
-     * @return {@code this}
-     */
-    @Override
-    public StructuredDataMessage with(final String key, final String value) {
-        put(key, value);
-        return this;
-    }
-
-    /**
      * Returns the supported formats.
      * @return An array of the supported format names.
      */
@@ -214,25 +202,6 @@ public class StructuredDataMessage extends MapMessage<StructuredDataMessage, Str
 
     protected void setMessageFormat(final String msg) {
         this.message = msg;
-    }
-
-
-    @Override
-    protected void validate(final String key, final String value) {
-        validateKey(key);
-    }
-
-    private void validateKey(final String key) {
-        if (key.length() > MAX_LENGTH) {
-            throw new IllegalArgumentException("Structured data keys are limited to 32 characters. key: " + key);
-        }
-        for (int i = 0; i < key.length(); i++) {
-            final char c = key.charAt(i);
-            if (c < '!' || c > '~' || c == '=' || c == ']' || c == '"') {
-                throw new IllegalArgumentException("Structured data keys must contain printable US ASCII characters" +
-                        "and may not contain a space, =, ], or \"");
-            }
-        }
     }
 
     /**
@@ -415,45 +384,87 @@ public class StructuredDataMessage extends MapMessage<StructuredDataMessage, Str
     protected void validate(String key, boolean value) {
         validateKey(key);
     }
-    
-    @Override
-    protected void validate(String key, char value) {
-        validateKey(key);
-    }
-    
+
+    /**
+     * @since 2.9
+     */
     @Override
     protected void validate(String key, byte value) {
         validateKey(key);
     }
 
+    /**
+     * @since 2.9
+     */
+    @Override
+    protected void validate(String key, char value) {
+        validateKey(key);
+    }
+    
+    /**
+     * @since 2.9
+     */
+    @Override
+    protected void validate(String key, double value) {
+        validateKey(key);
+    }
+    
+    /**
+     * @since 2.9
+     */
+    @Override
+    protected void validate(String key, float value) {
+        validateKey(key);
+    }
+
+    /**
+     * @since 2.9
+     */
+    @Override
+    protected void validate(String key, int value) {
+        validateKey(key);
+    }
+
+    /**
+     * @since 2.9
+     */
+    @Override
+    protected void validate(String key, long value) {
+        validateKey(key);
+    }
+
+    /**
+     * @since 2.9
+     */
+    @Override
+    protected void validate(String key, Object value) {
+        validateKey(key);
+    }
+
+    /**
+     * @since 2.9
+     */
     @Override
     protected void validate(String key, short value) {
         validateKey(key);
     }
 
     @Override
-    protected void validate(String key, Object value) {
+    protected void validate(final String key, final String value) {
         validateKey(key);
     }
 
-    @Override
-    protected void validate(String key, float value) {
-        validateKey(key);
-    }
-
-    @Override
-    protected void validate(String key, double value) {
-        validateKey(key);
-    }
-
-    @Override
-    protected void validate(String key, int value) {
-        validateKey(key);
-    }
-
-    @Override
-    protected void validate(String key, long value) {
-        validateKey(key);
+    private void validateKey(final String key) {
+        if (key.length() > MAX_LENGTH) {
+            throw new IllegalArgumentException("Structured data keys are limited to 32 characters. key: " + key);
+        }
+        for (int i = 0; i < key.length(); i++) {
+            final char c = key.charAt(i);
+            if (c < '!' || c > '~' || c == '=' || c == ']' || c == '"') {
+                throw new IllegalArgumentException("Structured data keys must contain printable US ASCII characters" +
+                        "and may not contain a space, =, ], or \"");
+            }
+        }
     }
 
 }
