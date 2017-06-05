@@ -35,7 +35,7 @@ import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.apache.logging.log4j.core.impl.ThrowableProxy;
 import org.apache.logging.log4j.core.util.Patterns;
 import org.apache.logging.log4j.core.util.UuidUtil;
-import org.apache.logging.log4j.message.MapMessage;
+import org.apache.logging.log4j.message.StringMapMessage;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.message.StructuredDataId;
 import org.apache.logging.log4j.message.StructuredDataMessage;
@@ -131,13 +131,13 @@ public class FlumeEvent extends SimpleEvent implements LogEvent {
         }
         final String guid =  UuidUtil.getTimeBasedUuid().toString();
         final Message message = event.getMessage();
-        if (message instanceof MapMessage) {
+        if (message instanceof StringMapMessage) {
             // Add the guid to the Map so that it can be included in the Layout.
-            ((MapMessage) message).put(GUID, guid);
+            ((StringMapMessage) message).put(GUID, guid);
             if (message instanceof StructuredDataMessage) {
                 addStructuredData(eventPrefix, headers, (StructuredDataMessage) message);
             }
-            addMapData(eventPrefix, headers, (MapMessage) message);
+            addMapData(eventPrefix, headers, (StringMapMessage) message);
         } else {
             headers.put(GUID, guid);
         }
@@ -152,7 +152,7 @@ public class FlumeEvent extends SimpleEvent implements LogEvent {
         fields.put(prefix + EVENT_ID, id.getName());
     }
 
-    protected void addMapData(final String prefix, final Map<String, String> fields, final MapMessage msg) {
+    protected void addMapData(final String prefix, final Map<String, String> fields, final StringMapMessage msg) {
         final Map<String, String> data = msg.getData();
         for (final Map.Entry<String, String> entry : data.entrySet()) {
             fields.put(prefix + entry.getKey(), entry.getValue());

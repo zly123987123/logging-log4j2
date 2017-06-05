@@ -28,7 +28,7 @@ import org.apache.logging.log4j.core.config.plugins.PluginElement;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.apache.logging.log4j.core.util.KeyValuePair;
-import org.apache.logging.log4j.message.MapMessage;
+import org.apache.logging.log4j.message.StringMapMessage;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.status.StatusLogger;
 
@@ -60,11 +60,11 @@ public final class MapRewritePolicy implements RewritePolicy {
     @Override
     public LogEvent rewrite(final LogEvent source) {
         final Message msg = source.getMessage();
-        if (msg == null || !(msg instanceof MapMessage)) {
+        if (msg == null || !(msg instanceof StringMapMessage)) {
             return source;
         }
 
-        final Map<String, String> newMap = new HashMap<>(((MapMessage) msg).getData());
+        final Map<String, String> newMap = new HashMap<>(((StringMapMessage) msg).getData());
         switch (mode) {
             case Add: {
                 newMap.putAll(map);
@@ -78,7 +78,7 @@ public final class MapRewritePolicy implements RewritePolicy {
                 }
             }
         }
-        final MapMessage message = ((MapMessage) msg).newInstance(newMap);
+        final StringMapMessage message = ((StringMapMessage) msg).newInstance(newMap);
         final LogEvent result = new Log4jLogEvent.Builder(source).setMessage(message).build();
         return result;
     }

@@ -33,7 +33,7 @@ import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 import org.apache.logging.log4j.core.util.KeyValuePair;
-import org.apache.logging.log4j.message.MapMessage;
+import org.apache.logging.log4j.message.StringMapMessage;
 import org.apache.logging.log4j.message.Message;
 import org.apache.logging.log4j.util.BiConsumer;
 import org.apache.logging.log4j.util.IndexedReadOnlyStringMap;
@@ -66,8 +66,8 @@ public class MapFilter extends AbstractFilter {
     @Override
     public Result filter(final Logger logger, final Level level, final Marker marker, final Message msg,
                          final Throwable t) {
-        if (msg instanceof MapMessage) {
-            return filter((MapMessage) msg) ? onMatch : onMismatch;
+        if (msg instanceof StringMapMessage) {
+            return filter((StringMapMessage) msg) ? onMatch : onMismatch;
         }
         return Result.NEUTRAL;
     }
@@ -75,13 +75,13 @@ public class MapFilter extends AbstractFilter {
     @Override
     public Result filter(final LogEvent event) {
         final Message msg = event.getMessage();
-        if (msg instanceof MapMessage) {
-            return filter((MapMessage) msg) ? onMatch : onMismatch;
+        if (msg instanceof StringMapMessage) {
+            return filter((StringMapMessage) msg) ? onMatch : onMismatch;
         }
         return Result.NEUTRAL;
     }
 
-    protected boolean filter(final MapMessage mapMessage) {
+    protected boolean filter(final StringMapMessage mapMessage) {
         boolean match = false;
         for (int i = 0; i < map.size(); i++) {
             final String toMatch = mapMessage.get(map.getKeyAt(i));

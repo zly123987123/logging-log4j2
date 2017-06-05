@@ -14,41 +14,42 @@
  * See the license for the specific language governing permissions and
  * limitations under the license.
  */
-package org.apache.logging.log4j.lookup;
 
-import org.apache.logging.log4j.message.AsynchronouslyFormattable;
-import org.apache.logging.log4j.message.StringMapMessage;
+package org.apache.logging.log4j.message;
 
 import java.util.Map;
 
 /**
- *
+ * A {@link StringMapMessage} typed to {@link String}-only values. This is like the MapMessage class before 2.9.
+ * 
+ * @since 2.9
  */
-@AsynchronouslyFormattable
-public class CustomMapMessage extends StringMapMessage {
+public class StringMapMessage extends MapMessage<StringMapMessage, String> {
 
     private static final long serialVersionUID = 1L;
-    private final String message;
 
-    public CustomMapMessage(final String msg, final Map<String, String> map) {
+    /**
+     * Constructs a new instance.
+     */
+    public StringMapMessage() {
+        super();
+    }
+
+    /**
+     * Constructs a new instance.
+     * 
+     * @param  initialCapacity the initial capacity.
+     */
+    public StringMapMessage(final int initialCapacity) {
+        super(initialCapacity);
+    }
+
+    /**
+     * Constructs a new instance based on an existing Map.
+     * @param map The Map.
+     */
+    public StringMapMessage(final Map<String, String> map) {
         super(map);
-        this.message = msg;
-    }
-
-    @Override
-    public String getFormattedMessage(final String[] formats) {
-        if (message != null) {
-            return message;
-        }
-        return super.getFormattedMessage(formats);
-    }
-
-    @Override
-    public String getFormattedMessage() {
-        if (message != null) {
-            return message;
-        }
-        return super.getFormattedMessage();
     }
 
 }

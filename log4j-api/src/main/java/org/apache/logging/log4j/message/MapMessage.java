@@ -41,7 +41,7 @@ import org.apache.logging.log4j.util.TriConsumer;
  * values.
  * </p>
  * <p>
- * This class was pulled up from {@link MapMessage} to allow for Objects as values.
+ * This class was pulled up from {@link StringMapMessage} to allow for Objects as values.
  * </p>
  * @param <M> A hack to allow subclasses to use fluent APIs and override methods that return instances of subclasses.
  * @param <V> The value type
