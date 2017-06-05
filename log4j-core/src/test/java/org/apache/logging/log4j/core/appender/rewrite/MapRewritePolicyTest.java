@@ -96,7 +96,7 @@ public class MapRewritePolicyTest {
 
         rewritten = addPolicy.rewrite(logEvent2);
         compareLogEvents(logEvent2, rewritten);
-        checkAdded(((StringMapMessage)rewritten.getMessage()).getData());
+        checkAdded(((StructuredDataMessage)rewritten.getMessage()).getData());
 
         rewritten = addPolicy.rewrite(logEvent3);
         compareLogEvents(logEvent3, rewritten);
@@ -116,7 +116,7 @@ public class MapRewritePolicyTest {
 
         rewritten = updatePolicy.rewrite(logEvent2);
         compareLogEvents(logEvent2, rewritten);
-        checkUpdated(((StringMapMessage)rewritten.getMessage()).getData());
+        checkUpdated(((StructuredDataMessage)rewritten.getMessage()).getData());
 
         rewritten = updatePolicy.rewrite(logEvent3);
         compareLogEvents(logEvent3, rewritten);
@@ -136,7 +136,7 @@ public class MapRewritePolicyTest {
 
         rewritten = addPolicy.rewrite(logEvent2);
         compareLogEvents(logEvent2, rewritten);
-        checkAdded(((StringMapMessage)rewritten.getMessage()).getData());
+        checkAdded(((StructuredDataMessage)rewritten.getMessage()).getData());
 
         rewritten = addPolicy.rewrite(logEvent3);
         compareLogEvents(logEvent3, rewritten);

@@ -146,10 +146,11 @@ public class MapMessage<M extends MapMessage<M, V>, V> implements MultiformatMes
      * Returns the message data as an unmodifiable Map.
      * @return the message data as an unmodifiable map.
      */
-    public Map<String, String> getData() {
-        final TreeMap<String, String> result = new TreeMap<>(); // returned map must be sorted
+    public Map<String, V> getData() {
+        final TreeMap<String, V> result = new TreeMap<>(); // returned map must be sorted
         for (int i = 0; i < data.size(); i++) {
-            result.put(data.getKeyAt(i), (String) data.getValueAt(i));
+            // The Eclipse compiler does not need the typecast to V, but the Oracle compiler sure does.
+            result.put(data.getKeyAt(i), (V) data.getValueAt(i));
         }
         return Collections.unmodifiableMap(result);
     }
@@ -415,7 +416,7 @@ public class MapMessage<M extends MapMessage<M, V>, V> implements MultiformatMes
      * @return A new MapMessage
      */
     @SuppressWarnings("unchecked")
-    public M newInstance(final Map<String, String> map) {
+    public M newInstance(final Map<String, V> map) {
         return (M) new MapMessage<>(map);
     }
 
