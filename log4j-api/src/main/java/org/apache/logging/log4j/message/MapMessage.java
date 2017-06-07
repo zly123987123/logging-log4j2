@@ -50,7 +50,7 @@ import org.apache.logging.log4j.util.TriConsumer;
 @AsynchronouslyFormattable
 public class MapMessage<M extends MapMessage<M, V>, V> implements MultiformatMessage, StringBuilderFormattable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -5031471831131487120L;    
 
     /**
      * When set as the format specifier causes the Map to be formatted as XML.
