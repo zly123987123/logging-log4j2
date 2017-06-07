@@ -146,6 +146,7 @@ public class MapMessage<M extends MapMessage<M, V>, V> implements MultiformatMes
      * Returns the message data as an unmodifiable Map.
      * @return the message data as an unmodifiable map.
      */
+    @SuppressWarnings("unchecked")
     public Map<String, V> getData() {
         final TreeMap<String, V> result = new TreeMap<>(); // returned map must be sorted
         for (int i = 0; i < data.size(); i++) {
