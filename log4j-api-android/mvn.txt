@@ -1,0 +1,1711 @@
+Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T04:57:37-07:00)
+Maven home: /opt/maven/maven
+Java version: 1.8.0_121, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.12.5", arch: "x86_64", family: "mac"
+[DEBUG] Created new class realm maven.api
+[DEBUG] Importing foreign packages into class realm maven.api
+[DEBUG]   Imported: javax.enterprise.inject.* < plexus.core
+[DEBUG]   Imported: javax.enterprise.util.* < plexus.core
+[DEBUG]   Imported: javax.inject.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.artifact < plexus.core
+[DEBUG]   Imported: org.apache.maven.classrealm < plexus.core
+[DEBUG]   Imported: org.apache.maven.cli < plexus.core
+[DEBUG]   Imported: org.apache.maven.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.exception < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution.scope < plexus.core
+[DEBUG]   Imported: org.apache.maven.lifecycle < plexus.core
+[DEBUG]   Imported: org.apache.maven.model < plexus.core
+[DEBUG]   Imported: org.apache.maven.monitor < plexus.core
+[DEBUG]   Imported: org.apache.maven.plugin < plexus.core
+[DEBUG]   Imported: org.apache.maven.profiles < plexus.core
+[DEBUG]   Imported: org.apache.maven.project < plexus.core
+[DEBUG]   Imported: org.apache.maven.reporting < plexus.core
+[DEBUG]   Imported: org.apache.maven.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.rtinfo < plexus.core
+[DEBUG]   Imported: org.apache.maven.settings < plexus.core
+[DEBUG]   Imported: org.apache.maven.toolchain < plexus.core
+[DEBUG]   Imported: org.apache.maven.usability < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authentication < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authorization < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.events < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.observers < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.proxy < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.resource < plexus.core
+[DEBUG]   Imported: org.codehaus.classworlds < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.* < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.classworlds < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.component < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.configuration < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.container < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.context < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.logging < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.personality < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.Xpp3Dom < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParser < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParserException < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlSerializer < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.* < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.artifact < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.collection < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.deployment < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.graph < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.impl < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.installation < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.internal.impl < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.metadata < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.repository < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.resolution < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.spi < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.transfer < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.version < plexus.core
+[DEBUG]   Imported: org.slf4j.* < plexus.core
+[DEBUG]   Imported: org.slf4j.spi.* < plexus.core
+[DEBUG] Populating class realm maven.api
+[INFO] Error stacktraces are turned on.
+[DEBUG] Reading global settings from /opt/maven/maven/conf/settings.xml
+[DEBUG] Reading user settings from /Users/rgoers/.m2/settings.xml
+[DEBUG] Reading global toolchains from /opt/maven/maven/conf/toolchains.xml
+[DEBUG] Reading user toolchains from /Users/rgoers/.m2/toolchains.xml
+[DEBUG] Using local repository at /Users/rgoers/.m2/repository
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10.0 for /Users/rgoers/.m2/repository
+[INFO] Scanning for projects...
+[DEBUG] Extension realms for project org.apache.logging.log4j:log4j-api-android:jar:2.9-SNAPSHOT: (none)
+[DEBUG] Looking up lifecyle mappings for packaging jar from ClassRealm[plexus.core, parent: null]
+[DEBUG] Extension realms for project org.apache.logging.log4j:log4j:pom:2.9-SNAPSHOT: (none)
+[DEBUG] Looking up lifecyle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
+[DEBUG] Extension realms for project org.apache.logging:logging-parent:pom:1: (none)
+[DEBUG] Looking up lifecyle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
+[DEBUG] Extension realms for project org.apache:apache:pom:18: (none)
+[DEBUG] Looking up lifecyle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
+[DEBUG] === REACTOR BUILD PLAN ================================================
+[DEBUG] Project: org.apache.logging.log4j:log4j-api-android:jar:2.9-SNAPSHOT
+[DEBUG] Tasks:   [clean, package]
+[DEBUG] Style:   Regular
+[DEBUG] =======================================================================
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Apache Log4j API for Android 2.9-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] === PROJECT BUILD PLAN ================================================
+[DEBUG] Project:       org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): [compile, runtime, test]
+[DEBUG] Repositories (dependencies): [central (http://repository.nextiva.xyz:8081/nexus/content/groups/public, default, releases), releases (http://repository.nextiva.xyz:8081/nexus/content/repositories/releases, default, releases), snapshots (http://repository.nextiva.xyz:8081/nexus/content/groups/NextivaSnapshots, default, releases+snapshots), apache.snapshots (https://repository.apache.org/snapshots, default, snapshots)]
+[DEBUG] Repositories (plugins)     : [central (http://repository.nextiva.xyz:8081/nexus/content/groups/public, default, releases), snapshots (http://repository.nextiva.xyz:8081/nexus/content/repositories/snapshots, default, releases+snapshots), apache (https://repository.apache.org/content/repositories/releases/, default, releases+snapshots)]
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-clean-plugin:3.0.0:clean (default-clean)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <directory default-value="${project.build.directory}"/>
+  <excludeDefaultDirectories default-value="false">${maven.clean.excludeDefaultDirectories}</excludeDefaultDirectories>
+  <failOnError default-value="true">${maven.clean.failOnError}</failOnError>
+  <followSymLinks default-value="false">${maven.clean.followSymLinks}</followSymLinks>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <reportDirectory default-value="${project.build.outputDirectory}"/>
+  <retryOnError default-value="true">${maven.clean.retryOnError}</retryOnError>
+  <skip default-value="false">${maven.clean.skip}</skip>
+  <testOutputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <verbose>${maven.clean.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-remote-resources-plugin:1.5:process (process-resource-bundles)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appendedResourcesDirectory default-value="${basedir}/src/main/appended-resources"/>
+  <attachToMain default-value="true">${attachToMain}</attachToMain>
+  <attachToTest default-value="true">${attachToTest}</attachToTest>
+  <attached default-value="true"/>
+  <basedir default-value="${basedir}"/>
+  <encoding default-value="${project.build.sourceEncoding}">${encoding}</encoding>
+  <excludeArtifactIds default-value="">${excludeArtifactIds}</excludeArtifactIds>
+  <excludeGroupIds default-value="">${excludeGroupIds}</excludeGroupIds>
+  <excludeScope default-value="">${excludeScope}</excludeScope>
+  <excludeTransitive default-value="false">${excludeTransitive}</excludeTransitive>
+  <includeArtifactIds default-value="">${includeArtifactIds}</includeArtifactIds>
+  <includeGroupIds default-value="">${includeGroupIds}</includeGroupIds>
+  <includeProjectProperties default-value="false"/>
+  <includeScope default-value="runtime">${includeScope}</includeScope>
+  <localRepository default-value="${localRepository}"/>
+  <outputDirectory default-value="${project.build.directory}/maven-shared-archive-resources"/>
+  <remoteArtifactRepositories default-value="${project.remoteArtifactRepositories}"/>
+  <resourceBundles>
+    <resourceBundle>org.apache:apache-jar-resource-bundle:1.4</resourceBundle>
+  </resourceBundles>
+  <resources default-value="${project.resources}"/>
+  <runOnlyAtExecutionRoot default-value="false"/>
+  <skip default-value="false">${remoteresources.skip}</skip>
+  <useDefaultFilterDelimiters default-value="true"/>
+  <mavenSession default-value="${session}"/>
+  <project default-value="${project}"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-remote-resources-plugin:1.5:process (default)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appendedResourcesDirectory default-value="${basedir}/src/main/appended-resources"/>
+  <attachToMain default-value="true">${attachToMain}</attachToMain>
+  <attachToTest default-value="true">${attachToTest}</attachToTest>
+  <attached default-value="true"/>
+  <basedir default-value="${basedir}"/>
+  <encoding default-value="${project.build.sourceEncoding}">${encoding}</encoding>
+  <excludeArtifactIds default-value="">${excludeArtifactIds}</excludeArtifactIds>
+  <excludeGroupIds default-value="">${excludeGroupIds}</excludeGroupIds>
+  <excludeScope default-value="">${excludeScope}</excludeScope>
+  <excludeTransitive default-value="false">${excludeTransitive}</excludeTransitive>
+  <includeArtifactIds default-value="">${includeArtifactIds}</includeArtifactIds>
+  <includeGroupIds default-value="">${includeGroupIds}</includeGroupIds>
+  <includeProjectProperties default-value="false"/>
+  <includeScope default-value="runtime">${includeScope}</includeScope>
+  <localRepository default-value="${localRepository}"/>
+  <outputDirectory default-value="${project.build.directory}/maven-shared-archive-resources"/>
+  <remoteArtifactRepositories default-value="${project.remoteArtifactRepositories}"/>
+  <resourceBundles/>
+  <resources default-value="${project.resources}"/>
+  <runOnlyAtExecutionRoot default-value="false"/>
+  <skip default-value="false">false</skip>
+  <useDefaultFilterDelimiters default-value="true"/>
+  <mavenSession default-value="${session}"/>
+  <project default-value="${project}"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-resources-plugin:3.0.1:resources (default-resources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <addDefaultExcludes default-value="true"/>
+  <buildFilters default-value="${project.build.filters}"/>
+  <encoding default-value="${project.build.sourceEncoding}"/>
+  <escapeString default-value="\"/>
+  <escapeWindowsPaths default-value="true"/>
+  <fileNameFiltering default-value="false"/>
+  <includeEmptyDirs default-value="false"/>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <overwrite default-value="false"/>
+  <project default-value="${project}"/>
+  <resources default-value="${project.resources}"/>
+  <session default-value="${session}"/>
+  <skip default-value="false">${maven.resources.skip}</skip>
+  <supportMultiLineFiltering default-value="false"/>
+  <useBuildFilters default-value="true"/>
+  <useDefaultDelimiters default-value="true"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <basedir default-value="${basedir}"/>
+  <buildDirectory default-value="${project.build.directory}"/>
+  <compilePath default-value="${project.compileClasspathElements}"/>
+  <compileSourceRoots default-value="${project.compileSourceRoots}"/>
+  <compilerArguments>
+    <Xmaxwarns>10000</Xmaxwarns>
+    <Xlint/>
+  </compilerArguments>
+  <compilerId default-value="javac">${maven.compiler.compilerId}</compilerId>
+  <compilerReuseStrategy default-value="${reuseCreated}">${maven.compiler.compilerReuseStrategy}</compilerReuseStrategy>
+  <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+  <debug default-value="true">${maven.compiler.debug}</debug>
+  <debuglevel>${maven.compiler.debuglevel}</debuglevel>
+  <encoding default-value="${project.build.sourceEncoding}">UTF-8</encoding>
+  <executable>${maven.compiler.executable}</executable>
+  <failOnError default-value="true">${maven.compiler.failOnError}</failOnError>
+  <failOnWarning default-value="false">${maven.compiler.failOnWarning}</failOnWarning>
+  <forceJavacCompilerUse default-value="false">${maven.compiler.forceJavacCompilerUse}</forceJavacCompilerUse>
+  <fork default-value="false">true</fork>
+  <generatedSourcesDirectory default-value="${project.build.directory}/generated-sources/annotations"/>
+  <maxmem>1024</maxmem>
+  <meminitial>256</meminitial>
+  <mojoExecution default-value="${mojoExecution}"/>
+  <optimize default-value="false">${maven.compiler.optimize}</optimize>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <project default-value="${project}"/>
+  <projectArtifact default-value="${project.artifact}"/>
+  <release>${maven.compiler.release}</release>
+  <session default-value="${session}"/>
+  <showDeprecation default-value="false">true</showDeprecation>
+  <showWarnings default-value="false">true</showWarnings>
+  <skipMain>${maven.main.skip}</skipMain>
+  <skipMultiThreadWarning default-value="false">${maven.compiler.skipMultiThreadWarning}</skipMultiThreadWarning>
+  <source default-value="1.5">1.7</source>
+  <staleMillis default-value="0">${lastModGranularityMs}</staleMillis>
+  <target default-value="1.5">1.7</target>
+  <useIncrementalCompilation default-value="true">${maven.compiler.useIncrementalCompilation}</useIncrementalCompilation>
+  <verbose default-value="false">${maven.compiler.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-resources-plugin:3.0.1:testResources (default-testResources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <addDefaultExcludes default-value="true"/>
+  <buildFilters default-value="${project.build.filters}"/>
+  <encoding default-value="${project.build.sourceEncoding}"/>
+  <escapeString default-value="\"/>
+  <escapeWindowsPaths default-value="true"/>
+  <fileNameFiltering default-value="false"/>
+  <includeEmptyDirs default-value="false"/>
+  <outputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <overwrite default-value="false"/>
+  <project default-value="${project}"/>
+  <resources default-value="${project.testResources}"/>
+  <session default-value="${session}"/>
+  <skip default-value="false">${maven.test.skip}</skip>
+  <supportMultiLineFiltering default-value="false"/>
+  <useBuildFilters default-value="true"/>
+  <useDefaultDelimiters default-value="true"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile (default-testCompile)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <basedir default-value="${basedir}"/>
+  <buildDirectory default-value="${project.build.directory}"/>
+  <compilePath default-value="${project.compileClasspathElements}"/>
+  <compileSourceRoots default-value="${project.testCompileSourceRoots}"/>
+  <compilerArguments>
+    <Xmaxwarns>10000</Xmaxwarns>
+    <Xlint/>
+  </compilerArguments>
+  <compilerId default-value="javac">${maven.compiler.compilerId}</compilerId>
+  <compilerReuseStrategy default-value="${reuseCreated}">${maven.compiler.compilerReuseStrategy}</compilerReuseStrategy>
+  <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+  <debug default-value="true">${maven.compiler.debug}</debug>
+  <debuglevel>${maven.compiler.debuglevel}</debuglevel>
+  <encoding default-value="${project.build.sourceEncoding}">UTF-8</encoding>
+  <executable>${maven.compiler.executable}</executable>
+  <failOnError default-value="true">${maven.compiler.failOnError}</failOnError>
+  <failOnWarning default-value="false">${maven.compiler.failOnWarning}</failOnWarning>
+  <forceJavacCompilerUse default-value="false">${maven.compiler.forceJavacCompilerUse}</forceJavacCompilerUse>
+  <fork default-value="false">true</fork>
+  <generatedTestSourcesDirectory default-value="${project.build.directory}/generated-test-sources/test-annotations"/>
+  <maxmem>1024</maxmem>
+  <meminitial>256</meminitial>
+  <mojoExecution default-value="${mojoExecution}"/>
+  <optimize default-value="false">${maven.compiler.optimize}</optimize>
+  <outputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <project default-value="${project}"/>
+  <release>${maven.compiler.release}</release>
+  <session default-value="${session}"/>
+  <showDeprecation default-value="false">true</showDeprecation>
+  <showWarnings default-value="false">true</showWarnings>
+  <skip>${maven.test.skip}</skip>
+  <skipMultiThreadWarning default-value="false">${maven.compiler.skipMultiThreadWarning}</skipMultiThreadWarning>
+  <source default-value="1.5">1.7</source>
+  <staleMillis default-value="0">${lastModGranularityMs}</staleMillis>
+  <target default-value="1.5">1.7</target>
+  <testPath default-value="${project.testClasspathElements}"/>
+  <testRelease>${maven.compiler.testRelease}</testRelease>
+  <testSource>${maven.compiler.testSource}</testSource>
+  <testTarget>${maven.compiler.testTarget}</testTarget>
+  <useIncrementalCompilation default-value="true">${maven.compiler.useIncrementalCompilation}</useIncrementalCompilation>
+  <verbose default-value="false">${maven.compiler.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-surefire-plugin:2.20:test (default-test)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <additionalClasspathElements>${maven.test.additionalClasspath}</additionalClasspathElements>
+  <argLine>${argLine}</argLine>
+  <basedir default-value="${basedir}"/>
+  <childDelegation default-value="false">${childDelegation}</childDelegation>
+  <classesDirectory default-value="${project.build.outputDirectory}"/>
+  <classpathDependencyExcludes>${maven.test.dependency.excludes}</classpathDependencyExcludes>
+  <debugForkedProcess>${maven.surefire.debug}</debugForkedProcess>
+  <dependenciesToScan>${dependenciesToScan}</dependenciesToScan>
+  <disableXmlReport default-value="false">${disableXmlReport}</disableXmlReport>
+  <enableAssertions default-value="true">${enableAssertions}</enableAssertions>
+  <excludedGroups>${excludedGroups}</excludedGroups>
+  <excludes>
+    <exclude>${log4j.skip.test1}</exclude>
+    <exclude>${log4j.skip.test2}</exclude>
+  </excludes>
+  <excludesFile>${surefire.excludesFile}</excludesFile>
+  <failIfNoSpecifiedTests>${surefire.failIfNoSpecifiedTests}</failIfNoSpecifiedTests>
+  <failIfNoTests>${failIfNoTests}</failIfNoTests>
+  <forkCount default-value="1">2C</forkCount>
+  <forkMode default-value="once">${forkMode}</forkMode>
+  <forkedProcessExitTimeoutInSeconds default-value="30">${surefire.exitTimeout}</forkedProcessExitTimeoutInSeconds>
+  <forkedProcessTimeoutInSeconds>${surefire.timeout}</forkedProcessTimeoutInSeconds>
+  <groups>${groups}</groups>
+  <includesFile>${surefire.includesFile}</includesFile>
+  <junitArtifactName default-value="junit:junit">${junitArtifactName}</junitArtifactName>
+  <jvm>${jvm}</jvm>
+  <localRepository default-value="${localRepository}"/>
+  <objectFactory>${objectFactory}</objectFactory>
+  <parallel>${parallel}</parallel>
+  <parallelMavenExecution default-value="${session.parallel}"/>
+  <parallelOptimized default-value="true">${parallelOptimized}</parallelOptimized>
+  <parallelTestsTimeoutForcedInSeconds>${surefire.parallel.forcedTimeout}</parallelTestsTimeoutForcedInSeconds>
+  <parallelTestsTimeoutInSeconds>${surefire.parallel.timeout}</parallelTestsTimeoutInSeconds>
+  <perCoreThreadCount default-value="true">${perCoreThreadCount}</perCoreThreadCount>
+  <pluginArtifactMap>${plugin.artifactMap}</pluginArtifactMap>
+  <pluginDescriptor default-value="${plugin}"/>
+  <printSummary default-value="true">${surefire.printSummary}</printSummary>
+  <projectArtifactMap>${project.artifactMap}</projectArtifactMap>
+  <projectBuildDirectory default-value="${project.build.directory}"/>
+  <redirectTestOutputToFile default-value="false">${maven.test.redirectTestOutputToFile}</redirectTestOutputToFile>
+  <remoteRepositories default-value="${project.pluginArtifactRepositories}"/>
+  <reportFormat default-value="brief">${surefire.reportFormat}</reportFormat>
+  <reportNameSuffix default-value="">${surefire.reportNameSuffix}</reportNameSuffix>
+  <reportsDirectory default-value="${project.build.directory}/surefire-reports"/>
+  <rerunFailingTestsCount default-value="0">${surefire.rerunFailingTestsCount}</rerunFailingTestsCount>
+  <reuseForks default-value="true">true</reuseForks>
+  <runOrder default-value="filesystem">${surefire.runOrder}</runOrder>
+  <shutdown default-value="testset">${surefire.shutdown}</shutdown>
+  <skip default-value="false">${maven.test.skip}</skip>
+  <skipAfterFailureCount default-value="0">${surefire.skipAfterFailureCount}</skipAfterFailureCount>
+  <skipExec>${maven.test.skip.exec}</skipExec>
+  <skipTests default-value="false">${skipTests}</skipTests>
+  <suiteXmlFiles>${surefire.suiteXmlFiles}</suiteXmlFiles>
+  <systemPropertyVariables>
+    <java.awt.headless>true</java.awt.headless>
+  </systemPropertyVariables>
+  <tempDir default-value="surefire">${tempDir}</tempDir>
+  <test>${test}</test>
+  <testClassesDirectory default-value="${project.build.testOutputDirectory}"/>
+  <testFailureIgnore default-value="false">${maven.test.failure.ignore}</testFailureIgnore>
+  <testNGArtifactName default-value="org.testng:testng">${testNGArtifactName}</testNGArtifactName>
+  <testSourceDirectory default-value="${project.build.testSourceDirectory}"/>
+  <threadCount>${threadCount}</threadCount>
+  <threadCountClasses default-value="0">${threadCountClasses}</threadCountClasses>
+  <threadCountMethods default-value="0">${threadCountMethods}</threadCountMethods>
+  <threadCountSuites default-value="0">${threadCountSuites}</threadCountSuites>
+  <trimStackTrace default-value="true">${trimStackTrace}</trimStackTrace>
+  <useFile default-value="true">${surefire.useFile}</useFile>
+  <useManifestOnlyJar default-value="true">${surefire.useManifestOnlyJar}</useManifestOnlyJar>
+  <useSystemClassLoader default-value="true">${surefire.useSystemClassLoader}</useSystemClassLoader>
+  <useUnlimitedThreads default-value="false">${useUnlimitedThreads}</useUnlimitedThreads>
+  <workingDirectory>${basedir}</workingDirectory>
+  <project default-value="${project}"/>
+  <session default-value="${session}"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-dependency-plugin:3.0.1:unpack (unpack-classes)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <artifact>${artifact}</artifact>
+  <artifactItems>
+    <artifactItem>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.9-SNAPSHOT</version>
+      <type>jar</type>
+      <overWrite>false</overWrite>
+    </artifactItem>
+  </artifactItems>
+  <excludes>META-INF/**/*.class</excludes>
+  <ignorePermissions default-value="false">${dependency.ignorePermissions}</ignorePermissions>
+  <includes>**/*.class</includes>
+  <markersDirectory default-value="${project.build.directory}/dependency-maven-plugin-markers"/>
+  <outputAbsoluteArtifactFilename default-value="false">${outputAbsoluteArtifactFilename}</outputAbsoluteArtifactFilename>
+  <outputDirectory default-value="${project.build.directory}/dependency">/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes</outputDirectory>
+  <overWriteIfNewer default-value="true">${mdep.overIfNewer}</overWriteIfNewer>
+  <overWriteReleases default-value="false">false</overWriteReleases>
+  <overWriteSnapshots default-value="false">true</overWriteSnapshots>
+  <project default-value="${project}"/>
+  <reactorProjects default-value="${reactorProjects}"/>
+  <remoteRepositories default-value="${project.remoteArtifactRepositories}"/>
+  <session default-value="${session}"/>
+  <silent default-value="false">${silent}</silent>
+  <skip default-value="false">${mdep.skip}</skip>
+  <useJvmChmod default-value="true">${dependency.useJvmChmod}</useJvmChmod>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-jar-plugin:3.0.0:jar (default-jar)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <archive>
+    <manifestFile>/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/MANIFEST.MF</manifestFile>
+    <manifestEntries>
+      <Specification-Title>Apache Log4j API for Android</Specification-Title>
+      <Specification-Version>2.9-SNAPSHOT</Specification-Version>
+      <Specification-Vendor>The Apache Software Foundation</Specification-Vendor>
+      <Implementation-Title>Apache Log4j API for Android</Implementation-Title>
+      <Implementation-Version>2.9-SNAPSHOT</Implementation-Version>
+      <Implementation-Vendor>The Apache Software Foundation</Implementation-Vendor>
+      <Implementation-Vendor-Id>org.apache</Implementation-Vendor-Id>
+      <X-Compile-Source-JDK>1.7</X-Compile-Source-JDK>
+      <X-Compile-Target-JDK>1.7</X-Compile-Target-JDK>
+    </manifestEntries>
+    <manifest>
+      <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+      <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+    </manifest>
+  </archive>
+  <classesDirectory default-value="${project.build.outputDirectory}"/>
+  <finalName default-value="${project.build.finalName}"/>
+  <forceCreation default-value="false">${maven.jar.forceCreation}</forceCreation>
+  <outputDirectory default-value="${project.build.directory}"/>
+  <project default-value="${project}"/>
+  <session default-value="${session}"/>
+  <skipIfEmpty default-value="false"/>
+  <useDefaultManifestFile default-value="false">${jar.useDefaultManifestFile}</useDefaultManifestFile>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-site-plugin:3.4:attach-descriptor (attach-descriptor)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <basedir>${basedir}</basedir>
+  <inputEncoding default-value="${project.build.sourceEncoding}">${encoding}</inputEncoding>
+  <localRepository default-value="${localRepository}"/>
+  <locales>en</locales>
+  <outputEncoding default-value="${project.reporting.outputEncoding}">${outputEncoding}</outputEncoding>
+  <pomPackagingOnly default-value="true"/>
+  <project default-value="${project}"/>
+  <reactorProjects default-value="${reactorProjects}"/>
+  <siteDirectory default-value="${basedir}/src/site"/>
+</configuration>
+[DEBUG] =======================================================================
+[DEBUG] Could not find metadata org.apache.logging.log4j:log4j-api:2.9-SNAPSHOT/maven-metadata.xml in local (/Users/rgoers/.m2/repository)
+[DEBUG] Failure to find org.apache.logging.log4j:log4j-api:2.9-SNAPSHOT/maven-metadata.xml in http://repository.nextiva.xyz:8081/nexus/content/groups/NextivaSnapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Skipped remote request for org.apache.logging.log4j:log4j-api:2.9-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Could not find metadata org.apache.logging.log4j:log4j-api:2.9-SNAPSHOT/maven-metadata.xml in local (/Users/rgoers/.m2/repository)
+[DEBUG] Failure to find org.apache.logging.log4j:log4j-api:2.9-SNAPSHOT/maven-metadata.xml in http://repository.nextiva.xyz:8081/nexus/content/groups/NextivaSnapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Skipped remote request for org.apache.logging.log4j:log4j-api:2.9-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Could not find metadata org.apache.logging.log4j:log4j:2.9-SNAPSHOT/maven-metadata.xml in local (/Users/rgoers/.m2/repository)
+[DEBUG] Failure to find org.apache.logging.log4j:log4j:2.9-SNAPSHOT/maven-metadata.xml in http://repository.nextiva.xyz:8081/nexus/content/groups/NextivaSnapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Skipped remote request for org.apache.logging.log4j:log4j:2.9-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=1, ConflictMarker.markTime=0, ConflictMarker.nodeCount=5, ConflictIdSorter.graphTime=1, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=4, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=3, ConflictResolver.conflictItemCount=4, DefaultDependencyCollector.collectTime=36, DefaultDependencyCollector.transformTime=6}
+[DEBUG] org.apache.logging.log4j:log4j-api-android:jar:2.9-SNAPSHOT
+[DEBUG]    junit:junit:jar:4.12:test
+[DEBUG]       org.hamcrest:hamcrest-core:jar:1.3:test
+[DEBUG]    org.hamcrest:hamcrest-all:jar:1.3:test
+[DEBUG]    org.apache.logging.log4j:log4j-api:jar:2.9-SNAPSHOT:compile
+[INFO] 
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ log4j-api-android ---
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=0, ConflictMarker.markTime=0, ConflictMarker.nodeCount=15, ConflictIdSorter.graphTime=0, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=13, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=1, ConflictResolver.conflictItemCount=15, DefaultDependencyCollector.collectTime=45, DefaultDependencyCollector.transformTime=1}
+[DEBUG] org.apache.maven.plugins:maven-clean-plugin:jar:3.0.0:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]          org.codehaus.plexus:plexus-utils:jar:2.0.4:compile
+[DEBUG]       org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:compile
+[DEBUG]          org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.apache.maven.shared:maven-shared-utils:jar:3.0.0:compile
+[DEBUG]       commons-io:commons-io:jar:2.4:compile
+[DEBUG]       com.google.code.findbugs:jsr305:jar:2.0.1:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-clean-plugin:3.0.0
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-clean-plugin:3.0.0
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-clean-plugin:3.0.0
+[DEBUG]   Included: org.apache.maven.plugins:maven-clean-plugin:jar:3.0.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.0.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.5.5
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-utils:jar:3.0.0
+[DEBUG]   Included: commons-io:commons-io:jar:2.4
+[DEBUG]   Included: com.google.code.findbugs:jsr305:jar:2.0.1
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-clean-plugin:3.0.0:clean from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-clean-plugin:3.0.0, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-clean-plugin:3.0.0:clean' with basic configurator -->
+[DEBUG]   (f) directory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target
+[DEBUG]   (f) excludeDefaultDirectories = false
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) followSymLinks = false
+[DEBUG]   (f) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG]   (f) reportDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG]   (f) retryOnError = true
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) testOutputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes
+[DEBUG] -- end configuration --
+[INFO] Deleting /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/NOTICE
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/LICENSE
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/DEPENDENCIES
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/NOTICE
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/LICENSE
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/DEPENDENCIES
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-archiver/pom.properties
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-archiver
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/dependency-maven-plugin-markers/org.apache.logging.log4j-log4j-api-jar-2.9-SNAPSHOT-592160352
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/dependency-maven-plugin-markers
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Unbox.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Unbox$WebSafeState.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Unbox$State.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Unbox$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/TriConsumer.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Supplier.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Strings.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/StringMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/StringBuilders.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/StringBuilderFormattable.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/StackLocatorUtil.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/StackLocator.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/StackLocator$PrivateSecurityManager.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/SortedArrayStringMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/SortedArrayStringMap$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/ReadOnlyStringMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/ProviderUtil.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/PropertiesUtil.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/PerformanceSensitive.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/MessageSupplier.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/LowLevelLogUtil.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/LoaderUtil.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/LoaderUtil$UrlResource.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/LoaderUtil$ThreadContextClassLoaderGetter.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/LoaderUtil$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/LambdaUtil.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/IndexedStringMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/IndexedReadOnlyStringMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/EnglishEnums.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Constants.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Chars.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/BiConsumer.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util/Activator.class
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/util
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/ThreadContext.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/ThreadContext$EmptyThreadContextStack.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/ThreadContext$EmptyIterator.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/ThreadContext$ContextStack.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/ThreadContext$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/status/StatusLogger.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/status/StatusLogger$BoundedQueue.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/status/StatusListener.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/status/StatusData.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/status/StatusConsoleListener.class
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/status
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/ThreadContextStack.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/ThreadContextMapFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/ThreadContextMap2.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/ThreadContextMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/Terminable.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/StandardLevel.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/ReadOnlyThreadContextMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/Provider.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/ObjectThreadContextMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/NoOpThreadContextMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/MutableThreadContextStack.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/MessageFactory2Adapter.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/LoggerRegistry.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/LoggerRegistry$WeakMapFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/LoggerRegistry$MapFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/LoggerRegistry$ConcurrentMapFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/LoggerContextKey.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/LoggerContextFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/LoggerContext.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/LoggerAdapter.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/GarbageFreeSortedArrayThreadContextMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/GarbageFreeSortedArrayThreadContextMap$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/ExtendedLoggerWrapper.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/ExtendedLogger.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/DefaultThreadContextStack.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/DefaultThreadContextMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/DefaultThreadContextMap$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/CopyOnWriteSortedArrayThreadContextMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/CopyOnWriteSortedArrayThreadContextMap$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/CopyOnWrite.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/CleanableThreadContextMap.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/AbstractLoggerAdapter.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi/AbstractLogger.class
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/spi
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/simple/SimpleLoggerContextFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/simple/SimpleLoggerContext.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/simple/SimpleLogger.class
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/simple
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/TimestampMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ThreadInformation.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ThreadDumpMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ThreadDumpMessage$ThreadInfoFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ThreadDumpMessage$ThreadDumpMessageProxy.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ThreadDumpMessage$BasicThreadInfoFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ThreadDumpMessage$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/StructuredDataMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/StructuredDataMessage$Format.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/StructuredDataId.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/StringMapMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/StringFormatterMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/StringFormattedMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/SimpleMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/SimpleMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ReusableSimpleMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ReusableParameterizedMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ReusableObjectMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ReusableMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ReusableMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ParameterizedNoReferenceMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ParameterizedNoReferenceMessageFactory$StatusMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ParameterizedMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ParameterizedMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ParameterFormatter.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ObjectMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ObjectArrayMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/MultiformatMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/MessageFormatMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/MessageFormatMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/MessageFactory2.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/MessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/Message.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/MapMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/MapMessage$MapFormat.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/MapMessage$1.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/LoggerNameAwareMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/LocalizedMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/LocalizedMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/FormattedMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/FormattedMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/FlowMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/FlowMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/ExitMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/EntryMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/DefaultFlowMessageFactory.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/DefaultFlowMessageFactory$SimpleExitMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/DefaultFlowMessageFactory$SimpleEntryMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/DefaultFlowMessageFactory$AbstractFlowMessage.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/BasicThreadInformation.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/AsynchronouslyFormattable.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message/AbstractMessageFactory.class
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/message
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/MarkerManager.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/MarkerManager$Log4jMarker.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/Marker.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/LogManager.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/LoggingException.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/Logger.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/Level.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/EventLogger.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/CloseableThreadContext.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/CloseableThreadContext$Instance.class
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j/CloseableThreadContext$1.class
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging/log4j
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache/logging
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org/apache
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/org
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/NOTICE
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/LICENSE
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/DEPENDENCIES
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[INFO] Deleting file /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/.plxarc
+[INFO] Deleting directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target
+[DEBUG] Skipping non-existing directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG] Skipping non-existing directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes
+[DEBUG] Skipping non-existing directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.5:process (process-resource-bundles) @ log4j-api-android ---
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=1, ConflictMarker.markTime=0, ConflictMarker.nodeCount=185, ConflictIdSorter.graphTime=0, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=44, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=4, ConflictResolver.conflictItemCount=100, DefaultDependencyCollector.collectTime=159, DefaultDependencyCollector.transformTime=5}
+[DEBUG] org.apache.maven.plugins:maven-remote-resources-plugin:jar:1.5:
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.2.1:compile
+[DEBUG]    org.apache.maven:maven-core:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.2.1:compile
+[DEBUG]       org.slf4j:slf4j-jdk14:jar:1.5.6:runtime
+[DEBUG]          org.slf4j:slf4j-api:jar:1.5.6:runtime
+[DEBUG]       org.slf4j:jcl-over-slf4j:jar:1.5.6:runtime
+[DEBUG]       org.apache.maven.reporting:maven-reporting-api:jar:2.2.1:compile
+[DEBUG]          org.apache.maven.doxia:doxia-sink-api:jar:1.1:compile
+[DEBUG]          org.apache.maven.doxia:doxia-logging-api:jar:1.1:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.2.1:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]          junit:junit:jar:3.8.1:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.2.1:compile
+[DEBUG]       commons-cli:commons-cli:jar:1.2:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.2.1:compile
+[DEBUG]       org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.2.1:compile
+[DEBUG]          backport-util-concurrent:backport-util-concurrent:jar:3.1:compile
+[DEBUG]       classworlds:classworlds:jar:1.1:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.2.1:compile
+[DEBUG]    org.apache.maven:maven-monitor:jar:2.2.1:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.2.1:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.2.1:compile
+[DEBUG]    org.apache.maven:maven-settings:jar:2.2.1:compile
+[DEBUG]    org.apache.maven.shared:maven-artifact-resolver:jar:1.0:compile
+[DEBUG]    org.apache.maven.shared:maven-common-artifact-filters:jar:1.4:compile
+[DEBUG]    org.apache.maven.shared:maven-filtering:jar:1.1:compile
+[DEBUG]       org.sonatype.plexus:plexus-build-api:jar:0.0.4:compile
+[DEBUG]    org.codehaus.plexus:plexus-resources:jar:1.0-alpha-7:compile
+[DEBUG]    org.codehaus.plexus:plexus-interpolation:jar:1.12:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:1.5.15:compile
+[DEBUG]    org.apache.velocity:velocity:jar:1.7:compile
+[DEBUG]       commons-collections:commons-collections:jar:3.2.1:compile
+[DEBUG]       commons-lang:commons-lang:jar:2.4:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-remote-resources-plugin:1.5
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-remote-resources-plugin:1.5
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-remote-resources-plugin:1.5
+[DEBUG]   Included: org.apache.maven.plugins:maven-remote-resources-plugin:jar:1.5
+[DEBUG]   Included: org.slf4j:slf4j-jdk14:jar:1.5.6
+[DEBUG]   Included: org.slf4j:jcl-over-slf4j:jar:1.5.6
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:2.2.1
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.1
+[DEBUG]   Included: org.apache.maven.doxia:doxia-logging-api:jar:1.1
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: commons-cli:commons-cli:jar:1.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4
+[DEBUG]   Included: backport-util-concurrent:backport-util-concurrent:jar:3.1
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.apache.maven.shared:maven-artifact-resolver:jar:1.0
+[DEBUG]   Included: org.apache.maven.shared:maven-common-artifact-filters:jar:1.4
+[DEBUG]   Included: org.apache.maven.shared:maven-filtering:jar:1.1
+[DEBUG]   Included: org.sonatype.plexus:plexus-build-api:jar:0.0.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-resources:jar:1.0-alpha-7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.12
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:1.5.15
+[DEBUG]   Included: org.apache.velocity:velocity:jar:1.7
+[DEBUG]   Included: commons-collections:commons-collections:jar:3.2.1
+[DEBUG]   Included: commons-lang:commons-lang:jar:2.4
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-remote-resources-plugin:1.5:process from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-remote-resources-plugin:1.5, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-remote-resources-plugin:1.5:process' with basic configurator -->
+[DEBUG]   (f) appendedResourcesDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/main/appended-resources
+[DEBUG]   (f) attachToMain = true
+[DEBUG]   (f) attachToTest = true
+[DEBUG]   (f) attached = true
+[DEBUG]   (f) basedir = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) excludeTransitive = false
+[DEBUG]   (f) includeProjectProperties = false
+[DEBUG]   (f) includeScope = runtime
+[DEBUG]   (f) localRepository =       id: local
+      url: file:///Users/rgoers/.m2/repository/
+   layout: default
+snapshots: [enabled => true, update => always]
+ releases: [enabled => true, update => always]
+
+[DEBUG]   (f) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources
+[DEBUG]   (f) remoteArtifactRepositories = [      id: central
+      url: http://repository.nextiva.xyz:8081/nexus/content/groups/public
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: releases
+      url: http://repository.nextiva.xyz:8081/nexus/content/repositories/releases
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: snapshots
+      url: http://repository.nextiva.xyz:8081/nexus/content/groups/NextivaSnapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: apache.snapshots
+      url: https://repository.apache.org/snapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => false, update => daily]
+]
+[DEBUG]   (f) resourceBundles = [org.apache:apache-jar-resource-bundle:1.4]
+[DEBUG]   (f) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/main/resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) runOnlyAtExecutionRoot = false
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) useDefaultFilterDelimiters = true
+[DEBUG]   (f) mavenSession = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG]   (f) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG] -- end configuration --
+[DEBUG] Initializing Velocity, Calling init()...
+[DEBUG] *******************************************************************
+[DEBUG] Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+[DEBUG] RuntimeInstance initializing.
+[DEBUG] Default Properties File: org/apache/velocity/runtime/defaults/velocity.properties
+[DEBUG] Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+[DEBUG] ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+[DEBUG] ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+[DEBUG] Default ResourceManager initialization complete.
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Define
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Break
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Include
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+[DEBUG] Velocimacro : initialization starting.
+[DEBUG] Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+[DEBUG] Velocimacro : Default library not found.
+[DEBUG] Velocimacro : allowInline = true : VMs can be defined inline in templates
+[DEBUG] Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+[DEBUG] Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+[DEBUG] Velocimacro : autoload off : VM system will not automatically reload global library macros
+[DEBUG] Velocimacro : Velocimacro : initialization complete.
+[DEBUG] RuntimeInstance successfully initialized.
+[DEBUG] Supplemental data models won't be loaded.  No models specified.
+[DEBUG] org.apache.logging.log4j:log4j-api-android:jar:2.9-SNAPSHOT (selected for null)
+[DEBUG]   junit:junit:jar:4.12:test (selected for test)
+[DEBUG]     org.hamcrest:hamcrest-core:jar:1.3:test (selected for test)
+[DEBUG]   org.hamcrest:hamcrest-all:jar:1.3:test (selected for test)
+[DEBUG]   org.apache.logging.log4j:log4j-api:jar:2.9-SNAPSHOT:compile (selected for compile)
+[DEBUG] Building project for org.apache.logging.log4j:log4j-api:jar:2.9-SNAPSHOT:compile
+[DEBUG] Could not find metadata org.apache.logging.log4j:log4j:2.9-SNAPSHOT/maven-metadata.xml in local (/Users/rgoers/.m2/repository)
+[DEBUG] Skipped remote request for org.apache.logging.log4j:log4j:2.9-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Failure to find org.apache.logging.log4j:log4j:2.9-SNAPSHOT/maven-metadata.xml in http://repository.nextiva.xyz:8081/nexus/content/groups/NextivaSnapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Adding project with groupId [org.apache.logging.log4j]
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.5:process (default) @ log4j-api-android ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-remote-resources-plugin:1.5:process from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-remote-resources-plugin:1.5, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-remote-resources-plugin:1.5:process' with basic configurator -->
+[DEBUG]   (f) appendedResourcesDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/main/appended-resources
+[DEBUG]   (f) attachToMain = true
+[DEBUG]   (f) attachToTest = true
+[DEBUG]   (f) attached = true
+[DEBUG]   (f) basedir = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) excludeTransitive = false
+[DEBUG]   (f) includeProjectProperties = false
+[DEBUG]   (f) includeScope = runtime
+[DEBUG]   (f) localRepository =       id: local
+      url: file:///Users/rgoers/.m2/repository/
+   layout: default
+snapshots: [enabled => true, update => always]
+ releases: [enabled => true, update => always]
+
+[DEBUG]   (f) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources
+[DEBUG]   (f) remoteArtifactRepositories = [      id: central
+      url: http://repository.nextiva.xyz:8081/nexus/content/groups/public
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: releases
+      url: http://repository.nextiva.xyz:8081/nexus/content/repositories/releases
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: snapshots
+      url: http://repository.nextiva.xyz:8081/nexus/content/groups/NextivaSnapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: apache.snapshots
+      url: https://repository.apache.org/snapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => false, update => daily]
+]
+[DEBUG]   (f) resourceBundles = []
+[DEBUG]   (f) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/main/resources, PatternSet [includes: {}, excludes: {}]}}, Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) runOnlyAtExecutionRoot = false
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) useDefaultFilterDelimiters = true
+[DEBUG]   (f) mavenSession = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG]   (f) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG] -- end configuration --
+[DEBUG] Initializing Velocity, Calling init()...
+[DEBUG] *******************************************************************
+[DEBUG] Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+[DEBUG] RuntimeInstance initializing.
+[DEBUG] Default Properties File: org/apache/velocity/runtime/defaults/velocity.properties
+[DEBUG] Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+[DEBUG] ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+[DEBUG] ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+[DEBUG] Default ResourceManager initialization complete.
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Define
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Break
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Include
+[DEBUG] Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+[DEBUG] Velocimacro : initialization starting.
+[DEBUG] Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+[DEBUG] Velocimacro : Default library not found.
+[DEBUG] Velocimacro : allowInline = true : VMs can be defined inline in templates
+[DEBUG] Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+[DEBUG] Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+[DEBUG] Velocimacro : autoload off : VM system will not automatically reload global library macros
+[DEBUG] Velocimacro : Velocimacro : initialization complete.
+[DEBUG] RuntimeInstance successfully initialized.
+[DEBUG] Supplemental data models won't be loaded.  No models specified.
+[DEBUG] org.apache.logging.log4j:log4j-api-android:jar:2.9-SNAPSHOT (selected for null)
+[DEBUG]   junit:junit:jar:4.12:test (selected for test)
+[DEBUG]     org.hamcrest:hamcrest-core:jar:1.3:test (selected for test)
+[DEBUG]   org.hamcrest:hamcrest-all:jar:1.3:test (selected for test)
+[DEBUG]   org.apache.logging.log4j:log4j-api:jar:2.9-SNAPSHOT:compile (selected for compile)
+[DEBUG] Building project for org.apache.logging.log4j:log4j-api:jar:2.9-SNAPSHOT:compile
+[DEBUG] Adding project with groupId [org.apache.logging.log4j]
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:resources (default-resources) @ log4j-api-android ---
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=0, ConflictMarker.markTime=1, ConflictMarker.nodeCount=69, ConflictIdSorter.graphTime=0, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=28, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=1, ConflictResolver.conflictItemCount=68, DefaultDependencyCollector.collectTime=44, DefaultDependencyCollector.transformTime=2}
+[DEBUG] org.apache.maven.plugins:maven-resources-plugin:jar:3.0.1:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]       org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.6:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]    org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]    org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.0.24:compile
+[DEBUG]    org.apache.maven.shared:maven-filtering:jar:3.1.1:compile
+[DEBUG]       org.apache.maven.shared:maven-shared-utils:jar:3.0.0:compile
+[DEBUG]          commons-io:commons-io:jar:2.4:compile
+[DEBUG]          com.google.code.findbugs:jsr305:jar:2.0.1:compile
+[DEBUG]       org.sonatype.plexus:plexus-build-api:jar:0.0.7:compile
+[DEBUG]    org.codehaus.plexus:plexus-interpolation:jar:1.22:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-resources-plugin:3.0.1
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-resources-plugin:3.0.1
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-resources-plugin:3.0.1
+[DEBUG]   Included: org.apache.maven.plugins:maven-resources-plugin:jar:3.0.1
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.6
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.24
+[DEBUG]   Included: org.apache.maven.shared:maven-filtering:jar:3.1.1
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-utils:jar:3.0.0
+[DEBUG]   Included: commons-io:commons-io:jar:2.4
+[DEBUG]   Included: com.google.code.findbugs:jsr305:jar:2.0.1
+[DEBUG]   Included: org.sonatype.plexus:plexus-build-api:jar:0.0.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.22
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-resources-plugin:3.0.1:resources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:3.0.1, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-resources-plugin:3.0.1:resources' with basic configurator -->
+[DEBUG]   (f) addDefaultExcludes = true
+[DEBUG]   (f) buildFilters = []
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) escapeString = \
+[DEBUG]   (f) escapeWindowsPaths = true
+[DEBUG]   (f) fileNameFiltering = false
+[DEBUG]   (s) includeEmptyDirs = false
+[DEBUG]   (s) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG]   (s) overwrite = false
+[DEBUG]   (f) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG]   (s) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/main/resources, PatternSet [includes: {}, excludes: {}]}}, Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources, PatternSet [includes: {}, excludes: {}]}}, Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) supportMultiLineFiltering = false
+[DEBUG]   (f) useBuildFilters = true
+[DEBUG]   (s) useDefaultDelimiters = true
+[DEBUG] -- end configuration --
+[DEBUG] properties used {file.encoding.pkg=sun.io, cobertura.plugin.version=2.7, java.home=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre, log4jParentDir=/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/.., findbugs.plugin.version=3.0.4, env.DISPLAY=/private/tmp/com.apple.launchd.S2zgiS324v/org.macosforge.xquartz:0, projectDir=, rat.plugin.version=0.12, classworlds.conf=/opt/maven/maven/bin/m2.conf, env.SDKMAN_CANDIDATES_DIR=/Users/rgoers/.sdkman/candidates, env.SECURITYSESSIONID=186a6, pmd.plugin.version=3.7, slf4jVersion=1.7.25, java.endorsed.dirs=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/endorsed, env.LOGNAME=rgoers, sun.os.patch.level=unknown, java.vendor.url=http://java.oracle.com/, env.TERM_PROGRAM_VERSION=388.1, java.version=1.8.0_121, env.SDKMAN_CURRENT_API=https://api.sdkman.io/2, env.MAVEN_OPTS= -Xmx1024m -Xms1024m -XX:MaxPermSize=512M, arguments=, env.JAVA9_HOME=/Library/Java/JavaVirtualMachines/Java9/Contents/Home, env.SDKMAN_DIR=/Users/rgoers/.sdkman, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, user.name=rgoers, env.LANG=en_US.UTF-8, sun.io.unicode.encoding=UnicodeBig, sun.jnu.encoding=UTF-8, java.runtime.name=Java(TM) SE Runtime Environment, activemq.version=5.14.5, java.specification.name=Java Platform API Specification, ftp.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, user.timezone=America/Phoenix, path.separator=:, env.MAVEN_CMD_LINE_ARGS= -X clean package, file.encoding=UTF-8, env.HOME=/Users/rgoers, sun.java.command=org.codehaus.plexus.classworlds.launcher.Launcher -X clean package, env.TERM_SESSION_ID=1BBA3CA6-121A-4F83-B392-60D97BEC9521, socksNonProxyHosts=local|*.local|169.254/16|*.169.254/16, jctoolsVersion=1.2.1, jxr.plugin.version=2.5, java.io.tmpdir=/var/folders/ng/bsg7qt2x5p373mck9gxhyjhr0000gn/T/, user.language=en, docLabel=Site Documentation, javadoc.opts=-Xdoclint:none, changes.plugin.version=2.12.1, compiler.plugin.version=3.6.1, line.separator=
+, project.baseUri=file:/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/, java.vm.info=mixed mode, java.vm.specification.name=Java Virtual Machine Specification, project.reporting.outputEncoding=UTF-8, commonsLoggingVersion=1.2, surefire.version=2.19.1, env.__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0, env.M2_HOME=/opt/maven/maven, sourceReleaseAssemblyDescriptor=source-release, disruptorVersion=3.3.6, http.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, env.SDKMAN_VERSION=5.1.18+191, java.awt.printerjob=sun.lwawt.macosx.CPrinterJob, env.SDKMAN_PLATFORM=Darwin, flumeVersion=1.7.0, distMgmtSnapshotsName=Apache Development Snapshot Repository, env.XPC_FLAGS=0x0, distMgmtSnapshotsUrl=https://repository.apache.org/content/repositories/snapshots, gopherProxySet=false, site.plugin.version=3.4, maven.build.timestamp=2017-07-10T02:24:57Z, os.name=Mac OS X, java.specification.vendor=Oracle Corporation, jacoco.plugin.version=0.7.7.201606060606, env.TERM=xterm-256color, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, Log4jReleaseKey=FA1C814D, java.library.path=/Users/rgoers/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., env.PATH=/Users/rgoers/.sdkman/candidates/groovy/current/bin:/opt/subversion/bin:/opt/ant/ant19/bin:/Users/rgoers/bin:/usr/local/git/bin:/opt/maven/maven/bin:/Library/Java/JavaVirtualMachines/Java8/Contents/Home/bin:/opt/gradle/gradle/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin, clirr.plugin.version=2.8, pdf.plugin.version=1.2, java.class.version=52.0, jackson1Version=1.9.13, env.SHLVL=1, maven.multiModuleProjectDirectory=/Users/rgoers/projects/apache/logging/log4j/log4j2/current, env.SDKMAN_LEGACY_API=https://api.sdkman.io/1, surefire.plugin.version=2.20, sun.boot.library.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib, project.build.sourceEncoding=UTF-8, env.JAVA_MAIN_CLASS_96902=org.codehaus.plexus.classworlds.launcher.Launcher, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, java.awt.graphicsenv=sun.awt.CGraphicsEnvironment, scm.plugin.version=1.9.5, env.USER=rgoers, springVersion=3.2.18.RELEASE, env.TERM_PROGRAM=Apple_Terminal, failsafe.plugin.version=2.20, remote.resources.plugin.version=1.5, conversantDisruptorVersion=1.2.10, gpg.useagent=true, java.vm.specification.version=1.8, checkstyle.plugin.version=2.17, awt.toolkit=sun.lwawt.macosx.LWCToolkit, sun.cpu.isalist=, env.MAVEN_PROJECTBASEDIR=/Users/rgoers/projects/apache/logging/log4j/log4j2/current, osgi.api.version=4.3.1, env.GROOVY_HOME=/Users/rgoers/.sdkman/candidates/groovy/current, java.ext.dirs=/Users/rgoers/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java, os.version=10.12.5, user.home=/Users/rgoers, java.vm.vendor=Oracle Corporation, Log4jReleaseVersion=2.8.2, env.JAVA_HOME=/Library/Java/JavaVirtualMachines/Java8/Contents/Home, env.XPC_SERVICE_NAME=0, user.dir=/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android, env.PWD=/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android, sun.cpu.endian=little, manifestfile=/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/MANIFEST.MF, env.TMPDIR=/var/folders/ng/bsg7qt2x5p373mck9gxhyjhr0000gn/T/, minSeverity=info, java.vm.version=25.121-b13, java.class.path=/opt/maven/maven/boot/plexus-classworlds-2.5.2.jar, org.slf4j.simpleLogger.defaultLogLevel=debug, os.arch=x86_64, jackson2Version=2.8.9, maven.build.version=Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T04:57:37-07:00), env.Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.AxUR0LrhR7/Render, logbackVersion=1.2.3, sun.java.launcher=SUN_STANDARD, javadoc.plugin.version=2.10.4, java.vm.specification.vendor=Oracle Corporation, file.separator=/, java.runtime.version=1.8.0_121-b13, env.SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.SVQTLzS9sJ/Listeners, sun.boot.class.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/classes, organization.logo=https://www.apache.org/images/asf_logo_wide.gif, maven.version=3.3.3, env.ANT_HOME=/opt/ant/ant19, user.country=US, release.plugin.version=2.5.3, maven.home=/opt/maven/maven, env.SHELL=/bin/bash, maven.compiler.target=1.7, mockitoVersion=2.2.7, java.vendor=Oracle Corporation, env.GRADLE_HOME=/opt/gradle/gradle, maven.compiler.source=1.7, Log4jReleaseManager=Matt Sicker, java.specification.version=1.8, sun.arch.data.model=64, argLine=-Xms256m -Xmx1024m}
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[DEBUG] resource with targetPath null
+directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/main/resources
+excludes []
+includes []
+[INFO] skip non existing resourceDirectory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/main/resources
+[DEBUG] resource with targetPath null
+directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources
+excludes []
+includes []
+[DEBUG] ignoreDelta true
+[INFO] Copying 3 resources
+[DEBUG] Copying file META-INF/DEPENDENCIES
+[DEBUG] file DEPENDENCIES has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/DEPENDENCIES to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/DEPENDENCIES
+[DEBUG] Copying file META-INF/LICENSE
+[DEBUG] file LICENSE has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/LICENSE to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/LICENSE
+[DEBUG] Copying file META-INF/NOTICE
+[DEBUG] file NOTICE has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/NOTICE to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/NOTICE
+[DEBUG] resource with targetPath null
+directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources
+excludes []
+includes []
+[DEBUG] ignoreDelta true
+[INFO] Copying 3 resources
+[DEBUG] Copying file META-INF/DEPENDENCIES
+[DEBUG] file DEPENDENCIES has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/DEPENDENCIES to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/DEPENDENCIES
+[DEBUG] Copying file META-INF/LICENSE
+[DEBUG] file LICENSE has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/LICENSE to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/LICENSE
+[DEBUG] Copying file META-INF/NOTICE
+[DEBUG] file NOTICE has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/NOTICE to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/NOTICE
+[DEBUG] no use filter components
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ log4j-api-android ---
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=1, ConflictMarker.markTime=0, ConflictMarker.nodeCount=117, ConflictIdSorter.graphTime=0, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=44, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=2, ConflictResolver.conflictItemCount=71, DefaultDependencyCollector.collectTime=28, DefaultDependencyCollector.transformTime=3}
+[DEBUG] org.apache.maven.plugins:maven-compiler-plugin:jar:3.6.1:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]       org.codehaus.plexus:plexus-utils:jar:2.0.4:compile
+[DEBUG]    org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]       org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]       org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.6:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.apache.maven.shared:maven-shared-utils:jar:3.1.0:compile
+[DEBUG]       commons-io:commons-io:jar:2.5:compile
+[DEBUG]    org.apache.maven.shared:maven-shared-incremental:jar:1.1:compile
+[DEBUG]    org.ow2.asm:asm:jar:6.0_ALPHA:compile
+[DEBUG]    com.thoughtworks.qdox:qdox:jar:2.0-M5:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-api:jar:2.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-manager:jar:2.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-javac:jar:2.8.1:runtime
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:3.6.1
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:3.6.1
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:3.6.1
+[DEBUG]   Included: org.apache.maven.plugins:maven-compiler-plugin:jar:3.6.1
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.0.4
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.6
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-utils:jar:3.1.0
+[DEBUG]   Included: commons-io:commons-io:jar:2.5
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-incremental:jar:1.1
+[DEBUG]   Included: org.ow2.asm:asm:jar:6.0_ALPHA
+[DEBUG]   Included: com.thoughtworks.qdox:qdox:jar:2.0-M5
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-api:jar:2.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-manager:jar:2.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-javac:jar:2.8.1
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-compiler-plugin:3.6.1, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile' with basic configurator -->
+[DEBUG]   (f) basedir = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android
+[DEBUG]   (f) buildDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target
+[DEBUG]   (f) compilePath = [/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes, /Users/rgoers/.m2/repository/org/apache/logging/log4j/log4j-api/2.9-SNAPSHOT/log4j-api-2.9-SNAPSHOT.jar]
+[DEBUG]   (f) compileSourceRoots = [/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/main/java]
+[DEBUG]   (f) compilerArguments = {Xlint=null, Xmaxwarns=10000}
+[DEBUG]   (f) compilerId = javac
+[DEBUG]   (f) debug = true
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) failOnWarning = false
+[DEBUG]   (f) forceJavacCompilerUse = false
+[DEBUG]   (f) fork = true
+[DEBUG]   (f) generatedSourcesDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/generated-sources/annotations
+[DEBUG]   (f) maxmem = 1024
+[DEBUG]   (f) meminitial = 256
+[DEBUG]   (f) mojoExecution = org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile {execution: default-compile}
+[DEBUG]   (f) optimize = false
+[DEBUG]   (f) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG]   (f) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG]   (f) projectArtifact = org.apache.logging.log4j:log4j-api-android:jar:2.9-SNAPSHOT
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG]   (f) showDeprecation = true
+[DEBUG]   (f) showWarnings = true
+[DEBUG]   (f) skipMultiThreadWarning = false
+[DEBUG]   (f) source = 1.7
+[DEBUG]   (f) staleMillis = 0
+[DEBUG]   (f) target = 1.7
+[DEBUG]   (f) useIncrementalCompilation = true
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[DEBUG] Using compiler 'javac'.
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.1:testResources (default-testResources) @ log4j-api-android ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-resources-plugin:3.0.1:testResources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:3.0.1, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-resources-plugin:3.0.1:testResources' with basic configurator -->
+[DEBUG]   (f) addDefaultExcludes = true
+[DEBUG]   (f) buildFilters = []
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) escapeString = \
+[DEBUG]   (f) escapeWindowsPaths = true
+[DEBUG]   (f) fileNameFiltering = false
+[DEBUG]   (s) includeEmptyDirs = false
+[DEBUG]   (s) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes
+[DEBUG]   (s) overwrite = false
+[DEBUG]   (f) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG]   (s) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/test/resources, PatternSet [includes: {}, excludes: {}]}}, Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources, PatternSet [includes: {}, excludes: {}]}}, Resource {targetPath: null, filtering: false, FileSet {directory: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) supportMultiLineFiltering = false
+[DEBUG]   (f) useBuildFilters = true
+[DEBUG]   (s) useDefaultDelimiters = true
+[DEBUG] -- end configuration --
+[DEBUG] properties used {file.encoding.pkg=sun.io, cobertura.plugin.version=2.7, java.home=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre, log4jParentDir=/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/.., findbugs.plugin.version=3.0.4, env.DISPLAY=/private/tmp/com.apple.launchd.S2zgiS324v/org.macosforge.xquartz:0, projectDir=, rat.plugin.version=0.12, classworlds.conf=/opt/maven/maven/bin/m2.conf, env.SDKMAN_CANDIDATES_DIR=/Users/rgoers/.sdkman/candidates, env.SECURITYSESSIONID=186a6, pmd.plugin.version=3.7, slf4jVersion=1.7.25, java.endorsed.dirs=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/endorsed, env.LOGNAME=rgoers, sun.os.patch.level=unknown, java.vendor.url=http://java.oracle.com/, env.TERM_PROGRAM_VERSION=388.1, java.version=1.8.0_121, env.SDKMAN_CURRENT_API=https://api.sdkman.io/2, env.MAVEN_OPTS= -Xmx1024m -Xms1024m -XX:MaxPermSize=512M, arguments=, env.JAVA9_HOME=/Library/Java/JavaVirtualMachines/Java9/Contents/Home, env.SDKMAN_DIR=/Users/rgoers/.sdkman, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, user.name=rgoers, env.LANG=en_US.UTF-8, sun.io.unicode.encoding=UnicodeBig, sun.jnu.encoding=UTF-8, java.runtime.name=Java(TM) SE Runtime Environment, activemq.version=5.14.5, java.specification.name=Java Platform API Specification, ftp.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, user.timezone=America/Phoenix, path.separator=:, env.MAVEN_CMD_LINE_ARGS= -X clean package, file.encoding=UTF-8, env.HOME=/Users/rgoers, sun.java.command=org.codehaus.plexus.classworlds.launcher.Launcher -X clean package, env.TERM_SESSION_ID=1BBA3CA6-121A-4F83-B392-60D97BEC9521, socksNonProxyHosts=local|*.local|169.254/16|*.169.254/16, jctoolsVersion=1.2.1, jxr.plugin.version=2.5, java.io.tmpdir=/var/folders/ng/bsg7qt2x5p373mck9gxhyjhr0000gn/T/, user.language=en, docLabel=Site Documentation, javadoc.opts=-Xdoclint:none, changes.plugin.version=2.12.1, compiler.plugin.version=3.6.1, line.separator=
+, project.baseUri=file:/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/, java.vm.info=mixed mode, java.vm.specification.name=Java Virtual Machine Specification, project.reporting.outputEncoding=UTF-8, commonsLoggingVersion=1.2, surefire.version=2.19.1, env.__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0, env.M2_HOME=/opt/maven/maven, sourceReleaseAssemblyDescriptor=source-release, disruptorVersion=3.3.6, http.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, env.SDKMAN_VERSION=5.1.18+191, java.awt.printerjob=sun.lwawt.macosx.CPrinterJob, env.SDKMAN_PLATFORM=Darwin, flumeVersion=1.7.0, distMgmtSnapshotsName=Apache Development Snapshot Repository, env.XPC_FLAGS=0x0, distMgmtSnapshotsUrl=https://repository.apache.org/content/repositories/snapshots, gopherProxySet=false, site.plugin.version=3.4, maven.build.timestamp=2017-07-10T02:24:58Z, os.name=Mac OS X, java.specification.vendor=Oracle Corporation, jacoco.plugin.version=0.7.7.201606060606, env.TERM=xterm-256color, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, Log4jReleaseKey=FA1C814D, java.library.path=/Users/rgoers/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., env.PATH=/Users/rgoers/.sdkman/candidates/groovy/current/bin:/opt/subversion/bin:/opt/ant/ant19/bin:/Users/rgoers/bin:/usr/local/git/bin:/opt/maven/maven/bin:/Library/Java/JavaVirtualMachines/Java8/Contents/Home/bin:/opt/gradle/gradle/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin, clirr.plugin.version=2.8, pdf.plugin.version=1.2, java.class.version=52.0, jackson1Version=1.9.13, env.SHLVL=1, maven.multiModuleProjectDirectory=/Users/rgoers/projects/apache/logging/log4j/log4j2/current, env.SDKMAN_LEGACY_API=https://api.sdkman.io/1, surefire.plugin.version=2.20, sun.boot.library.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib, project.build.sourceEncoding=UTF-8, env.JAVA_MAIN_CLASS_96902=org.codehaus.plexus.classworlds.launcher.Launcher, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, java.awt.graphicsenv=sun.awt.CGraphicsEnvironment, scm.plugin.version=1.9.5, env.USER=rgoers, springVersion=3.2.18.RELEASE, env.TERM_PROGRAM=Apple_Terminal, failsafe.plugin.version=2.20, remote.resources.plugin.version=1.5, conversantDisruptorVersion=1.2.10, gpg.useagent=true, java.vm.specification.version=1.8, checkstyle.plugin.version=2.17, awt.toolkit=sun.lwawt.macosx.LWCToolkit, sun.cpu.isalist=, env.MAVEN_PROJECTBASEDIR=/Users/rgoers/projects/apache/logging/log4j/log4j2/current, osgi.api.version=4.3.1, env.GROOVY_HOME=/Users/rgoers/.sdkman/candidates/groovy/current, java.ext.dirs=/Users/rgoers/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java, os.version=10.12.5, user.home=/Users/rgoers, java.vm.vendor=Oracle Corporation, Log4jReleaseVersion=2.8.2, env.JAVA_HOME=/Library/Java/JavaVirtualMachines/Java8/Contents/Home, env.XPC_SERVICE_NAME=0, user.dir=/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android, env.PWD=/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android, sun.cpu.endian=little, manifestfile=/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/MANIFEST.MF, env.TMPDIR=/var/folders/ng/bsg7qt2x5p373mck9gxhyjhr0000gn/T/, minSeverity=info, java.vm.version=25.121-b13, java.class.path=/opt/maven/maven/boot/plexus-classworlds-2.5.2.jar, org.slf4j.simpleLogger.defaultLogLevel=debug, os.arch=x86_64, jackson2Version=2.8.9, maven.build.version=Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T04:57:37-07:00), env.Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.AxUR0LrhR7/Render, logbackVersion=1.2.3, sun.java.launcher=SUN_STANDARD, javadoc.plugin.version=2.10.4, java.vm.specification.vendor=Oracle Corporation, file.separator=/, java.runtime.version=1.8.0_121-b13, env.SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.SVQTLzS9sJ/Listeners, sun.boot.class.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/classes, organization.logo=https://www.apache.org/images/asf_logo_wide.gif, maven.version=3.3.3, env.ANT_HOME=/opt/ant/ant19, user.country=US, release.plugin.version=2.5.3, maven.home=/opt/maven/maven, env.SHELL=/bin/bash, maven.compiler.target=1.7, mockitoVersion=2.2.7, java.vendor=Oracle Corporation, env.GRADLE_HOME=/opt/gradle/gradle, maven.compiler.source=1.7, Log4jReleaseManager=Matt Sicker, java.specification.version=1.8, sun.arch.data.model=64, argLine=-Xms256m -Xmx1024m}
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[DEBUG] resource with targetPath null
+directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/test/resources
+excludes []
+includes []
+[INFO] skip non existing resourceDirectory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/test/resources
+[DEBUG] resource with targetPath null
+directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources
+excludes []
+includes []
+[DEBUG] ignoreDelta true
+[INFO] Copying 3 resources
+[DEBUG] Copying file META-INF/DEPENDENCIES
+[DEBUG] file DEPENDENCIES has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/DEPENDENCIES to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/DEPENDENCIES
+[DEBUG] Copying file META-INF/LICENSE
+[DEBUG] file LICENSE has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/LICENSE to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/LICENSE
+[DEBUG] Copying file META-INF/NOTICE
+[DEBUG] file NOTICE has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/NOTICE to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/NOTICE
+[DEBUG] resource with targetPath null
+directory /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources
+excludes []
+includes []
+[DEBUG] ignoreDelta true
+[INFO] Copying 3 resources
+[DEBUG] Copying file META-INF/DEPENDENCIES
+[DEBUG] file DEPENDENCIES has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/DEPENDENCIES to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/DEPENDENCIES
+[DEBUG] Copying file META-INF/LICENSE
+[DEBUG] file LICENSE has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/LICENSE to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/LICENSE
+[DEBUG] Copying file META-INF/NOTICE
+[DEBUG] file NOTICE has a filtered file extension
+[DEBUG] copy /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/maven-shared-archive-resources/META-INF/NOTICE to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes/META-INF/NOTICE
+[DEBUG] no use filter components
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ log4j-api-android ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-compiler-plugin:3.6.1, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile' with basic configurator -->
+[DEBUG]   (f) basedir = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android
+[DEBUG]   (f) buildDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target
+[DEBUG]   (f) compilePath = [/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes, /Users/rgoers/.m2/repository/org/apache/logging/log4j/log4j-api/2.9-SNAPSHOT/log4j-api-2.9-SNAPSHOT.jar]
+[DEBUG]   (f) compileSourceRoots = [/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/test/java]
+[DEBUG]   (f) compilerArguments = {Xlint=null, Xmaxwarns=10000}
+[DEBUG]   (f) compilerId = javac
+[DEBUG]   (f) debug = true
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) failOnWarning = false
+[DEBUG]   (f) forceJavacCompilerUse = false
+[DEBUG]   (f) fork = true
+[DEBUG]   (f) generatedTestSourcesDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/generated-test-sources/test-annotations
+[DEBUG]   (f) maxmem = 1024
+[DEBUG]   (f) meminitial = 256
+[DEBUG]   (f) mojoExecution = org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile {execution: default-testCompile}
+[DEBUG]   (f) optimize = false
+[DEBUG]   (f) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes
+[DEBUG]   (f) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG]   (f) showDeprecation = true
+[DEBUG]   (f) showWarnings = true
+[DEBUG]   (f) skipMultiThreadWarning = false
+[DEBUG]   (f) source = 1.7
+[DEBUG]   (f) staleMillis = 0
+[DEBUG]   (f) target = 1.7
+[DEBUG]   (f) testPath = [/Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes, /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes, /Users/rgoers/.m2/repository/junit/junit/4.12/junit-4.12.jar, /Users/rgoers/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar, /Users/rgoers/.m2/repository/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3.jar, /Users/rgoers/.m2/repository/org/apache/logging/log4j/log4j-api/2.9-SNAPSHOT/log4j-api-2.9-SNAPSHOT.jar]
+[DEBUG]   (f) useIncrementalCompilation = true
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[DEBUG] Using compiler 'javac'.
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.20:test (default-test) @ log4j-api-android ---
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=0, ConflictMarker.markTime=1, ConflictMarker.nodeCount=115, ConflictIdSorter.graphTime=0, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=35, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=1, ConflictResolver.conflictItemCount=81, DefaultDependencyCollector.collectTime=27, DefaultDependencyCollector.transformTime=2}
+[DEBUG] org.apache.maven.plugins:maven-surefire-plugin:jar:2.20:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.2.1:compile
+[DEBUG]    org.apache.maven.surefire:maven-surefire-common:jar:2.20:compile
+[DEBUG]       org.apache.maven.surefire:surefire-booter:jar:2.20:compile
+[DEBUG]       org.apache.maven:maven-artifact:jar:2.2.1:compile
+[DEBUG]          org.codehaus.plexus:plexus-utils:jar:1.5.15:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.2.1:compile
+[DEBUG]          org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]             junit:junit:jar:4.12:compile
+[DEBUG]                org.hamcrest:hamcrest-core:jar:1.3:compile
+[DEBUG]       org.apache.maven:maven-project:jar:2.2.1:compile
+[DEBUG]          org.apache.maven:maven-settings:jar:2.2.1:compile
+[DEBUG]          org.apache.maven:maven-profile:jar:2.2.1:compile
+[DEBUG]          org.apache.maven:maven-artifact-manager:jar:2.2.1:compile
+[DEBUG]             backport-util-concurrent:backport-util-concurrent:jar:3.1:compile
+[DEBUG]          org.apache.maven:maven-plugin-registry:jar:2.2.1:compile
+[DEBUG]          org.codehaus.plexus:plexus-interpolation:jar:1.11:compile
+[DEBUG]       org.apache.maven:maven-model:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-core:jar:2.2.1:compile
+[DEBUG]          org.apache.maven:maven-plugin-parameter-documenter:jar:2.2.1:compile
+[DEBUG]          org.slf4j:slf4j-jdk14:jar:1.5.6:runtime
+[DEBUG]             org.slf4j:slf4j-api:jar:1.5.6:runtime
+[DEBUG]          org.slf4j:jcl-over-slf4j:jar:1.5.6:runtime
+[DEBUG]          org.apache.maven.reporting:maven-reporting-api:jar:3.0:compile
+[DEBUG]          org.apache.maven:maven-repository-metadata:jar:2.2.1:compile
+[DEBUG]          org.apache.maven:maven-error-diagnostics:jar:2.2.1:compile
+[DEBUG]          org.apache.maven:maven-monitor:jar:2.2.1:compile
+[DEBUG]          classworlds:classworlds:jar:1.1:compile
+[DEBUG]          org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]             org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]       org.apache.commons:commons-lang3:jar:3.1:compile
+[DEBUG]    org.apache.maven.surefire:surefire-api:jar:2.20:compile
+[DEBUG]       org.apache.maven.surefire:surefire-logger-api:jar:2.20:compile
+[DEBUG]    org.apache.maven:maven-toolchain:jar:2.2.1:compile
+[DEBUG]    org.apache.maven.plugin-tools:maven-plugin-annotations:jar:3.3:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:2.20
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:2.20
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:2.20
+[DEBUG]   Included: org.apache.maven.plugins:maven-surefire-plugin:jar:2.20
+[DEBUG]   Included: org.apache.maven.surefire:maven-surefire-common:jar:2.20
+[DEBUG]   Included: org.apache.maven.surefire:surefire-booter:jar:2.20
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:1.5.15
+[DEBUG]   Included: junit:junit:jar:4.12
+[DEBUG]   Included: org.hamcrest:hamcrest-core:jar:1.3
+[DEBUG]   Included: backport-util-concurrent:backport-util-concurrent:jar:3.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.11
+[DEBUG]   Included: org.slf4j:slf4j-jdk14:jar:1.5.6
+[DEBUG]   Included: org.slf4j:jcl-over-slf4j:jar:1.5.6
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:3.0
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.apache.commons:commons-lang3:jar:3.1
+[DEBUG]   Included: org.apache.maven.surefire:surefire-api:jar:2.20
+[DEBUG]   Included: org.apache.maven.surefire:surefire-logger-api:jar:2.20
+[DEBUG]   Included: org.apache.maven.plugin-tools:maven-plugin-annotations:jar:3.3
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-surefire-plugin:2.20:test from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-surefire-plugin:2.20, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-surefire-plugin:2.20:test' with basic configurator -->
+[DEBUG]   (s) additionalClasspathElements = []
+[DEBUG]   (s) argLine = -Xms256m -Xmx1024m
+[DEBUG]   (s) basedir = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android
+[DEBUG]   (s) childDelegation = false
+[DEBUG]   (s) classesDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG]   (s) classpathDependencyExcludes = []
+[DEBUG]   (s) dependenciesToScan = []
+[DEBUG]   (s) disableXmlReport = false
+[DEBUG]   (s) enableAssertions = true
+[DEBUG]   (s) excludes = [null, null]
+[DEBUG]   (f) forkCount = 2C
+[DEBUG]   (s) forkMode = once
+[DEBUG]   (s) forkedProcessExitTimeoutInSeconds = 30
+[DEBUG]   (s) junitArtifactName = junit:junit
+[DEBUG]   (s) localRepository =       id: local
+      url: file:///Users/rgoers/.m2/repository/
+   layout: default
+snapshots: [enabled => true, update => always]
+ releases: [enabled => true, update => always]
+
+[DEBUG]   (f) parallelMavenExecution = false
+[DEBUG]   (s) parallelOptimized = true
+[DEBUG]   (s) perCoreThreadCount = true
+[DEBUG]   (s) pluginArtifactMap = {org.apache.maven.plugins:maven-surefire-plugin=org.apache.maven.plugins:maven-surefire-plugin:maven-plugin:2.20:, org.apache.maven:maven-plugin-api=org.apache.maven:maven-plugin-api:jar:2.2.1:compile, org.apache.maven.surefire:maven-surefire-common=org.apache.maven.surefire:maven-surefire-common:jar:2.20:compile, org.apache.maven.surefire:surefire-booter=org.apache.maven.surefire:surefire-booter:jar:2.20:compile, org.apache.maven:maven-artifact=org.apache.maven:maven-artifact:jar:2.2.1:compile, org.codehaus.plexus:plexus-utils=org.codehaus.plexus:plexus-utils:jar:1.5.15:compile, org.apache.maven:maven-plugin-descriptor=org.apache.maven:maven-plugin-descriptor:jar:2.2.1:compile, org.codehaus.plexus:plexus-container-default=org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile, junit:junit=junit:junit:jar:4.12:compile, org.hamcrest:hamcrest-core=org.hamcrest:hamcrest-core:jar:1.3:compile, org.apache.maven:maven-project=org.apache.maven:maven-project:jar:2.2.1:compile, org.apache.maven:maven-settings=org.apache.maven:maven-settings:jar:2.2.1:compile, org.apache.maven:maven-profile=org.apache.maven:maven-profile:jar:2.2.1:compile, org.apache.maven:maven-artifact-manager=org.apache.maven:maven-artifact-manager:jar:2.2.1:compile, backport-util-concurrent:backport-util-concurrent=backport-util-concurrent:backport-util-concurrent:jar:3.1:compile, org.apache.maven:maven-plugin-registry=org.apache.maven:maven-plugin-registry:jar:2.2.1:compile, org.codehaus.plexus:plexus-interpolation=org.codehaus.plexus:plexus-interpolation:jar:1.11:compile, org.apache.maven:maven-model=org.apache.maven:maven-model:jar:2.2.1:compile, org.apache.maven:maven-core=org.apache.maven:maven-core:jar:2.2.1:compile, org.apache.maven:maven-plugin-parameter-documenter=org.apache.maven:maven-plugin-parameter-documenter:jar:2.2.1:compile, org.slf4j:slf4j-jdk14=org.slf4j:slf4j-jdk14:jar:1.5.6:runtime, org.slf4j:slf4j-api=org.slf4j:slf4j-api:jar:1.5.6:runtime, org.slf4j:jcl-over-slf4j=org.slf4j:jcl-over-slf4j:jar:1.5.6:runtime, org.apache.maven.reporting:maven-reporting-api=org.apache.maven.reporting:maven-reporting-api:jar:3.0:compile, org.apache.maven:maven-repository-metadata=org.apache.maven:maven-repository-metadata:jar:2.2.1:compile, org.apache.maven:maven-error-diagnostics=org.apache.maven:maven-error-diagnostics:jar:2.2.1:compile, org.apache.maven:maven-monitor=org.apache.maven:maven-monitor:jar:2.2.1:compile, classworlds:classworlds=classworlds:classworlds:jar:1.1:compile, org.sonatype.plexus:plexus-sec-dispatcher=org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile, org.sonatype.plexus:plexus-cipher=org.sonatype.plexus:plexus-cipher:jar:1.4:compile, org.apache.commons:commons-lang3=org.apache.commons:commons-lang3:jar:3.1:compile, org.apache.maven.surefire:surefire-api=org.apache.maven.surefire:surefire-api:jar:2.20:compile, org.apache.maven.surefire:surefire-logger-api=org.apache.maven.surefire:surefire-logger-api:jar:2.20:compile, org.apache.maven:maven-toolchain=org.apache.maven:maven-toolchain:jar:2.2.1:compile, org.apache.maven.plugin-tools:maven-plugin-annotations=org.apache.maven.plugin-tools:maven-plugin-annotations:jar:3.3:compile}
+[DEBUG]   (f) pluginDescriptor = Component Descriptor: role: 'org.apache.maven.plugin.Mojo', implementation: 'org.apache.maven.plugin.surefire.HelpMojo', role hint: 'org.apache.maven.plugins:maven-surefire-plugin:2.20:help'
+role: 'org.apache.maven.plugin.Mojo', implementation: 'org.apache.maven.plugin.surefire.SurefirePlugin', role hint: 'org.apache.maven.plugins:maven-surefire-plugin:2.20:test'
+---
+[DEBUG]   (s) printSummary = true
+[DEBUG]   (s) projectArtifactMap = {junit:junit=junit:junit:jar:4.12:test, org.hamcrest:hamcrest-core=org.hamcrest:hamcrest-core:jar:1.3:test, org.hamcrest:hamcrest-all=org.hamcrest:hamcrest-all:jar:1.3:test, org.apache.logging.log4j:log4j-api=org.apache.logging.log4j:log4j-api:jar:2.9-SNAPSHOT:compile}
+[DEBUG]   (s) projectBuildDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target
+[DEBUG]   (s) redirectTestOutputToFile = false
+[DEBUG]   (s) remoteRepositories = [      id: central
+      url: http://repository.nextiva.xyz:8081/nexus/content/groups/public
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: snapshots
+      url: http://repository.nextiva.xyz:8081/nexus/content/repositories/snapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: apache
+      url: https://repository.apache.org/content/repositories/releases/
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => true, update => daily]
+]
+[DEBUG]   (s) reportFormat = brief
+[DEBUG]   (s) reportsDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/surefire-reports
+[DEBUG]   (f) rerunFailingTestsCount = 0
+[DEBUG]   (f) reuseForks = true
+[DEBUG]   (s) runOrder = filesystem
+[DEBUG]   (f) shutdown = testset
+[DEBUG]   (s) skip = false
+[DEBUG]   (f) skipAfterFailureCount = 0
+[DEBUG]   (s) skipTests = false
+[DEBUG]   (s) suiteXmlFiles = []
+[DEBUG]   (s) systemPropertyVariables = {java.awt.headless=true}
+[DEBUG]   (s) tempDir = surefire
+[DEBUG]   (s) testClassesDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/test-classes
+[DEBUG]   (s) testFailureIgnore = false
+[DEBUG]   (s) testNGArtifactName = org.testng:testng
+[DEBUG]   (s) testSourceDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/src/test/java
+[DEBUG]   (s) threadCountClasses = 0
+[DEBUG]   (s) threadCountMethods = 0
+[DEBUG]   (s) threadCountSuites = 0
+[DEBUG]   (s) trimStackTrace = true
+[DEBUG]   (s) useFile = true
+[DEBUG]   (s) useManifestOnlyJar = true
+[DEBUG]   (s) useSystemClassLoader = true
+[DEBUG]   (s) useUnlimitedThreads = false
+[DEBUG]   (s) workingDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android
+[DEBUG]   (s) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG]   (s) session = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG] -- end configuration --
+[INFO] 
+[INFO] --- maven-dependency-plugin:3.0.1:unpack (unpack-classes) @ log4j-api-android ---
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=0, ConflictMarker.markTime=0, ConflictMarker.nodeCount=288, ConflictIdSorter.graphTime=1, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=80, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=5, ConflictResolver.conflictItemCount=196, DefaultDependencyCollector.collectTime=122, DefaultDependencyCollector.transformTime=6}
+[DEBUG] org.apache.maven.plugins:maven-dependency-plugin:jar:3.0.1:
+[DEBUG]    org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]    org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]       org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]       org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.6:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]    org.apache.maven.reporting:maven-reporting-api:jar:3.0:compile
+[DEBUG]    org.apache.maven.reporting:maven-reporting-impl:jar:2.3:compile
+[DEBUG]       org.apache.maven.shared:maven-shared-utils:jar:0.6:compile
+[DEBUG]          com.google.code.findbugs:jsr305:jar:2.0.1:compile
+[DEBUG]       org.apache.maven.doxia:doxia-core:jar:1.2:compile
+[DEBUG]          xerces:xercesImpl:jar:2.9.1:compile
+[DEBUG]             xml-apis:xml-apis:jar:1.3.04:compile
+[DEBUG]          org.apache.httpcomponents:httpclient:jar:4.0.2:compile
+[DEBUG]             org.apache.httpcomponents:httpcore:jar:4.0.1:compile
+[DEBUG]       commons-validator:commons-validator:jar:1.3.1:compile
+[DEBUG]          commons-beanutils:commons-beanutils:jar:1.7.0:compile
+[DEBUG]          commons-digester:commons-digester:jar:1.6:compile
+[DEBUG]          commons-logging:commons-logging:jar:1.0.4:compile
+[DEBUG]    commons-io:commons-io:jar:2.5:compile
+[DEBUG]    org.apache.maven.doxia:doxia-sink-api:jar:1.4:compile
+[DEBUG]       org.apache.maven.doxia:doxia-logging-api:jar:1.4:compile
+[DEBUG]    org.apache.maven.doxia:doxia-site-renderer:jar:1.4:compile
+[DEBUG]       org.apache.maven.doxia:doxia-decoration-model:jar:1.4:compile
+[DEBUG]       org.apache.maven.doxia:doxia-module-xhtml:jar:1.4:compile
+[DEBUG]       org.apache.maven.doxia:doxia-module-fml:jar:1.4:compile
+[DEBUG]       org.codehaus.plexus:plexus-i18n:jar:1.0-beta-7:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-30:compile
+[DEBUG]          junit:junit:jar:3.8.1:compile
+[DEBUG]       org.codehaus.plexus:plexus-velocity:jar:1.1.7:compile
+[DEBUG]       org.apache.velocity:velocity:jar:1.5:compile
+[DEBUG]          oro:oro:jar:2.0.8:compile
+[DEBUG]       org.apache.velocity:velocity-tools:jar:2.0:compile
+[DEBUG]          commons-chain:commons-chain:jar:1.1:compile
+[DEBUG]          dom4j:dom4j:jar:1.1:compile
+[DEBUG]          sslext:sslext:jar:1.2-0:compile
+[DEBUG]          org.apache.struts:struts-core:jar:1.3.8:compile
+[DEBUG]             antlr:antlr:jar:2.7.2:compile
+[DEBUG]          org.apache.struts:struts-taglib:jar:1.3.8:compile
+[DEBUG]          org.apache.struts:struts-tiles:jar:1.3.8:compile
+[DEBUG]    org.codehaus.plexus:plexus-archiver:jar:3.4:compile
+[DEBUG]       org.apache.commons:commons-compress:jar:1.11:compile
+[DEBUG]       org.iq80.snappy:snappy:jar:0.4:compile
+[DEBUG]       org.tukaani:xz:jar:1.5:runtime
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.0.24:compile
+[DEBUG]    org.apache.maven.shared:file-management:jar:1.2.1:compile
+[DEBUG]       org.apache.maven.shared:maven-shared-io:jar:1.1:compile
+[DEBUG]          org.apache.maven.wagon:wagon-provider-api:jar:1.0-alpha-6:compile
+[DEBUG]    org.codehaus.plexus:plexus-io:jar:2.4:compile
+[DEBUG]    org.apache.maven.shared:maven-dependency-analyzer:jar:1.7:compile
+[DEBUG]       org.ow2.asm:asm:jar:5.0.2:compile
+[DEBUG]    org.apache.maven.shared:maven-dependency-tree:jar:3.0.1:compile
+[DEBUG]       org.eclipse.aether:aether-util:jar:0.9.0.M2:compile
+[DEBUG]    org.apache.maven.shared:maven-common-artifact-filters:jar:3.0.1:compile
+[DEBUG]    org.apache.maven.shared:maven-artifact-transfer:jar:0.9.1:compile
+[DEBUG]       commons-codec:commons-codec:jar:1.6:compile
+[DEBUG]       org.slf4j:slf4j-api:jar:1.7.5:compile
+[DEBUG]    commons-lang:commons-lang:jar:2.6:compile
+[DEBUG]    commons-collections:commons-collections:jar:3.2.2:compile
+[DEBUG]    classworlds:classworlds:jar:1.1:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-dependency-plugin:3.0.1
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-dependency-plugin:3.0.1
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-dependency-plugin:3.0.1
+[DEBUG]   Included: org.apache.maven.plugins:maven-dependency-plugin:jar:3.0.1
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.6
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:3.0
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-impl:jar:2.3
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-utils:jar:0.6
+[DEBUG]   Included: com.google.code.findbugs:jsr305:jar:2.0.1
+[DEBUG]   Included: org.apache.maven.doxia:doxia-core:jar:1.2
+[DEBUG]   Included: xerces:xercesImpl:jar:2.9.1
+[DEBUG]   Included: xml-apis:xml-apis:jar:1.3.04
+[DEBUG]   Included: org.apache.httpcomponents:httpclient:jar:4.0.2
+[DEBUG]   Included: org.apache.httpcomponents:httpcore:jar:4.0.1
+[DEBUG]   Included: commons-validator:commons-validator:jar:1.3.1
+[DEBUG]   Included: commons-beanutils:commons-beanutils:jar:1.7.0
+[DEBUG]   Included: commons-digester:commons-digester:jar:1.6
+[DEBUG]   Included: commons-logging:commons-logging:jar:1.0.4
+[DEBUG]   Included: commons-io:commons-io:jar:2.5
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.4
+[DEBUG]   Included: org.apache.maven.doxia:doxia-logging-api:jar:1.4
+[DEBUG]   Included: org.apache.maven.doxia:doxia-site-renderer:jar:1.4
+[DEBUG]   Included: org.apache.maven.doxia:doxia-decoration-model:jar:1.4
+[DEBUG]   Included: org.apache.maven.doxia:doxia-module-xhtml:jar:1.4
+[DEBUG]   Included: org.apache.maven.doxia:doxia-module-fml:jar:1.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-i18n:jar:1.0-beta-7
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-velocity:jar:1.1.7
+[DEBUG]   Included: org.apache.velocity:velocity:jar:1.5
+[DEBUG]   Included: oro:oro:jar:2.0.8
+[DEBUG]   Included: org.apache.velocity:velocity-tools:jar:2.0
+[DEBUG]   Included: commons-chain:commons-chain:jar:1.1
+[DEBUG]   Included: dom4j:dom4j:jar:1.1
+[DEBUG]   Included: sslext:sslext:jar:1.2-0
+[DEBUG]   Included: org.apache.struts:struts-core:jar:1.3.8
+[DEBUG]   Included: antlr:antlr:jar:2.7.2
+[DEBUG]   Included: org.apache.struts:struts-taglib:jar:1.3.8
+[DEBUG]   Included: org.apache.struts:struts-tiles:jar:1.3.8
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:3.4
+[DEBUG]   Included: org.apache.commons:commons-compress:jar:1.11
+[DEBUG]   Included: org.iq80.snappy:snappy:jar:0.4
+[DEBUG]   Included: org.tukaani:xz:jar:1.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.24
+[DEBUG]   Included: org.apache.maven.shared:file-management:jar:1.2.1
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-io:jar:1.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.4
+[DEBUG]   Included: org.apache.maven.shared:maven-dependency-analyzer:jar:1.7
+[DEBUG]   Included: org.ow2.asm:asm:jar:5.0.2
+[DEBUG]   Included: org.apache.maven.shared:maven-dependency-tree:jar:3.0.1
+[DEBUG]   Included: org.eclipse.aether:aether-util:jar:0.9.0.M2
+[DEBUG]   Included: org.apache.maven.shared:maven-common-artifact-filters:jar:3.0.1
+[DEBUG]   Included: org.apache.maven.shared:maven-artifact-transfer:jar:0.9.1
+[DEBUG]   Included: commons-codec:commons-codec:jar:1.6
+[DEBUG]   Included: commons-lang:commons-lang:jar:2.6
+[DEBUG]   Included: commons-collections:commons-collections:jar:3.2.2
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-dependency-plugin:3.0.1:unpack from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-dependency-plugin:3.0.1, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-dependency-plugin:3.0.1:unpack' with basic configurator -->
+[DEBUG]   (s) groupId = org.apache.logging.log4j
+[DEBUG]   (s) artifactId = log4j-api
+[DEBUG]   (s) version = 2.9-SNAPSHOT
+[DEBUG]   (s) type = jar
+[DEBUG]   (s) overWrite = false
+[DEBUG]   (s) artifactItems = [org.apache.logging.log4j:log4j-api:2.9-SNAPSHOT:jar]
+[DEBUG]   (s) excludes = META-INF/**/*.class
+[DEBUG]   (f) ignorePermissions = false
+[DEBUG]   (s) includes = **/*.class
+[DEBUG]   (s) markersDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/dependency-maven-plugin-markers
+[DEBUG]   (f) outputAbsoluteArtifactFilename = false
+[DEBUG]   (s) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG]   (s) overWriteIfNewer = true
+[DEBUG]   (s) overWriteReleases = false
+[DEBUG]   (s) overWriteSnapshots = true
+[DEBUG]   (f) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG]   (f) reactorProjects = [MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml]
+[DEBUG]   (f) remoteRepositories = [      id: central
+      url: http://repository.nextiva.xyz:8081/nexus/content/groups/public
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: releases
+      url: http://repository.nextiva.xyz:8081/nexus/content/repositories/releases
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: snapshots
+      url: http://repository.nextiva.xyz:8081/nexus/content/groups/NextivaSnapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => true, update => daily]
+,       id: apache.snapshots
+      url: https://repository.apache.org/snapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => false, update => daily]
+]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG]   (s) silent = false
+[DEBUG]   (s) skip = false
+[DEBUG]   (s) useJvmChmod = true
+[DEBUG] -- end configuration --
+[INFO] Configured Artifact: org.apache.logging.log4j:log4j-api:2.9-SNAPSHOT:jar
+[INFO] Unpacking /Users/rgoers/.m2/repository/org/apache/logging/log4j/log4j-api/2.9-SNAPSHOT/log4j-api-2.9-SNAPSHOT.jar to /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes with includes "**/*.class" and excludes "META-INF/**/*.class"
+[DEBUG] Found unArchiver by type: org.codehaus.plexus.archiver.zip.ZipUnArchiver$__sisu1@64db4967
+[DEBUG] Expanding: /Users/rgoers/.m2/repository/org/apache/logging/log4j/log4j-api/2.9-SNAPSHOT/log4j-api-2.9-SNAPSHOT.jar into /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG] expand complete
+[INFO] 
+[INFO] --- maven-jar-plugin:3.0.0:jar (default-jar) @ log4j-api-android ---
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=0, ConflictMarker.markTime=0, ConflictMarker.nodeCount=74, ConflictIdSorter.graphTime=0, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=31, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=1, ConflictResolver.conflictItemCount=73, DefaultDependencyCollector.collectTime=11, DefaultDependencyCollector.transformTime=1}
+[DEBUG] org.apache.maven.plugins:maven-jar-plugin:jar:3.0.0:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]       org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]       org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]    org.apache.maven:maven-archiver:jar:3.0.2:compile
+[DEBUG]       org.apache.maven.shared:maven-shared-utils:jar:3.0.0:compile
+[DEBUG]          commons-io:commons-io:jar:2.4:compile
+[DEBUG]          com.google.code.findbugs:jsr305:jar:2.0.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-archiver:jar:3.1.1:compile
+[DEBUG]       org.codehaus.plexus:plexus-io:jar:2.7.1:compile
+[DEBUG]       org.apache.commons:commons-compress:jar:1.10:compile
+[DEBUG]       org.iq80.snappy:snappy:jar:0.4:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.0.22:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-jar-plugin:3.0.0
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-jar-plugin:3.0.0
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-jar-plugin:3.0.0
+[DEBUG]   Included: org.apache.maven.plugins:maven-jar-plugin:jar:3.0.0
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.5.5
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.apache.maven:maven-archiver:jar:3.0.2
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-utils:jar:3.0.0
+[DEBUG]   Included: commons-io:commons-io:jar:2.4
+[DEBUG]   Included: com.google.code.findbugs:jsr305:jar:2.0.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:3.1.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.7.1
+[DEBUG]   Included: org.apache.commons:commons-compress:jar:1.10
+[DEBUG]   Included: org.iq80.snappy:snappy:jar:0.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.22
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-jar-plugin:3.0.0:jar from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-jar-plugin:3.0.0, parent: sun.misc.Launcher$AppClassLoader@42a57993]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-jar-plugin:3.0.0:jar' with basic configurator -->
+[DEBUG]   (s) manifestFile = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/MANIFEST.MF
+[DEBUG]   (s) manifestEntries = {Implementation-Title=Apache Log4j API for Android, Implementation-Vendor=The Apache Software Foundation, Implementation-Vendor-Id=org.apache, Implementation-Version=2.9-SNAPSHOT, Specification-Title=Apache Log4j API for Android, Specification-Vendor=The Apache Software Foundation, Specification-Version=2.9-SNAPSHOT, X-Compile-Source-JDK=1.7, X-Compile-Target-JDK=1.7}
+[DEBUG]   (s) addDefaultSpecificationEntries = true
+[DEBUG]   (s) addDefaultImplementationEntries = true
+[DEBUG]   (s) manifest = org.apache.maven.archiver.ManifestConfiguration@31e130bf
+[DEBUG]   (f) archive = org.apache.maven.archiver.MavenArchiveConfiguration@54755dd9
+[DEBUG]   (f) classesDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes
+[DEBUG]   (f) finalName = log4j-api-android-2.9-SNAPSHOT
+[DEBUG]   (f) forceCreation = false
+[DEBUG]   (f) outputDirectory = /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target
+[DEBUG]   (f) project = MavenProject: org.apache.logging.log4j:log4j-api-android:2.9-SNAPSHOT @ /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/pom.xml
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@125c082e
+[DEBUG]   (f) skipIfEmpty = false
+[DEBUG]   (f) useDefaultManifestFile = false
+[DEBUG] -- end configuration --
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.971 s
+[INFO] Finished at: 2017-07-09T19:24:58-07:00
+[INFO] Final Memory: 24M/981M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-jar-plugin:3.0.0:jar (default-jar) on project log4j-api-android: Error assembling JAR: Manifest file: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/MANIFEST.MF does not exist. -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-jar-plugin:3.0.0:jar (default-jar) on project log4j-api-android: Error assembling JAR
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:216)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:862)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:286)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:197)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+Caused by: org.apache.maven.plugin.MojoExecutionException: Error assembling JAR
+	at org.apache.maven.plugins.jar.AbstractJarMojo.createArchive(AbstractJarMojo.java:231)
+	at org.apache.maven.plugins.jar.AbstractJarMojo.execute(AbstractJarMojo.java:255)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	... 20 more
+Caused by: org.codehaus.plexus.archiver.ArchiverException: Manifest file: /Users/rgoers/projects/apache/logging/log4j/log4j2/current/log4j-api-android/target/classes/META-INF/MANIFEST.MF does not exist.
+	at org.codehaus.plexus.archiver.jar.JarArchiver.setManifest(JarArchiver.java:194)
+	at org.apache.maven.archiver.MavenArchiver.createArchive(MavenArchiver.java:613)
+	at org.apache.maven.plugins.jar.AbstractJarMojo.createArchive(AbstractJarMojo.java:224)
+	... 23 more
+[ERROR] 
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

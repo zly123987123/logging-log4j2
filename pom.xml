@@ -1273,6 +1273,7 @@
   <modules>
     <module>log4j-api-java9</module>
     <module>log4j-api</module>
+    <module>log4j-api-android</module>
     <module>log4j-core</module>
     <module>log4j-core-its</module>
     <module>log4j-1.2-api</module>
