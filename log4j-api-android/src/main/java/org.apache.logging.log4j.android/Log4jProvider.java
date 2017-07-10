@@ -16,30 +16,14 @@
  */
 package org.apache.logging.log4j.android;
 
-import java.net.URI;
-
-import org.apache.logging.log4j.spi.LoggerContext;
-import org.apache.logging.log4j.spi.LoggerContextFactory;
+import org.apache.logging.log4j.spi.Provider;
 
 /**
  *
  */
-public class AndroidLoggerContextFactory implements LoggerContextFactory {
-
-    private static LoggerContext context = new AndroidLoggerContext();
-
-    @Override
-    public LoggerContext getContext(String fqcn, ClassLoader loader, Object externalContext, boolean currentContext) {
-        return context;
-    }
-
-    @Override
-    public LoggerContext getContext(String fqcn, ClassLoader loader, Object externalContext, boolean currentContext, URI configLocation, String name) {
-        return context;
-    }
-
-    @Override
-    public void removeContext(LoggerContext context) {
-        // do nothing.
+public class Log4jProvider extends Provider {
+    public Log4jProvider() {
+        super(10, "2.6.0", AndroidLoggerContextFactory.class);
     }
 }
+
