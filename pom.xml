@@ -1016,7 +1016,7 @@
               <arg>-XDcompilePolicy=simple</arg>
               <!--<arg>-Xplugin:ErrorProne</arg>-->
               <!--<arg>-XprintProcessorInfo</arg>-->
-              <arg>-J-verbose</arg>
+              <!--<arg>-J-verbose</arg>-->
             </compilerArgs>
             <compilerArguments>
               <Xmaxwarns>10000</Xmaxwarns>
