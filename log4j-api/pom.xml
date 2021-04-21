@@ -107,9 +107,33 @@
               <goal>compile</goal>
             </goals>
             <phase>generate-sources</phase>
-            <configuration>
+            <configuration combine.self="override">
               <source>${maven.compiler.source}</source>
               <target>${maven.compiler.target}</target>
+              <release>${maven.compiler.release}</release>
+              <showDeprecation>true</showDeprecation>
+              <showWarnings>true</showWarnings>
+              <encoding>UTF-8</encoding>
+              <fork>true</fork>
+              <meminitial>256</meminitial>
+              <maxmem>1024</maxmem>
+              <compilerArgs>
+                <arg>-XDcompilePolicy=simple</arg>
+                <arg>-Xplugin:ErrorProne</arg>
+              </compilerArgs>
+              <compilerArguments>
+                <Xmaxwarns>10000</Xmaxwarns>
+                <Xlint />
+              </compilerArguments>
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>com.google.errorprone</groupId>
+                  <artifactId>error_prone_core</artifactId>
+                  <version>${errorprone.version}</version>
+                </path>
+              </annotationProcessorPaths>
+              <forceJavacCompilerUse>true</forceJavacCompilerUse>
+              <parameters>true</parameters>
             </configuration>
           </execution>
           <execution>
@@ -119,9 +143,33 @@
               <goal>testCompile</goal>
             </goals>
             <phase>generate-sources</phase>
-            <configuration>
+            <configuration combine.self="override">
               <source>${maven.compiler.source}</source>
               <target>${maven.compiler.target}</target>
+              <release>${maven.compiler.release}</release>
+              <showDeprecation>true</showDeprecation>
+              <showWarnings>true</showWarnings>
+              <encoding>UTF-8</encoding>
+              <fork>true</fork>
+              <meminitial>256</meminitial>
+              <maxmem>1024</maxmem>
+              <compilerArgs>
+                <arg>-XDcompilePolicy=simple</arg>
+                <arg>-Xplugin:ErrorProne</arg>
+              </compilerArgs>
+              <compilerArguments>
+                <Xmaxwarns>10000</Xmaxwarns>
+                <Xlint />
+              </compilerArguments>
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>com.google.errorprone</groupId>
+                  <artifactId>error_prone_core</artifactId>
+                  <version>${errorprone.version}</version>
+                </path>
+              </annotationProcessorPaths>
+              <forceJavacCompilerUse>true</forceJavacCompilerUse>
+              <parameters>true</parameters>
               <compileSourceRoots>
                 <compileSourceRoot>${project.basedir}/src/test/java-test</compileSourceRoot>
               </compileSourceRoots>
