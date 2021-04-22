@@ -78,7 +78,7 @@ module org.apache.logging.log4j.core {
     requires transitive org.apache.commons.compress;
     requires transitive org.fusesource.jansi;
     uses org.apache.logging.log4j.core.util.ContextDataProvider;
-    provides org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory with org.apache.logging.log4j.core.message.ExtendedThreadInfoFactory;
+    provides org.apache.logging.log4j.message.ThreadDumpMessage.ThreadInfoFactory with org.apache.logging.log4j.core.message.ExtendedThreadInfoFactory;
     provides org.apache.logging.log4j.core.util.ContextDataProvider with org.apache.logging.log4j.core.impl.ThreadContextDataProvider;
     provides org.apache.logging.log4j.spi.Provider with org.apache.logging.log4j.core.impl.Log4jProvider;
     provides org.apache.logging.log4j.plugins.processor.PluginService with org.apache.logging.log4j.core.plugins.Log4jPlugins;
